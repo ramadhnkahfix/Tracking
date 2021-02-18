@@ -94,13 +94,7 @@
 	  
 	    </div>
 	    <div class="col-lg-2">
-	      	<form class="my-4" style="display: flex" action="#" method="GET">
-            @csrf
-            <input type= "hidden" name= "_token" value= " {!! csrf_token() !!}">
-            <input class="form-control" type="search" placeholder="cari" aria-label="Search" name="query" required="" 
-            style="width: 100%">
-            <button class="btn btn-outline-success" type="submit" ><i class="fas fa-search"></i></button>
-          </form>   
+        
 	    </div>
   	</div>
 </div>

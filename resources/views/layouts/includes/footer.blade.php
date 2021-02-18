@@ -47,7 +47,7 @@
 
       <div class="row">
         <div class="col-lg-12 mt-5" style="text-align: center;">
-          <span style="font-weight: bold">Copyright © 2020</span><a href="{{url('/')}}" style="font-weight : bold"> Bea Cukai Kediri</a>. All rights reserved.
+          <span style="font-weight: bold">Copyright © @php echo date('Y') @endphp</span><a href="{{url('/')}}" style="font-weight : bold"> Bea Cukai Kediri</a>. All rights reserved.
         </div>
       </div>
 

@@ -63,11 +63,15 @@
               </button>
 
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav" style="margin: auto;">
+                <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link px-5" href="{{url('/')}}">BERANDA</a>
+                    <a class="nav-link px-5" href="{{url('/')}}">TRACKING</a>
                   </li>
-                  <li class="nav-item dropdown">
+                  <li class="nav-item">
+                    <a class="nav-link px-5" href="{{url('/upload')}}">UPLOAD</a>
+                  </li>
+
+                  <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-5" id="ProfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       TENTANG KAMI
                     </a>
@@ -111,7 +115,7 @@
                   </li>
                    <li class="nav-item">
                     <a class="nav-link px-5" href="{{url('/hubungi')}}">HUBUNGI</a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
         </nav>
