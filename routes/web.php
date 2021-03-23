@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/upload','UploadController@index');
+Route::get('/login', 'HomeController@login');
