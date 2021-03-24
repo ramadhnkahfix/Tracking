@@ -47,17 +47,18 @@
       <div class="card-body py-3">
         <div class="row my-2">
           <div class="col">
-            <form action="">
-              <div class="form-group mb-2">
+            <form action="" method="POST">
+              <div class="form-group mb-4">
                 <div class="col-4">
                   <input type="text" class="form-control form-control-lg" id="" placeholder="Isikan Kode Unik">
                 </div>
               </div>
-              <div class="form-group mt-4 mb-2">
-                
-              </div>
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="form-group">
+                <div class="col-4">
+                  <div class="g-recaptcha" data-sitekey="6LcuRowaAAAAAEQuIA575O1WQ3PfW5p5iE1aWNsX"></div>
+                  <br>
+                  <input type="submit" value="submit" class="btn btn-primary">
+                </div>
               </div>
             </form>
           </div>
