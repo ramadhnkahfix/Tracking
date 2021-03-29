@@ -23,6 +23,7 @@ Route::get('/upload','UploadController@index');
 // Route Login
 Route::get('/login', 'HomeController@login');
 Route::post('/postlogin', 'HomeController@postLogin');
+Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
 
 // Route Dhani
