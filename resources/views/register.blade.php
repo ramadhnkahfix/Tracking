@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bea Cukai Kediri | Log in</title>
+  <title>Bea Cukai Kediri | SignUp</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,10 +26,23 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Register your account</p>
 
       <form action="" method="post">
         @csrf
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="name" placeholder="Nama">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          @error('name')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+          @enderror
+        </div>
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" id="email" placeholder="Email">
           <div class="input-group-append">
@@ -41,7 +54,7 @@
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </span>
-      @enderror
+            @enderror
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" id="password" name="password" placeholder="Password">
@@ -54,24 +67,17 @@
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </span>
-        @enderror
+      @enderror
         </div>
-        @if(session()->has('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif 
         <div class="row">
           <div class="col-8">
-          
+              <a href="/login" class="alert alert-link">kembali</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">  {{ __('Login') }}</button>
+            <button type="submit" class="btn btn-primary btn-block">  {{ __('SignUp') }}</button>
           </div>
           <!-- /.col -->
-        </div>
-
-        <div class="my-3 text-center">
-            <p>Don't have account? <a href="/signup">SignUp Here</a></p>
         </div>
       </form>
     </div>

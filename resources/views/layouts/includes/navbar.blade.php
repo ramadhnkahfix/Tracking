@@ -73,7 +73,7 @@
                   <li class="nav-item">
                     <a class="nav-link px-5" href="{{url('/login')}}">Login/Register</a>
                   </li>
-
+                </ul>
                   <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-5" id="ProfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       TENTANG KAMI
