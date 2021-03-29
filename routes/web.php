@@ -44,3 +44,4 @@ Route::get('logout','HomeController@logout');
 
 
 // Route Dimas
+Route::get('/admin', 'AdminController@index');
