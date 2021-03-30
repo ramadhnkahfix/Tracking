@@ -8,6 +8,16 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        return view('admin.layouts.dashboard');
+    }
+
+    public function dokumen()
+    {
+        return view('admin.dokumen');
+    }
+
+    public function detail()
+    {
+        return view('admin.detail_dokumen');
     }
 }
