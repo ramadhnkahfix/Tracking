@@ -14,7 +14,7 @@
       <div class="card-body py-3">
         <div class="row my-2">
           <div class="col-4">
-            <button type="button" class="btn btn-primary btn-lg px-2 py-2" data-toggle="modal" data-target="#modalupload">Upload Document</button>
+            <button type="button" class="btn btn-primary btn-lg px-2 py-2" data-toggle="modal" style="color: white" data-target="#modalupload">Upload Document</button>
           </div>
         </div>
         <div class="row">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label for="file">Upload File</label><br>
-                  <input type="file" name="file" accept=".doc,.docx,.pdf" class="" required><br>
+                  <input type="file" name="file" accept=".doc,.docx,.pdf" class="" multiple required><br>
                   <small>format: .doc, .docx, .pdf
                 </div>
               

@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="" method="post">
+      <form action="{{url('/postlogin')}}" method="post">
         @csrf
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" id="email" placeholder="Email">

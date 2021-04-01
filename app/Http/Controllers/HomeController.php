@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -18,13 +19,14 @@ class HomeController extends Controller
 
     public function postlogin(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
         if(Auth::attempt($request->only('email','password'))){
-            return redirect('/dashboard');
+            return redirect('/');
         }   
         session()->flash('error', 'Invalid Email or Password');
         return redirect('/login');
@@ -51,6 +53,12 @@ class HomeController extends Controller
         return redirect('/login')->with('status', 'Anda berhasil registrasi');
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect ('/login');
+
+    }
     
 
 }

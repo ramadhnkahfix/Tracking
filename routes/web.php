@@ -22,12 +22,13 @@ Route::get('/upload','UploadController@index');
 
 // Route Login
 Route::get('/login', 'HomeController@login');
-Route::post('/postlogin', 'HomeController@postLogin');
+Route::post('/postlogin', 'HomeController@postlogin');
 Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
 
-// Route Dhani
-
+// Route dhani
+Route::get('/admin-user','UserController@index');
+Route::post('/admin-user','UserController@store');
 
 
 
@@ -45,3 +46,6 @@ Route::get('logout','HomeController@logout');
 
 
 // Route Dimas
+Route::get('/admin', 'AdminController@index');
+Route::get('/dokumen', 'AdminController@dokumen');
+Route::get('/detail', 'AdminController@detail');
