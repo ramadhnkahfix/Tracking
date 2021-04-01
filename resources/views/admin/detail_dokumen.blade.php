@@ -23,7 +23,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1>Gudang Garam</h1>
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Gudang Garam</h3>
+                            <a href="#upload" class="text-danger" data-toggle="modal">
+                                <button type="button" class="btn btn-sm btn-primary">Upload</button>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -37,8 +42,8 @@
                                 
                                 <tr>
                                     <td></td>
-                                    <td align="center" style="width: 15%">
-                                        <a href="{{url('/download/dokumen')}}" class="text-danger" data-toggle="modal">
+                                    <td align="center" style="width: 20%">
+                                        <a href="{{url('/download/dokumen')}}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-success">DOWNLOAD</button>
                                         </a>
                                     </td>
@@ -60,8 +65,86 @@
             <!-- /.col -->
         </div>
     <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Dokumen Selesai</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead class="thead-dark text-center">
+                                <tr>
+                                    <th>Dokumen</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td></td>
+                                    <td align="center" style="width: 20%">
+                                        <a href="#update" class="text-danger" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-warning">UPDATE</button>
+                                        </a>
+                                        <a href="#hapus" class="text-danger">
+                                            <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Dokumen</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
     </div><!-- /.container-fluid -->
 </section>
+
+<!-- Modal Upload Data-->
+<div class="modal small fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ url('/dokumen/upload-balasan')}}" method="post">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title">Ganti Status</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+
+                </div>
+                <div class="modal-body modal-body-upload">
+                    <button type="button" class="btn btn-sm btn-outline-primary" style="float: right" id="tambah"><i class="fas fa-plus"> Tambah</i></button>
+                    <br>
+                    <div class="form-group col-12">
+                        <label>Subject</label>
+                        <input type="text" class="form-control" name="subject" readonly value="Subject">
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="hidden" value="1" id="no">
+                        <label id="label-upload">File Dokumen</label>
+                        <input type="file" name="file[]" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footer-upload">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal Upload Data -->
 
 <!-- Modal Delete Data-->
 <div class="modal small fade" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -115,6 +198,26 @@
   <script>
     $(document).ready(function(){
         $('#dokumen').addClass('active');
+
+        $('#tambah').on('click', function(){
+            let no = document.getElementById('no').value;
+            document.getElementById('label-upload').innerHTML = "File Dokumen 1";
+            no++;
+
+            let el = '<div class="form-group col-12">'+
+                        '<label>File Dokumen '+no+'</label>'+
+                        '<input type="file" class="form-control" name="file[]" required>'+
+                        '</div>';
+
+            let footer = '<div class="modal-footer modal-footer-upload">'+
+                            '<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button>'+
+                            '<button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>'+
+                        '</div>';
+            
+            $('.modal-footer-upload').remove();
+            $('.modal-body-upload').append(el,footer);
+            document.getElementById('no').value = no;
+        });
     });
     $(function () {
       $("#example1").DataTable({

@@ -46,7 +46,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td align="center" style="width: 15%">
+                                    <td align="center" style="width: 20%">
                                         <a href="#status" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a>
@@ -79,12 +79,12 @@
     </div><!-- /.container-fluid -->
 </section>
 
-<!-- Modal Delete Data-->
+<!-- Modal Status Data-->
 <div class="modal small fade" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ url('/dokumen/status')}}" method="post">
-                <div class="modal-header">
+                <div class="modal-header bg-success">
                     <h5 class="modal-title">Ganti Status</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
@@ -104,14 +104,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button> 
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
                     <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- End Modal Delete Data -->
+<!-- End Modal Status Data -->
 @endsection
 
 @section('script')
