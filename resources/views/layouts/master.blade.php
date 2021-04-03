@@ -51,6 +51,8 @@
   	<script type="text/javascript" src="{{asset('assets/js/app.js')}}"></script>
   	<!-- Carousel JS Files -->
   	<script type="text/javascript" src="{{asset('assets/owl-carousel/owl.carousel.min.js')}}"></script>
+	
+	@yield('script')
 
 </body>
 </html>

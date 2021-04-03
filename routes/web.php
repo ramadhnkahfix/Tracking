@@ -21,12 +21,14 @@ Route::get('/', 'HomeController@index');
 Route::get('/upload','UploadController@index');
 
 // Route Login
-Route::get('/login', 'HomeController@login');
+Route::get('/login', 'HomeController@login')->name('login');
 Route::post('/postlogin', 'HomeController@postlogin');
 Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
 
 // Route dhani
+Route::post('/upload','UploadController@store')->middleware('auth');
+
 Route::get('/admin-user','UserController@index');
 Route::post('/admin-user','UserController@store');
 

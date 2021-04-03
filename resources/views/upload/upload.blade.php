@@ -35,34 +35,36 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalupload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
-        <form action="" method="POST">
-          <div class="modal-header">
+          <div class="modal-header">  
               <h5 class="modal-title" id="exampleModalLabel">Upload Document</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
           </div>
-          <div class="modal-body">
-              
+          <div class="modal-body modal-body-upload">
+          <form action="{{url('/upload')}}" method="POST">
+          @csrf
+                <button type="button" class="btn btn-primary" style="float: right" id="tambah"><span style="color:#fff"><i class="fas fa-plus"></i> Tambah</span></button>
+                <br>
                 <div class="form-group">
                   <label for="nama">Nama/Instansi</label>
-                  <input type="text" name="nama" class="form-control" required>
+                  <input type="text" style="width:100%" name="nama" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" name="email" class="form-control" required>
+                  <input type="email" name="email" style="width:100%" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="file">Upload File</label><br>
-                  <input type="file" name="file" accept=".doc,.docx,.pdf" class="" multiple required><br>
-                  <small>format: .doc, .docx, .pdf
+                  <input type="hidden" value="1" id="no">
+                  <label id="label-upload">Upload File</label><br>
+                  <input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>
+                  <small>format: .doc, .docx, .pdf</small>
                 </div>
               
           </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal">Cancel</button>
+          <div class="modal-footer modal-footer-upload">
               <button type="submit" class="btn btn-primary" style="color: white">Submit</button>
           </div>
         </form>
@@ -70,4 +72,34 @@
   </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+  $(document).ready(function(){
+
+  $('#tambah').on('click', function(){
+            let no = document.getElementById('no').value;
+            document.getElementById('label-upload').innerHTML = "Upload File 1";
+            no++;
+            console.log("error");
+
+            let el = '<div class="form-group">'+
+                        '<label>Upload File '+no+'</label>'+
+                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf" required>'+
+                        '<small>format: .doc, .docx, .pdf</small>'+
+                        '</div>';
+
+            let footer = '<div class="modal-footer modal-footer-upload">'+
+                            '<button type="submit" class="btn btn-primary"  style="color: white" id="modalDelete">Simpan</a>'+
+                        '</div>';
+            
+            $('.modal-footer-upload').remove();
+            $('.modal-body-upload').append(el,footer);
+            document.getElementById('no').value = no;
+
+    });
+  });
+
+</script>
 @endsection

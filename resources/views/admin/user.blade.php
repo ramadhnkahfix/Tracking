@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="#tambah" data-toggle="modal">
-                            <button class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-sm btn-outline-primary" style="float:right"><i class="fas fa-plus"> Tambah</i></button>
                         </a>
                     </div>
                     <div class="card-body">

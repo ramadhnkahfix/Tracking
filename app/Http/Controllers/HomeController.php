@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -24,12 +25,13 @@ class HomeController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-
+        
         if(Auth::attempt($request->only('email','password'))){
             return redirect('/');
-        }   
+        }      
         session()->flash('error', 'Invalid Email or Password');
         return redirect('/login');
+    
     }
 
     public function signup(){

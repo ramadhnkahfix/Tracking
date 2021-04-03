@@ -57,7 +57,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:right">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -71,7 +71,7 @@
                     <a class="nav-link px-5" href="{{url('/upload')}}">UPLOAD</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link px-5" href="{{url('/login')}}">Login/Register</a>
+                    <a class="nav-link px-5" href="{{url('/login')}}">LOGIN</a>
                   </li>
                 </ul>
                   <!-- <li class="nav-item dropdown">

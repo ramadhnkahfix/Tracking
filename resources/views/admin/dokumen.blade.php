@@ -89,7 +89,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modal-body-upload">
                     <div class="form-group col-12">
                         <label>Subject</label>
                         <input type="text" class="form-control" name="subject" readonly value="Subject">
@@ -131,6 +131,8 @@
   <script>
     $(document).ready(function(){
         $('#dokumen').addClass('active');
+
+        
     });
     $(function () {
       $("#example1").DataTable({
