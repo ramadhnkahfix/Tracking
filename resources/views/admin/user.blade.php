@@ -82,15 +82,13 @@
 <div class="modal small fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/status')}}" method="post">
+            <form action="{{ url('/admin-user')}}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah User</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
                 </div>
                 <div class="modal-body">
-                <form action="{{url('/admin-user')}}" method="post">
-                @csrf
                      <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
