@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Jabatan;
+use App\Models\User;
+use App\Models\Jabatan;
 use Str;
 
 class UserController extends Controller
