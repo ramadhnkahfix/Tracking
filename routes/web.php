@@ -29,8 +29,10 @@ Route::get('logout','HomeController@logout');
 // Route dhani
 Route::post('/upload','UploadController@store')->middleware('auth');
 
-Route::get('/admin-user','UserController@index');
+Route::get('/admin/user','UserController@index');
 Route::post('/admin-user','UserController@store');
+
+Route::get('/profile','AdminController@profile');
 
 
 

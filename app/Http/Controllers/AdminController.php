@@ -20,4 +20,9 @@ class AdminController extends Controller
     {
         return view('admin.detail_dokumen');
     }
+
+    public function profile()
+    {
+        return view ('admin.profile');
+    }
 }

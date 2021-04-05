@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Jabatan;
+use Str;
 
 class UserController extends Controller
 {
@@ -19,21 +20,21 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'jabatan_id' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique',
             'password' =>  'required|min:8'
         ]);
         
-        dd($request->all());
-        // $user = App\User::create($request->all());
+        // dd($request->all());
+        // $user = \App\User;
         // $user->remeber_token = Str::random(60);
         // $user->save();
-        // User::create([
-        //     'name' => $request->name,
-        //     'id_jabatan' => $request->jabatan_id,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        //     'remember_token' => Str::random(60)
-        // ]);
-        return redirect ('/admin-user')->with('status','Data berhasil ditambahkan');
+        User::create([
+            'name' => $request->name,
+            'id_jabatan' => $request->id_jabatan,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'remember_token' => Str::random(60)
+        ]);
+        return redirect ('/admin/user')->with('status','Data berhasil ditambahkan');
     }
 }

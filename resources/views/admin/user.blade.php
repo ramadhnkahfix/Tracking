@@ -79,52 +79,54 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<!-- Modal Add USer -->
 <div class="modal small fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/admin-user')}}" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah User</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah User</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
+            </div>
+            <div class="modal-body">
+            <form action="{{ url('/admin-user')}}" method="post">
+            {{ csrf_field()}}
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Nama</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control">
+                    </div>
                 </div>
-                <div class="modal-body">
-                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control">
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Jabatan</label>
+                    <div class="col-sm-10">
+                        <select name="id_jabatan" class="form-control">
+                        <option selected>Pilih Jabatan</option>
+                        @foreach($jabatan as $jbt)
+                            <option value="{{$jbt->id}}">{{$jbt->nama_jabatan}}</option>
+                        @endforeach
+                        </select>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Jabatan</label>
-                        <div class="col-sm-10">
-                            <select name="jabatan_id" class="form-control">
-                            <option selected>Pilih Jabatan</option>
-                            @foreach($jabatan as $jbt)
-                                <option value="{{$jbt->id}}">{{$jbt->nama_jabatan}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm 10">
-                            <input type="password" class="form-control" id="password" name="password">    
-                            <div class="input-group-append">
-                                
-                            </div>
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Tambah</a>
                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm 10">
+                        <input type="password" class="form-control" id="password" name="password">    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="remember_token">
+                </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" >Tambah</a>    
             </form>
+            </div>
         </div>
     </div>
 </div>
