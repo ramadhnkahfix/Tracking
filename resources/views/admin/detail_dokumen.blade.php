@@ -86,10 +86,10 @@
                                 <tr>
                                     <td></td>
                                     <td align="center" style="width: 20%">
-                                        <a href="#update" class="text-danger" data-toggle="modal">
+                                        <a href="#update" class="text-warning" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">UPDATE</button>
                                         </a>
-                                        <a href="#hapus" class="text-danger">
+                                        <a href="#hapus" class="text-danger" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
                                     </td>
@@ -146,33 +146,53 @@
 </div>
 <!-- End Modal Upload Data -->
 
+<!-- Modal Update Data-->
+<div class="modal small fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ url('/dokumen/upload-balasan')}}" method="post">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Update Dokumen</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+
+                </div>
+                <div class="modal-body modal-body-upload">
+                    <div class="form-group col-12">
+                        <label>Dokumen Sebelumnya</label>
+                        <input type="text" class="form-control" name="subject" readonly value="Subject">
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="hidden" value="1" id="no">
+                        <label id="label-upload">Dokumen Baru</label>
+                        <input type="file" name="file" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footer-upload">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary">Simpan</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal Update Data -->
+
 <!-- Modal Delete Data-->
-<div class="modal small fade" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal small fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ url('/dokumen/status')}}" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ganti Status</h5>
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title">Hapus Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
                 </div>
                 <div class="modal-body">
-                    <div class="form-group col-12">
-                        <label>Subject</label>
-                        <input type="text" class="form-control" name="subject" readonly value="Subject">
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Status</label>
-                        <select class="form-control">
-                            <option value="">Diterima</option>
-                            <option value="">Diproses</option>
-                            <option value="">Selesai</option>
-                        </select>
-                    </div>
+                    <p>Apakah anda yakin ingin menghapus dokumen ini?
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
-                    <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
+                    <button type="submit" class="btn btn-primary"  id="modalDelete">Ya</a>
                 </div>
             </form>
         </div>

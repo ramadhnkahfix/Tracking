@@ -46,7 +46,11 @@
                                     <td>{{ $usr->jabatan->nama_jabatan }}</td>
                                     <td>{{ $usr->email }}</td>
                                     <td align="center" style="width: 20%">
+                                        @if( $usr->status == null || $usr->status == 0 )
+                                        <button class="btn btn-secondary btn-sm" type="button">Disable</button>
+                                        @else
                                         <button class="btn btn-success btn-sm" type="button">Active</button>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
