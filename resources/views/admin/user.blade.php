@@ -34,7 +34,7 @@
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
-                                    <th>Aksi</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,13 +46,7 @@
                                     <td>{{ $usr->jabatan->nama_jabatan }}</td>
                                     <td>{{ $usr->email }}</td>
                                     <td align="center" style="width: 20%">
-                                        <form action="#" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
-                                                DELETE
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-success btn-sm" type="button">Active</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -64,7 +58,7 @@
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
-                                    <th>Aksi</th>
+                                    <th>Status</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -86,16 +80,15 @@
             <div class="modal-header">
                 <h5 class="modal-title">Tambah User</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-
             </div>
             <div class="modal-body">
             <form action="{{ url('/admin-user')}}" method="post">
             {{ csrf_field()}}
-                    <div class="form-group row">
+                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
                         <input type="text" name="name" class="form-control">
-                    </div>
+                    </div>  
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Jabatan</label>
@@ -113,10 +106,6 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name="email">
                     </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
-                    <button type="submit" class="btn btn-primary" >Tambah</a>
-                </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
@@ -126,7 +115,9 @@
                 <div class="form-group">
                     <input type="hidden" name="remember_token">
                 </div>
+            </div>
             <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
                 <button type="submit" class="btn btn-primary" >Tambah</a>    
             </form>
             </div>
