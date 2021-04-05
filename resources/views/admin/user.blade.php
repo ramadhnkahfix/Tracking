@@ -113,6 +113,9 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name="email">
                     </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary" >Tambah</a>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
