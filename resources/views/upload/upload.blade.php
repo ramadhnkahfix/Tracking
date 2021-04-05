@@ -35,7 +35,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalupload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">  
               <h5 class="modal-title" id="exampleModalLabel">Upload Document</h5>
@@ -65,7 +65,8 @@
               
           </div>
           <div class="modal-footer modal-footer-upload">
-              <button type="submit" class="btn btn-primary" style="color: white">Submit</button>
+              <button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button> 
+              <button type="submit" class="btn btn-primary" style="color: white">Upload</button>
           </div>
         </form>
       </div>
@@ -85,13 +86,14 @@
             console.log("error");
 
             let el = '<div class="form-group">'+
-                        '<label>Upload File '+no+'</label>'+
-                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf" required>'+
+                        '<label>Upload File '+no+'</label><br>'+
+                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>'+
                         '<small>format: .doc, .docx, .pdf</small>'+
                         '</div>';
 
             let footer = '<div class="modal-footer modal-footer-upload">'+
-                            '<button type="submit" class="btn btn-primary"  style="color: white" id="modalDelete">Simpan</a>'+
+                          '<button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button>'+ 
+                          '<button type="submit" class="btn btn-primary" style="color: white">Upload</button>'+
                         '</div>';
             
             $('.modal-footer-upload').remove();
