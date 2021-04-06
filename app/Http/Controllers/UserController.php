@@ -20,7 +20,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'jabatan_id' => 'required',
-            'email' => 'required|unique',
+            'email' => 'required',
             'password' =>  'required|min:8'
         ]);
         

@@ -81,7 +81,7 @@
 <div class="modal small fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-gradient-blue">
                 <h5 class="modal-title">Tambah User</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
             </div>
@@ -110,6 +110,7 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name="email">
                     </div>
+                </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
