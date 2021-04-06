@@ -38,12 +38,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <tr>
                                 @foreach($user as $usr)
+                                <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $usr->name }}</td>
-                                    <td>{{ $usr->jabatan->nama_jabatan }}</td>
+                                    <td>{{ $usr->nama }}</td>
+                                    <td>{{ $usr->jabatan->nama }}</td>
                                     <td>{{ $usr->email }}</td>
                                     <td align="center" style="width: 20%">
                                         @if( $usr->status == null || $usr->status == 0 )
@@ -54,7 +53,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -110,6 +108,7 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name="email">
                     </div>
+                </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
@@ -145,13 +144,7 @@
 <script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
-
-  <script>
+<script>
     $(document).ready(function(){
         $('#user').addClass('active');
     });
