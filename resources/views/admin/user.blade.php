@@ -38,12 +38,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <tr>
                                 @foreach($user as $usr)
+                                <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $usr->name }}</td>
-                                    <td>{{ $usr->jabatan->nama_jabatan }}</td>
+                                    <td>{{ $usr->nama }}</td>
+                                    <td>{{ $usr->jabatan->nama }}</td>
                                     <td>{{ $usr->email }}</td>
                                     <td align="center" style="width: 20%">
                                         @if( $usr->status == null || $usr->status == 0 )
@@ -54,7 +53,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -91,16 +89,16 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" required>
                     </div>  
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <select name="id_jabatan" class="form-control">
-                        <option selected>Pilih Jabatan</option>
+                        <select name="id_jabatan" class="form-control" required>
+                        <option selected disabled>Pilih Jabatan</option>
                         @foreach($jabatan as $jbt)
-                            <option value="{{$jbt->id}}">{{$jbt->nama_jabatan}}</option>
+                            <option value="{{$jbt->id_jabatan}}">{{$jbt->nama}}</option>
                         @endforeach
                         </select>
                     </div>
@@ -108,13 +106,13 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
-                        <input type="password" class="form-control" id="password" name="password">    
+                        <input type="password" class="form-control" id="password" name="password" required>    
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,7 +131,20 @@
 @endsection
 
 @section('script')
-  <script>
+<script src="{{ asset('/adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<script>
     $(document).ready(function(){
         $('#user').addClass('active');
     });
