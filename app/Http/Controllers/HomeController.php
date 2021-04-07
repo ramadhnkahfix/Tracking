@@ -16,7 +16,7 @@ class HomeController extends Controller
             return view('admin.layouts.dashboard');
         }
         else{
-            return view('layouts.home');    
+            return view('upload.upload');    
         }
 
     }
@@ -37,7 +37,7 @@ class HomeController extends Controller
             // if(auth()->user()->jabatan()->nama == 'Super Admin'){
             //     return redirect('/admin');
             // }
-            return redirect('/');
+            return redirect('/upload');
         }      
         session()->flash('error', 'Invalid Email or Password');
         return redirect('/login');
