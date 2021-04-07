@@ -25,7 +25,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ url('/change-password')}}" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-lock nav-icon"></i>
                   <p>Change Password</p>
                 </a>
               </li>
@@ -39,7 +39,7 @@
         </li>
     </ul>
     <!-- Sidebar Menu -->
-    <nav class="user-panel mt-2">
+    <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
@@ -78,11 +78,7 @@
                 </li>
                 </ul> -->
             </li>
-        </ul>
-    </nav>
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
+            <li class="nav-item">
                 <a href="{{ url('/admin/user') }}" id="user" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>User</p>

@@ -89,16 +89,16 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" required>
                     </div>  
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <select name="id_jabatan" class="form-control">
-                        <option selected>Pilih Jabatan</option>
+                        <select name="id_jabatan" class="form-control" required>
+                        <option selected disabled>Pilih Jabatan</option>
                         @foreach($jabatan as $jbt)
-                            <option value="{{$jbt->id}}">{{$jbt->nama_jabatan}}</option>
+                            <option value="{{$jbt->id_jabatan}}">{{$jbt->nama}}</option>
                         @endforeach
                         </select>
                     </div>
@@ -106,13 +106,13 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
-                        <input type="password" class="form-control" id="password" name="password">    
+                        <input type="password" class="form-control" id="password" name="password" required>    
                     </div>
                 </div>
                 <div class="form-group">

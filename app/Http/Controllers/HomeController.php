@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\User;
+use App\Models\User;
 
 class HomeController extends Controller
 {
     
     public function index()
     {
-        return view('layouts.home');
+        if(auth()->user()->id_jabatan == '1'){
+            return view('admin.admin');
+        }
+        else{
+            return view('layouts.home');    
+        }
+
     }
 
     public function login(){
@@ -27,6 +33,9 @@ class HomeController extends Controller
         ]);
         
         if(Auth::attempt($request->only('email','password'))){
+            // if(auth()->user()->jabatan()->nama == 'Super Admin'){
+            //     return redirect('/admin');
+            // }
             return redirect('/');
         }      
         session()->flash('error', 'Invalid Email or Password');
@@ -41,8 +50,9 @@ class HomeController extends Controller
     public function postsignup(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|min:6'
+            'email' => 'required|unique:user|email',
+            'password' => 'required|min:8',
+            'confirmation' => 'required|same:password'
         ]);
 
         User::create([

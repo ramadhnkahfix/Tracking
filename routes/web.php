@@ -32,8 +32,6 @@ Route::post('/upload','UploadController@store')->middleware('auth');
 Route::get('/admin/user','UserController@index');
 Route::post('/admin-user','UserController@store');
 
-Route::get('/profile','AdminController@profile');
-
 
 
 
