@@ -25,9 +25,6 @@ class UserController extends Controller
         ]);
         
         // dd($request->all());
-        // $user = \App\User;
-        // $user->remeber_token = Str::random(60);
-        // $user->save();
         User::create([
             'name' => $request->name,
             'id_jabatan' => $request->id_jabatan,

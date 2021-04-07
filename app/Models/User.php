@@ -6,9 +6,11 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * Class User
@@ -26,8 +28,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable
 {
+	// use Authenticatable;
+
+
 	protected $table = 'user';
 	protected $primaryKey = 'id_user';
 	public $timestamps = false;
@@ -54,6 +59,6 @@ class User extends Model
 
 	public function jabatan()
 	{
-		return $this->belongsTo(Jabatan::class, 'id_jabatan');
+		return $this->belongsTo(Jabatan::class, 'id_jabatan','id_jabatan');
 	}
 }

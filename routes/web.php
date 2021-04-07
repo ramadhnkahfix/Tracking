@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function(){
+    return view('layouts.home');
+});
 Route::get('/upload','UploadController@index');
 
 // Route Login
@@ -25,16 +27,14 @@ Route::get('/login', 'HomeController@login')->name('login');
 Route::post('/postlogin', 'HomeController@postlogin');
 Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
+Route::post('/postsignup', 'HomeController@postsignup');
 
-// Route dhani
 Route::post('/upload','UploadController@store')->middleware('auth');
+Route::group(['middleware' => ['auth']],function(){
+// Route dhani
 
-Route::get('/admin/user','UserController@index');
-Route::post('/admin-user','UserController@store');
-
-
-
-
+    Route::get('/admin/user','UserController@index');
+    Route::post('/admin-user','UserController@store');
 
 
 
@@ -47,7 +47,13 @@ Route::post('/admin-user','UserController@store');
 
 
 
-// Route Dimas
-Route::get('/admin', 'AdminController@index');
-Route::get('/dokumen', 'AdminController@dokumen');
-Route::get('/detail', 'AdminController@detail');
+
+
+
+
+    // Route Dimas
+    Route::get('/admin', 'AdminController@index');
+    Route::get('/dokumen', 'AdminController@dokumen');
+    Route::get('/detail', 'AdminController@detail');
+
+});

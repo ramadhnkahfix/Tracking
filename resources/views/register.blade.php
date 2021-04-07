@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Register your account</p>
 
-      <form action="" method="post">
+      <form action="{{url('/postsignup')}}" method="post">
         @csrf
         <div class="input-group mb-3">
           <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama">

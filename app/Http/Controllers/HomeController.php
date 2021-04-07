@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Str;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         if(auth()->user()->id_jabatan == '1'){
-            return view('admin.admin');
+            return view('admin.layouts.dashboard');
         }
         else{
             return view('layouts.home');    
@@ -49,20 +50,22 @@ class HomeController extends Controller
 
     public function postsignup(Request $request){
         $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'email' => 'required|unique:user|email',
             'password' => 'required|min:8',
             'confirmation' => 'required|same:password'
         ]);
 
+        // dd($request->all());
         User::create([
-            'id_jabatan' => '2',
-            'name' => $request->name,
+            'id_jabatan' => 2,
+            'nama' => $request->nama,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'status' => 1,
             'remember_token' => Str::random(60)
         ]);
-        return redirect('/login')->with('status', 'Anda berhasil registrasi');
+        return redirect('/login')->with('status', 'Anda berhasil registrasi, Kami telah mengirim email untuk konfirmasi');
     }
 
     public function logout()
