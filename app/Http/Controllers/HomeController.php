@@ -12,11 +12,14 @@ class HomeController extends Controller
     
     public function index()
     {
-        if(auth()->user()->id_jabatan == '1'){
-            return view('admin.layouts.dashboard');
+        if(!Auth::user()){
+            return view('layouts.home');
         }
-        else{
-            return view('layouts.home');    
+        elseif(Auth::user()->id_jabatan == 1){
+            return redirect()->route('admin');
+        }
+        elseif(Auth::user()->id_jabatan == 2){
+            return redirect()->route('upload');    
         }
 
     }
