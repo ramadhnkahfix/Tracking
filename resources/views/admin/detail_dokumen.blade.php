@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title','Detail Document')
-@section('page-title', 'Detail Document')
+@section('page-title', 'Nama Instansi')
 @section('style')
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Gudang Garam</h3>
+                            <h3 class="card-title">Dokumen Diterima</h3>
                             <a href="#upload" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-primary">Upload</button>
                             </a>
@@ -119,7 +119,7 @@
         <div class="modal-content">
             <form action="{{ url('/dokumen/upload-balasan')}}" method="post">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title">Ganti Status</h5>
+                    <h5 class="modal-title">Upload Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
                 </div>
