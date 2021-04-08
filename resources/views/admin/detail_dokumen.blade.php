@@ -167,6 +167,7 @@
                         <input type="file" name="file" class="form-control" required>
                     </div>
                 </div>
+                <div class="file"></div>
                 <div class="modal-footer modal-footer-upload">
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
                     <button type="submit" class="btn btn-primary">Simpan</a>
@@ -228,14 +229,7 @@
                         '<label>File Dokumen '+no+'</label>'+
                         '<input type="file" class="form-control" name="file[]" required>'+
                         '</div>';
-
-            let footer = '<div class="modal-footer modal-footer-upload">'+
-                            '<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button>'+
-                            '<button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>'+
-                        '</div>';
-            
-            $('.modal-footer-upload').remove();
-            $('.modal-body-upload').append(el,footer);
+            $('.file').append(el);
             document.getElementById('no').value = no;
         });
     });
