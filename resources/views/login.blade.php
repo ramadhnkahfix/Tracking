@@ -38,7 +38,7 @@
       <form action="{{url('/postlogin')}}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') }}">
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -51,7 +51,7 @@
       @enderror
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old('password') }}">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

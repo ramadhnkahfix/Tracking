@@ -28,7 +28,7 @@ Route::post('/postsignup', 'HomeController@postsignup');
 
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/upload','UploadController@index')->name('upload');
-    
+    Route::post('/upload','UploadController@store');
     // Route dhani
 
     

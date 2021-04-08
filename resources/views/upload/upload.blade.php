@@ -57,12 +57,15 @@
                   <input type="email" name="email" style="width:100%" class="form-control" required>
                 </div>
                 <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" name="subject" style="width:100%" class="form-control" required>
+                </div>
+                <div class="form-group">
                   <input type="hidden" value="1" id="no">
                   <label id="label-upload">Upload File</label><br>
                   <input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>
                   <small>format: .doc, .docx, .pdf</small>
-                </div>
-              
+                </div>  
           </div>
           <div class="modal-footer modal-footer-upload">
               <button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button> 
@@ -104,4 +107,5 @@
   });
 
 </script>
+
 @endsection

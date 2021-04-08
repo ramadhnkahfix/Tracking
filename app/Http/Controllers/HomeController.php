@@ -12,16 +12,7 @@ class HomeController extends Controller
     
     public function index()
     {
-        if(!Auth::user()){
-            return view('layouts.home');
-        }
-        elseif(Auth::user()->id_jabatan == 1){
-            return redirect()->route('admin');
-        }
-        elseif(Auth::user()->id_jabatan == 2){
-            return redirect()->route('upload');    
-        }
-
+       return view('layouts.home');
     }
 
     public function login(){
@@ -30,11 +21,11 @@ class HomeController extends Controller
 
     public function postlogin(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        // // dd($request->all());
+        // $request->validate([
+        //     'email' => 'required',
+        //     'password' => 'required'
+        // ]);
         
         if(Auth::attempt($request->only('email','password'))){
             // if(auth()->user()->jabatan()->nama == 'Super Admin'){

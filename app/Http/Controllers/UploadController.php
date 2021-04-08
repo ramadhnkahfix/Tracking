@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Dokuman;
+use App\Models\DetailDokuman;
+use Carbon\Carbon;
 
 class UploadController extends Controller
 {
@@ -34,7 +37,36 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nama' => 'required',
+            'email' => 'required|email|unique:dokumen',
+            'subject' => 'required',
+            'file' => 'required',
+            'file.*' => 'file|mimes:doc,docx,pdf'
+        ]);
+
+        // dd($request->all());
+        if ($request->hasFile('file')){
+            foreach($request->file('file') as $file){
+                $name = $file->getClientOriginalName();
+                $file->move(public_path() . '/document/', $name);
+                $data[] = $name;
+            }
+        }
+
+        $dokumen = new DetailDokuman;
+        $dokumen->file = json_encode($data);
+        $dokumen->save();
+        
+        $time = Carbon::now()->format("d-m-Y H:i:s");
+
+        Dokuman::create([
+            'nama_instansi' => $request->nama,
+            'email' => $request->email,
+            'subject' => $request->subject
+        ]);
+
     }
 
     /**
