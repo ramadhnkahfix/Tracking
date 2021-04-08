@@ -46,15 +46,7 @@ class UploadController extends Controller
         // ]);
 
         // dd($request->all());
-        $data = [];
-        if ($request->hasFile('file')){
-            foreach($request->file('file[]') as $file){
-                $name = $file->getClientOriginalName();
-                $file->move(public_path() . '/document/', $name);
-                $data[] = $name;
-            }
-        }
-
+        
         
 
         $date = Carbon::now()->format("d-m-Y");
@@ -67,16 +59,22 @@ class UploadController extends Controller
             'status' => 1
         ]);
 
-        $id = Dokuman::orderBy('id_dokumen', 'desc')->first();
-
+        $id = Dokuman::select('id_dokumen')->orderBy('id_dokumen', 'desc')->first();
+        
         $detail = [];
-        for($i=0; $i<count($data); $i++){
+        $i = 0;
+        foreach($request->file as $key){
+            $file = $request->file('file');
+            $name = $file[$i]->getClientOriginalName();
+            $file[$i]->move('document/', $name);
+
             $detail[] = [
-                'file' => $data[$i],
-                'dokumen_id_dokumen' => $id
+                'file' => $name,
+                'dokumen_id_dokumen' => $id->id_dokumen
             ];
         }
         DetailDokuman::insert($detail);
+        $i++;
 
         return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
     }

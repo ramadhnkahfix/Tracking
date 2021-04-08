@@ -44,7 +44,7 @@
               </button>
           </div>
           <div class="modal-body modal-body-upload">
-          <form action="{{url('/upload')}}" method="POST">
+          <form action="{{url('/upload')}}" method="POST" enctype="multipart/form-data">
           @csrf
                 <button type="button" class="btn btn-primary" style="float: right" id="tambah"><span style="color:#fff"><i class="fas fa-plus"></i> Tambah</span></button>
                 <br>
