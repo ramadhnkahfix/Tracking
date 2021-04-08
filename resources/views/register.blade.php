@@ -31,7 +31,7 @@
       <form action="{{url('/postsignup')}}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama">
+          <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama" value="{{ old('nama') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -44,7 +44,7 @@
           @enderror
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email">
+          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" value="{{ old('email') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

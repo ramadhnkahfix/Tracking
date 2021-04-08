@@ -70,9 +70,28 @@
                   <li class="nav-item">
                     <a class="nav-link px-5" href="{{url('/upload')}}">UPLOAD</a>
                   </li>
+                  @if(!auth()->user())
                   <li class="nav-item">
                     <a class="nav-link px-5" href="{{url('/login')}}">LOGIN</a>
                   </li>
+                  @endif
+                  @if(auth()->user())
+                  <li class="nav-item dropdown">
+                    <a class="nav-link px-5" data-toggle="dropdown" href="#">
+                    PROFILE
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                      <div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item">
+                        <i class="fas fa-lock mr-2"></i> Change Password
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a href="{{url('/logout')}}" class="dropdown-item">
+                        <i class="fas fa-power-off mr-2"></i> Logout
+                      </a>
+                    </div>
+                  </li>
+                  @endif
                 </ul>
                   <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-5" id="ProfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

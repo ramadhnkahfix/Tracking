@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/', function(){
+Route::get('/tracking', function(){
     return view('layouts.home');
 });
 
@@ -29,9 +27,9 @@ Route::get('logout','HomeController@logout');
 Route::post('/postsignup', 'HomeController@postsignup');
 
 Route::group(['middleware' => ['auth']],function(){
-// Route dhani
-    Route::get('/upload','UploadController@index');
-    Route::post('/upload','UploadController@store');
+    Route::get('/upload','UploadController@index')->name('upload');
+    
+    // Route dhani
 
     
     Route::get('/admin/user','UserController@index');
@@ -44,16 +42,8 @@ Route::group(['middleware' => ['auth']],function(){
 
 
 
-
-
-
-
-
-
-
-
     // Route Dimas
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/dokumen', 'AdminController@dokumen');
     Route::get('/detail', 'AdminController@detail');
 
