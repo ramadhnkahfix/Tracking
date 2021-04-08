@@ -12,16 +12,7 @@ class HomeController extends Controller
     
     public function index()
     {
-        if(!Auth::user()){
-            return view('layouts.home');
-        }
-        elseif(Auth::user()->id_jabatan == 1){
-            return redirect()->route('admin');
-        }
-        elseif(Auth::user()->id_jabatan == 2){
-            return redirect()->route('upload');    
-        }
-
+        return view('layouts.home');
     }
 
     public function login(){
@@ -37,10 +28,12 @@ class HomeController extends Controller
         ]);
         
         if(Auth::attempt($request->only('email','password'))){
-            // if(auth()->user()->jabatan()->nama == 'Super Admin'){
-            //     return redirect('/admin');
-            // }
-            return redirect('/upload');
+            if(Auth::user()->id_jabatan == 1){
+                return redirect()->route('admin');
+            }
+            elseif(Auth::user()->id_jabatan == 2){
+                return redirect()->route('upload');    
+            }
         }      
         session()->flash('error', 'Invalid Email or Password');
         return redirect('/login');
@@ -77,6 +70,30 @@ class HomeController extends Controller
         return redirect ('/login');
 
     }
-    
 
+    public function changePassword(){
+        return view('change-password');
+    }
+    
+    public function updatePassword(Request $request){
+        $id = Auth::user()->email;
+
+        $user = User::where('email', '=', $id)->first();
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+
+        if(Auth::user()->id_jabatan == 1){
+            return redirect()->route('admin');
+        }
+        elseif(Auth::user()->id_jabatan == 2){
+            return redirect()->route('home');
+        }
+    }
+
+    public function verify_old_password()
+    {
+        $old_password = $_POST['old_password'];
+        $verify_result =  HASH::check($old_password, Auth::user()->password);
+        return response()->json($verify_result);
+    }
 }
