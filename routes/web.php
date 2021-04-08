@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/tracking', function(){
-    return view('layouts.home');
-});
+// Route::get('/tracking', function(){
+//     return view('layouts.home');
+// });
 
 // Route Login
 Route::get('/login', 'HomeController@login')->name('login');
@@ -47,4 +47,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('/dokumen', 'AdminController@dokumen');
     Route::get('/detail', 'AdminController@detail');
 
+    Route::get('/change-password', 'HomeController@changePassword');
+    Route::post('/change-password', 'HomeController@updatePassword');
+    Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
 });

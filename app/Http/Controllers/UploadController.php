@@ -37,36 +37,48 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required|email|unique:dokumen',
-            'subject' => 'required',
-            'file' => 'required',
-            'file.*' => 'file|mimes:doc,docx,pdf'
-        ]);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'email' => 'required|email|unique:dokumen',
+        //     'subject' => 'required',
+        //     'file' => 'required',
+        //     'file.*' => 'file|mimes:doc,docx,pdf'
+        // ]);
 
         // dd($request->all());
+        $data = [];
         if ($request->hasFile('file')){
-            foreach($request->file('file') as $file){
+            foreach($request->file('file[]') as $file){
                 $name = $file->getClientOriginalName();
                 $file->move(public_path() . '/document/', $name);
                 $data[] = $name;
             }
         }
 
-        $dokumen = new DetailDokuman;
-        $dokumen->file = json_encode($data);
-        $dokumen->save();
         
-        $time = Carbon::now()->format("d-m-Y H:i:s");
+
+        $date = Carbon::now()->format("d-m-Y");
 
         Dokuman::create([
             'nama_instansi' => $request->nama,
             'email' => $request->email,
-            'subject' => $request->subject
+            'subject' => $request->subject,
+            'tanggal' =>$date,
+            'status' => 1
         ]);
 
+        $id = Dokuman::orderBy('id_dokumen', 'desc')->first();
+
+        $detail = [];
+        for($i=0; $i<count($data); $i++){
+            $detail[] = [
+                'file' => $data[$i],
+                'dokumen_id_dokumen' => $id
+            ];
+        }
+        DetailDokuman::insert($detail);
+
+        return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
     }
 
     /**

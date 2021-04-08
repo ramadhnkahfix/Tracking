@@ -20,7 +20,11 @@
         <li class="user-panel nav-item">
             <a href="#" class="nav-link">
             <img src="{{ asset('adminlte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
+<<<<<<< HEAD
                 <p>{{auth()->user()->nama}}</p> 
+=======
+                <p>{{Auth::user()->nama}}</p> 
+>>>>>>> 323ee245ec1b5d3453debc48e018887b2ee26822
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">

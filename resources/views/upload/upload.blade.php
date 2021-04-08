@@ -65,7 +65,8 @@
                   <label id="label-upload">Upload File</label><br>
                   <input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>
                   <small>format: .doc, .docx, .pdf</small>
-                </div>  
+                </div>
+                <div class="file"></div>
           </div>
           <div class="modal-footer modal-footer-upload">
               <button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button> 
@@ -93,14 +94,7 @@
                         '<input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>'+
                         '<small>format: .doc, .docx, .pdf</small>'+
                         '</div>';
-
-            let footer = '<div class="modal-footer modal-footer-upload">'+
-                          '<button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button>'+ 
-                          '<button type="submit" class="btn btn-primary" style="color: white">Upload</button>'+
-                        '</div>';
-            
-            $('.modal-footer-upload').remove();
-            $('.modal-body-upload').append(el,footer);
+            $('.file').append(el);
             document.getElementById('no').value = no;
 
     });
