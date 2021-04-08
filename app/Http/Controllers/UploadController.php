@@ -48,14 +48,12 @@ class UploadController extends Controller
         // dd($request->all());
         $data = [];
         if ($request->hasFile('file')){
-            foreach($request->file('file[]') as $file){
+            foreach($request->file('file') as $file){
                 $name = $file->getClientOriginalName();
                 $file->move(public_path() . '/document/', $name);
                 $data[] = $name;
             }
-        }
-
-        
+        }  
 
         $date = Carbon::now()->format("d-m-Y");
 
@@ -68,7 +66,7 @@ class UploadController extends Controller
         ]);
 
         $id = Dokuman::orderBy('id_dokumen', 'desc')->first();
-
+        
         $detail = [];
         for($i=0; $i<count($data); $i++){
             $detail[] = [

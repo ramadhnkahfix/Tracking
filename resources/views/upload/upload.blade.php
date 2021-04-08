@@ -17,6 +17,14 @@
             <button type="button" class="btn btn-primary btn-lg px-2 py-2" data-toggle="modal" style="color: white" data-target="#modalupload">Upload Document</button>
           </div>
         </div>
+        @if(session('status'))
+          <div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">
+              {{ session('status') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        @endif
         <div class="row">
             <div class="col-6">
             </br>
@@ -44,8 +52,8 @@
               </button>
           </div>
           <div class="modal-body modal-body-upload">
-          <form action="{{url('/upload')}}" method="POST">
-          @csrf
+          <form action="{{url('/upload')}}" method="POST" enctype="multipart/form-data">
+          {{csrf_field()}}
                 <button type="button" class="btn btn-primary" style="float: right" id="tambah"><span style="color:#fff"><i class="fas fa-plus"></i> Tambah</span></button>
                 <br>
                 <div class="form-group">
@@ -67,6 +75,20 @@
                   <small>format: .doc, .docx, .pdf</small>
                 </div>
                 <div class="file"></div>
+                <!-- <div class="form-group control-group increment" >
+                  <input type="file" name="filename[]" class="form-control">
+                  <div class="input-group-btn"> 
+                    <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                  </div>
+                </div>
+                <div class="clone hide">
+                  <div class="control-group input-group" style="margin-top:10px">
+                    <input type="file" name="filename[]" class="form-control">
+                    <div class="input-group-btn"> 
+                      <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                    </div>
+                  </div>
+                </div> -->
           </div>
           <div class="modal-footer modal-footer-upload">
               <button type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal" aria-hidden="true">Batal</button> 
@@ -101,5 +123,17 @@
   });
 
 </script>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+    });
+</script> -->
 
 @endsection
