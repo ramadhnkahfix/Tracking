@@ -18,7 +18,7 @@
           </div>
         </div>
         @if(session('status'))
-          <div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">
+          <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
               {{ session('status') }}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -53,7 +53,7 @@
           </div>
           <div class="modal-body modal-body-upload">
           <form action="{{url('/upload')}}" method="POST" enctype="multipart/form-data">
-          {{csrf_field()}}
+          @csrf
                 <button type="button" class="btn btn-primary" style="float: right" id="tambah"><span style="color:#fff"><i class="fas fa-plus"></i> Tambah</span></button>
                 <br>
                 <div class="form-group">

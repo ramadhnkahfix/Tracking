@@ -39,16 +39,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach($detail_dokumen as $dd)
                                 <tr>
-                                    <td></td>
+                                    <td>{{$dd->file}}</td>
                                     <td align="center" style="width: 20%">
                                         <a href="{{url('/download/dokumen')}}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-success">DOWNLOAD</button>
                                         </a>
                                     </td>
                                 </tr>
-                                
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -82,7 +82,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                                 <tr>
                                     <td></td>
                                     <td align="center" style="width: 20%">
@@ -94,7 +94,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
                             <tfoot>
                                 <tr>

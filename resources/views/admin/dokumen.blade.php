@@ -39,13 +39,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach($dokumen as $dok)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $dok->nama_instansi }}</td>
+                                    <td>{{ $dok->email }}</td>
+                                    <td>{{ $dok->subject }}</td>
+                                    <td>{{ $dok->tanggal }}</td>
+                                    <td>@if($dok->status == null)
+                                            <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
+                                        @elseif($dok->status == 1)
+                                            <button class="btn btn-info btn-sm" type="button">Diproses</button>
+                                        @elseif($dok->status == 0)
+                                            <button class="btn btn-success btn-sm" type="button">Diterima</button>
+                                        @endif
+                                    </td>
                                     <td align="center" style="width: 20%">
                                         <a href="#status" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
@@ -55,7 +62,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>

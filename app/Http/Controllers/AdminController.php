@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Dokuman;
+use App\Models\DetailDokuman;
 
 class AdminController extends Controller
 {
@@ -13,12 +15,16 @@ class AdminController extends Controller
 
     public function dokumen()
     {
-        return view('admin.dokumen');
+        $dokumen = Dokuman::all();
+        return view('admin.dokumen', compact('dokumen'));
     }
 
     public function detail()
     {
-        return view('admin.detail_dokumen');
+        $detail_dokumen = DetailDokuman::with('dokuman')->get();
+        return view('admin.detail_dokumen')->with([
+            'detail_dokumen' => $detail_dokumen
+        ]);
     }
 
     public function profile()
