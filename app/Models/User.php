@@ -6,11 +6,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-// use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * Class User
@@ -30,9 +27,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  */
 class User extends Authenticatable
 {
-	// use Authenticatable;
-
-
 	protected $table = 'user';
 	protected $primaryKey = 'id_user';
 	public $timestamps = false;
@@ -59,6 +53,6 @@ class User extends Authenticatable
 
 	public function jabatan()
 	{
-		return $this->belongsTo(Jabatan::class, 'id_jabatan','id_jabatan');
+		return $this->belongsTo(Jabatan::class, 'id_jabatan');
 	}
 }

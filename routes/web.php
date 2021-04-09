@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::get('/change-password', 'HomeController@changePassword');
     Route::post('/change-password', 'HomeController@updatePassword');
     Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
-    // Route dhani
+    
 });
 Route::group(['middleware' => ['auth','checkRole:1']],function(){ 
     Route::get('/admin/user','UserController@index');
@@ -45,11 +45,12 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
 
 
 
-
-    // Route Dimas
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/dokumen', 'AdminController@dokumen');
     Route::get('/detail/{id}/dokumen', 'AdminController@detail')->name('detail.dokumen');
+
+    // Upload
+    Route::post('/dokumen/upload-balasan', 'AdminController@storeDokumen');
 
     //Download
     Route::get('/download/dokumen/{id}', 'AdminController@download');

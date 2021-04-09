@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dokuman;
 use App\Models\DetailDokuman;
 use App\Models\DokumenSelesai;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -37,33 +38,26 @@ class AdminController extends Controller
 
     public function storeDokumen(Request $request)
     {
-        $date = Carbon::now()->format("d-m-Y");
-
-        DokumenSelesai::create([
-            'file' => $request->nama,
-            'tanggal' => $date,
-            'author' => $request->subject,
-            'dokumen_id_dokumen' =>$date
-        ]);
-
-        $id = Dokuman::select('id_dokumen')->orderBy('id_dokumen', 'desc')->first();
+        $date = Carbon::now()->format("Y-m-d");
         
-        $detail = [];
+        $data = [];
         $i = 0;
         foreach($request->file as $key){
             $file = $request->file('file');
             $name = $file[$i]->getClientOriginalName();
-            $file[$i]->move('document/', $name);
+            $file[$i]->move('file_balasan/', $name);
 
-            $detail[] = [
+            $data[] = [
                 'file' => $name,
-                'dokumen_id_dokumen' => $id->id_dokumen
+                'tanggal' => $date,
+                'author' => $request->user,
+                'dokumen_id_dokumen' =>$request->id
             ];
             $i++;
         }
-        DetailDokuman::insert($detail);
+        DokumenSelesai::insert($data);
 
-        return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
+        return redirect()->back()->with('status','Data Berhasil di Tambahkan');
     }
 
     public function profile()
