@@ -19,10 +19,12 @@ class AdminController extends Controller
         return view('admin.dokumen', compact('dokumen'));
     }
 
-    public function detail()
+    public function detail($id)
     {
-        $detail_dokumen = DetailDokuman::with('dokuman')->get();
+        $dokumen = Dokuman::findOrFail($id);
+        $detail_dokumen = DetailDokuman::with('dokuman')->where('dokumen_id_dokumen', $id)->get();
         return view('admin.detail_dokumen')->with([
+            'dokumen' => $dokumen,
             'detail_dokumen' => $detail_dokumen
         ]);
     }

@@ -57,7 +57,7 @@
                                         <a href="#status" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a>
-                                        <a href="{{ url('/detail') }}" class="text-danger">
+                                        <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
                                     </td>

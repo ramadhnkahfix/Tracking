@@ -26,12 +26,16 @@ Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
 Route::post('/postsignup', 'HomeController@postsignup');
 
-Route::group(['middleware' => ['auth']],function(){
+Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::get('/upload','UploadController@index')->name('upload');
     Route::post('/upload','UploadController@store');
-    // Route dhani
 
-    
+    Route::get('/change-password', 'HomeController@changePassword');
+    Route::post('/change-password', 'HomeController@updatePassword');
+    Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
+    // Route dhani
+});
+Route::group(['middleware' => ['auth','checkRole:1']],function(){ 
     Route::get('/admin/user','UserController@index');
     Route::post('/admin-user','UserController@store');
 
@@ -45,9 +49,7 @@ Route::group(['middleware' => ['auth']],function(){
     // Route Dimas
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/dokumen', 'AdminController@dokumen');
-    Route::get('/detail', 'AdminController@detail');
+    Route::get('/detail/{id}/dokumen', 'AdminController@detail')->name('detail.dokumen');
 
-    Route::get('/change-password', 'HomeController@changePassword');
-    Route::post('/change-password', 'HomeController@updatePassword');
-    Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
+
 });
