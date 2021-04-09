@@ -17,7 +17,7 @@ class CreateDokumenSelesaiTable extends Migration
             $table->integer('id_dokumen_selesai', true);
             $table->string('file', 225);
             $table->date('tanggal');
-            $table->integer('author');
+            $table->string('author', 50);
             $table->integer('dokumen_id_dokumen')->index('fk_dokumen_selesai_dokumen1_idx');
         });
     }

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_dokumen_selesai
  * @property string $file
  * @property Carbon $tanggal
- * @property int $author
+ * @property string $author
  * @property int $dokumen_id_dokumen
  * 
  * @property Dokuman $dokuman
@@ -29,7 +29,6 @@ class DokumenSelesai extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'author' => 'int',
 		'dokumen_id_dokumen' => 'int'
 	];
 

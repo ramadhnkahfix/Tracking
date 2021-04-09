@@ -119,6 +119,8 @@
                             <tfoot>
                                 <tr>
                                     <th>Dokumen</th>
+                                    <th>Tanggal</th>
+                                    <th>User</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -139,6 +141,9 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ url('/dokumen/upload-balasan')}}" method="post" enctype="multipart/form-data">
+            @csrf
+                <input type="hidden" name="user" value="{{auth()->user()->nama}}">
+                <input type="hidden" name="id" value="{{$dokumen->id_dokumen}}">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title">Upload Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
@@ -148,7 +153,7 @@
                     <br>
                     <div class="form-group col-12">
                         <label>Subject</label>
-                        <input type="text" class="form-control" name="subject" readonly value="Subject">
+                        <input type="text" class="form-control" name="subject" readonly value="{{$dokumen->subject}}">
                     </div>
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">

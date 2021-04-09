@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Dokuman;
 use App\Models\DetailDokuman;
+use App\Models\DokumenSelesai;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -36,6 +38,26 @@ class AdminController extends Controller
             'dokumen' => $dokumen,
             'detail_dokumen' => $detail_dokumen
         ]);
+        $date = Carbon::now()->format("Y-m-d");
+        
+        $data = [];
+        $i = 0;
+        foreach($request->file as $key){
+            $file = $request->file('file');
+            $name = $file[$i]->getClientOriginalName();
+            $file[$i]->move('file_balasan/', $name);
+
+            $data[] = [
+                'file' => $name,
+                'tanggal' => $date,
+                'author' => $request->user,
+                'dokumen_id_dokumen' =>$request->id
+            ];
+            $i++;
+        }
+        DokumenSelesai::insert($data);
+
+        return redirect()->back()->with('status','Data Berhasil di Tambahkan');
     }
 
     public function profile()
