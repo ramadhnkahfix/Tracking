@@ -32,12 +32,21 @@ class AdminController extends Controller
 
     public function detail($id)
     {
-        $dokumen = Dokuman::findOrFail($id);
+        $dokumen = Dokuman::findOrFail($id)->first();
         $detail_dokumen = DetailDokuman::with('dokuman')->where('dokumen_id_dokumen', $id)->get();
+        $dokumen_selesai = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
+        $data = $dokumen_selesai->first();
+
         return view('admin.detail_dokumen')->with([
             'dokumen' => $dokumen,
-            'detail_dokumen' => $detail_dokumen
+            'detail_dokumen' => $detail_dokumen,
+            'dokumen_selesai' => $dokumen_selesai,
+            'data' => $data
         ]);
+    }
+
+    public function storeDokumen(Request $request)
+    {
         $date = Carbon::now()->format("Y-m-d");
         
         $data = [];
@@ -65,5 +74,11 @@ class AdminController extends Controller
         return view ('admin.profile');
     }
 
+    public function download($id)
+    {
+        $data = DetailDokuman::findOrFail($id);
+        $file = public_path()."/document"."/".$data->file; 
 
+        return response()->download($file, $data->file);
+    }
 }
