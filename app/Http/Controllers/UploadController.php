@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dokuman;
 use App\Models\DetailDokuman;
 use Carbon\Carbon;
+use App\Models\User;
 
 class UploadController extends Controller
 {
@@ -51,7 +52,7 @@ class UploadController extends Controller
 
         $date = Carbon::now()->format("d-m-Y");
 
-        Dokuman::create([
+        $dokumen = Dokuman::create([
             'nama_instansi' => $request->nama,
             'email' => $request->email,
             'subject' => $request->subject,
@@ -75,7 +76,11 @@ class UploadController extends Controller
             $i++;
         }
         DetailDokuman::insert($detail);
-
+        $user = User::all();
+        \Mail::raw('Kode Unik Untuk Tracking Dokumen' . $dokumen->tanggal, function($message) use($dokumen){
+            $message->to($dokumen->email, $dokumen->nama);
+            $message->subject('Kode Unik Tracking');
+        });
         return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
     }
 

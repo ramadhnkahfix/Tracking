@@ -45,11 +45,11 @@
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
                                     <td>{{ $dok->tanggal }}</td>
-                                    <td>@if($dok->status == null)
+                                    <td>@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
-                                        @elseif($dok->status == 1)
+                                        @elseif($dok->status == 2)
                                             <button class="btn btn-info btn-sm" type="button">Diproses</button>
-                                        @elseif($dok->status == 0)
+                                        @elseif($dok->status == 3)
                                             <button class="btn btn-success btn-sm" type="button">Diterima</button>
                                         @endif
                                     </td>
@@ -104,9 +104,9 @@
                     <div class="form-group col-12">
                         <label>Status</label>
                         <select class="form-control">
-                            <option value="">Diterima</option>
-                            <option value="">Diproses</option>
-                            <option value="">Selesai</option>
+                            <option value="1">Diterima</option>
+                            <option value="2">Diproses</option>
+                            <option value="3">Selesai</option>
                         </select>
                     </div>
                 </div>

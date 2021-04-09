@@ -19,6 +19,13 @@ Route::get('/', 'HomeController@index')->name('home');
 //     return view('layouts.home');
 // });
 
+// Route::get('kirimemail',function(){
+//     \Mail::raw('Halo Adik adik',function($message){
+//         $message->to('gudanggaram@gmail.com', 'Bea Cukai');
+//         $message->subject('Balasan Permohonan Cukai');
+//     });
+// });
+
 // Route Login
 Route::get('/login', 'HomeController@login')->name('login');
 Route::post('/postlogin', 'HomeController@postlogin');
@@ -30,9 +37,9 @@ Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::get('/upload','UploadController@index')->name('upload');
     Route::post('/upload','UploadController@store');
 
-    Route::get('/change-password', 'HomeController@changePassword');
-    Route::post('/change-password', 'HomeController@updatePassword');
-    Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
+        Route::get('/change-password', 'HomeController@changePassword');
+        Route::post('/change-password', 'HomeController@updatePassword');
+        Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
     // Route dhani
 });
 Route::group(['middleware' => ['auth','checkRole:1']],function(){ 
