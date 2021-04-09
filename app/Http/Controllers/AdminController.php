@@ -19,6 +19,15 @@ class AdminController extends Controller
         return view('admin.dokumen', compact('dokumen'));
     }
 
+    public function status(Request $request,$id)
+    {
+        Dokuman::findOrFail($id)->update([
+            'status' => $request->status 
+        ]);
+
+        return back();
+    }
+
     public function detail($id)
     {
         $dokumen = Dokuman::findOrFail($id);
@@ -33,5 +42,6 @@ class AdminController extends Controller
     {
         return view ('admin.profile');
     }
+
 
 }

@@ -44,21 +44,17 @@
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
-<<<<<<< HEAD
                                     <td>{{ $dok->tanggal }}</td>
-=======
-                                    <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
->>>>>>> 2eb9a59081caf8243d7a8a01b7763cd824a19ba6
-                                    <td>@if($dok->status == 1)
+                                    <td align="center">@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
                                         @elseif($dok->status == 2)
                                             <button class="btn btn-info btn-sm" type="button">Diproses</button>
                                         @elseif($dok->status == 3)
-                                            <button class="btn btn-success btn-sm" type="button">Diterima</button>
+                                            <button class="btn btn-success btn-sm" type="button">Selesai</button>
                                         @endif
                                     </td>
                                     <td align="center" style="width: 20%">
-                                        <a href="#status" class="text-primary mr-2" data-toggle="modal">
+                                        <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a>
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
@@ -91,10 +87,13 @@
 </section>
 
 <!-- Modal Status Data-->
-<div class="modal small fade" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+@foreach($dokumen as $dok)
+<div class="modal small fade" id="status-{{$dok->id_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/status')}}" method="post">
+            <form action="{{ route('update.status', $dok->id_dokumen) }}" method="post">
+            {{csrf_field()}}
+            @method('patch')
                 <div class="modal-header bg-success">
                     <h5 class="modal-title">Ganti Status</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
@@ -103,11 +102,11 @@
                 <div class="modal-body modal-body-upload">
                     <div class="form-group col-12">
                         <label>Subject</label>
-                        <input type="text" class="form-control" name="subject" readonly value="Subject">
+                        <input type="text" class="form-control" name="subject" readonly value="{{$dok->subject}}">
                     </div>
                     <div class="form-group col-12">
                         <label>Status</label>
-                        <select class="form-control">
+                        <select name="status" class="form-control">
                             <option value="1">Diterima</option>
                             <option value="2">Diproses</option>
                             <option value="3">Selesai</option>
@@ -122,6 +121,7 @@
         </div>
     </div>
 </div>
+@endforeach
 <!-- End Modal Status Data -->
 @endsection
 

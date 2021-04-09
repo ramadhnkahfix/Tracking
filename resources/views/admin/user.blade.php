@@ -46,9 +46,13 @@
                                     <td>{{ $usr->email }}</td>
                                     <td align="center" style="width: 20%">
                                         @if( $usr->status == null || $usr->status == 0 )
-                                        <button class="btn btn-secondary btn-sm" type="button">Disable</button>
+                                        <a href="#status-{{$usr->id_user}}" data-toggle="modal">
+                                            <button class="btn btn-secondary btn-sm" type="button">Disable</button>
+                                        </a>
                                         @else
-                                        <button class="btn btn-success btn-sm" type="button">Active</button>
+                                        <a href="#status-{{$usr->id_user}}" data-toggle="modal">
+                                            <button class="btn btn-success btn-sm" type="button">Active</button>
+                                        </a>
                                         @endif
                                     </td>
                                 </tr>
@@ -127,6 +131,29 @@
         </div>
     </div>
 </div>
+
+@foreach($user as $usr)
+<!-- Modal Status USer -->
+<div class="modal small fade" id="status-{{$usr->id_user}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">Ganti Status</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin ingin menonaktifkan user {{$usr->nama}} ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
+                <a href="{{url('user/status/')}}{{$usr->id_user}}">
+                    <button type="button" class="btn btn-primary" >Ya</button>
+                </a>    
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 @endsection
 

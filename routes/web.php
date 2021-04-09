@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::get('/admin/user','UserController@index');
     Route::post('/admin-user','UserController@store');
 
-
+    Route::patch('/dokumen/{id}/status', 'AdminController@status')->name('update.status');
 
 
 
