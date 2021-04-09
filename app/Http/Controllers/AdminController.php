@@ -34,8 +34,4 @@ class AdminController extends Controller
         return view ('admin.profile');
     }
 
-    public function status(Request $request ,$id){
-        
-        return back();
-    }
 }

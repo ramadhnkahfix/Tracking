@@ -44,7 +44,11 @@
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
+<<<<<<< HEAD
                                     <td>{{ $dok->tanggal }}</td>
+=======
+                                    <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
+>>>>>>> 2eb9a59081caf8243d7a8a01b7763cd824a19ba6
                                     <td>@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
                                         @elseif($dok->status == 2)

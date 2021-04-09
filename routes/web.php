@@ -58,5 +58,8 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::get('/dokumen', 'AdminController@dokumen');
     Route::get('/detail/{id}/dokumen', 'AdminController@detail')->name('detail.dokumen');
 
+    //Download
+    Route::get('/download/dokumen/{id}', 'AdminController@download');
+
 
 });
