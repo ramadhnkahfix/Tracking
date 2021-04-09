@@ -1,19 +1,34 @@
 @extends('admin.layouts.master')
 @section('title','Detail Document')
-@section('page-title', 'Nama Instansi')
+
 @section('style')
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endsection
-@section('page')
-<li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-<li class="breadcrumb-item"><a href="{{ url('/dokumen') }}">Document</a></li>
-<li class="breadcrumb-item active">Detail Document</li>
-@endsection
 
 @section('content')
 
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">{{$dokumen->nama_instansi}}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/dokumen') }}">Document</a></li>
+                <li class="breadcrumb-item active">Detail Document</li>
+                </ol>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
@@ -43,7 +58,7 @@
                                 <tr>
                                     <td>{{$dd->file}}</td>
                                     <td align="center" style="width: 20%">
-                                        <a href="{{url('/download/dokumen')}}" class="text-danger">
+                                        <a href="{{url('/download/dokumen/'.$dd->id_detail_dokumen)}}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-success">DOWNLOAD</button>
                                         </a>
                                     </td>
@@ -65,6 +80,7 @@
             <!-- /.col -->
         </div>
     <!-- /.row -->
+    @if($data != null)
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -74,17 +90,21 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="selesai" class="table table-bordered table-striped">
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th>Dokumen</th>
+                                    <th>Tanggal</th>
+                                    <th>User</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($dokumen_selesai as $ds)
                                 <tr>
-                                    <td></td>
+                                    <td>{{$ds->file}}</td>
+                                    <td>{{date('d F Y', strtotime($ds->tanggal))}}</td>
+                                    <td>{{$ds->author}}</td>
                                     <td align="center" style="width: 20%">
                                         <a href="#update" class="text-warning" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">UPDATE</button>
@@ -94,7 +114,7 @@
                                         </a>
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -110,6 +130,7 @@
             </div>
             <!-- /.col -->
         </div>
+    @endif
     </div><!-- /.container-fluid -->
 </section>
 
@@ -117,11 +138,10 @@
 <div class="modal small fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/upload-balasan')}}" method="post">
+            <form action="{{ url('/dokumen/upload-balasan')}}" method="post" enctype="multipart/form-data">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title">Upload Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-
                 </div>
                 <div class="modal-body modal-body-upload">
                     <button type="button" class="btn btn-sm btn-outline-primary" style="float: right" id="tambah"><i class="fas fa-plus"> Tambah</i></button>
@@ -135,6 +155,7 @@
                         <label id="label-upload">File Dokumen</label>
                         <input type="file" name="file[]" class="form-control" required>
                     </div>
+                    <div class="file"></div>
                 </div>
                 <div class="modal-footer modal-footer-upload">
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
@@ -235,6 +256,19 @@
     });
     $(function () {
       $("#example1").DataTable({
+        "responsive": true, "lengthChange": true, "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+
+      $("#selesai").DataTable({
         "responsive": true, "lengthChange": true, "autoWidth": false
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
       $('#example2').DataTable({

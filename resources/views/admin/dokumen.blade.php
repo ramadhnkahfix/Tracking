@@ -44,12 +44,12 @@
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
-                                    <td>{{ $dok->tanggal }}</td>
-                                    <td>@if($dok->status == null)
+                                    <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
+                                    <td>@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
-                                        @elseif($dok->status == 1)
+                                        @elseif($dok->status == 2)
                                             <button class="btn btn-info btn-sm" type="button">Diproses</button>
-                                        @elseif($dok->status == 0)
+                                        @elseif($dok->status == 3)
                                             <button class="btn btn-success btn-sm" type="button">Diterima</button>
                                         @endif
                                     </td>
