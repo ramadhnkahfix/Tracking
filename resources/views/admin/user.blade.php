@@ -39,20 +39,16 @@
                             </thead>
                             <tbody>
                                 @foreach($user as $usr)
-                                <tr>
+                                <tr id="{{$usr->id_user}}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $usr->nama }}</td>
                                     <td>{{ $usr->jabatan->nama }}</td>
                                     <td>{{ $usr->email }}</td>
-                                    <td align="center" style="width: 20%">
+                                    <td id="kd-{{$usr->id_user}}" align="center" style="width: 20%">
                                         @if( $usr->status == null || $usr->status == 0 )
-                                        <a href="#status-{{$usr->id_user}}" data-toggle="modal">
-                                            <button class="btn btn-secondary btn-sm" type="button">Disable</button>
-                                        </a>
+                                            <button class="btn btn-secondary btn-sm status" type="button" id="status-{{$usr->id_user}}">Disable</button>
                                         @else
-                                        <a href="#status-{{$usr->id_user}}" data-toggle="modal">
-                                            <button class="btn btn-success btn-sm" type="button">Active</button>
-                                        </a>
+                                            <button class="btn btn-success btn-sm status" type="button" id="status-{{$usr->id_user}}">Active</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -174,6 +170,61 @@
 <script>
     $(document).ready(function(){
         $('#user').addClass('active');
+
+        $('.status').on('click', function(){
+            var disable = '<button class="btn btn-secondary btn-sm status" type="button" id="status-{{$usr->id_user}}">Disable</button>';
+            var active = '<button class="btn btn-success btn-sm status" type="button" id="status-{{$usr->id_user}}">Active</button>';
+            
+            let id = $(this).attr('id').slice(7);
+            var token = $('meta[name="csrf-token"]').attr('content');
+            var url = '/admin-user/status';
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    _token: token,
+                    id : id
+                },
+                success: function(results){
+                    if (results.data.status == 1){
+
+                        // $('#status-'+id).remove();
+                        // $('tr td#kd-'+id).append(active);
+                        $('#status-'+id).removeClass('btn-secondary');
+                        $('#status-'+id).addClass('btn-success');
+                        document.getElementById('status-'+id).textContent = "Active";
+
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Status User berhasil disimpan.',
+                        showConfirmButton: false,
+                        timer: 2000
+                        });
+                        
+                    }
+                    else {
+                        // $('#status-'+id).remove();
+                        // $('tr td#kd-'+id).append(disable);
+                        $('#status-'+id).removeClass('btn-success');
+                        $('#status-'+id).addClass('btn-secondary');
+                        document.getElementById('status-'+id).textContent = "Disable";
+
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Status User berhasil disimpan.',
+                        showConfirmButton: false,
+                        timer: 2000
+                        });
+                    }
+                }
+            });
+        });
+        
     });
     $(function () {
       $("#example1").DataTable({

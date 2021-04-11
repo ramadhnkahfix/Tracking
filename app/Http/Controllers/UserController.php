@@ -34,4 +34,19 @@ class UserController extends Controller
         ]);
         return redirect ('/admin/user')->with('status','Data berhasil ditambahkan');
     }
+
+    public function status(Request $request){
+
+        $data = User::findOrFail($request->id);
+        if($data->status == 1){
+            $data->status = 0;
+        }
+        else{
+            $data->status = 1;
+        }
+
+        $data->save();
+
+        return response()->json(["success" => true, "data" => $data]);
+    }
 }

@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
 Route::group(['middleware' => ['auth','checkRole:1']],function(){ 
     Route::get('/admin/user','UserController@index');
     Route::post('/admin-user','UserController@store');
-
+    Route::post('/admin-user/status','UserController@status');
     Route::patch('/dokumen/{id}/status', 'AdminController@status')->name('update.status');
 
 
@@ -51,6 +51,8 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
 
     // Upload
     Route::post('/dokumen/upload-balasan', 'AdminController@storeDokumen');
+    Route::post('/dokumen/edit-balasan', 'AdminController@editDetailDokumen');
+    Route::get('/dokumen/delete-balasan/{id}', 'AdminController@deleteDetailDokumen');
 
     //Download
     Route::get('/download/dokumen/{id}', 'AdminController@download');

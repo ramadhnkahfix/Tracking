@@ -87,6 +87,9 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Selesai</h3>
+                            <a href="#kirim" class="text-danger" data-toggle="modal">
+                                <button type="button" class="btn btn-sm btn-primary">KIRIM</button>
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -106,10 +109,10 @@
                                     <td>{{date('d F Y', strtotime($ds->tanggal))}}</td>
                                     <td>{{$ds->author}}</td>
                                     <td align="center" style="width: 20%">
-                                        <a href="#update" class="text-warning" data-toggle="modal">
+                                        <a href="#update-{{$ds->id_dokumen_selesai}}" class="text-warning" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">UPDATE</button>
                                         </a>
-                                        <a href="#hapus" class="text-danger" data-toggle="modal">
+                                        <a href="#hapus-{{$ds->id_dokumen_selesai}}" class="text-danger" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
                                     </td>
@@ -171,12 +174,13 @@
     </div>
 </div>
 <!-- End Modal Upload Data -->
-
+@foreach($dokumen_selesai as $ds)
 <!-- Modal Update Data-->
-<div class="modal small fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal small fade" id="update-{{$ds->id_dokumen_selesai}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/upload-balasan')}}" method="post">
+            <form action="{{ url('/dokumen/edit-balasan')}}" method="post" enctype="multipart/form-data">
+            @csrf
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title">Update Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
@@ -185,7 +189,7 @@
                 <div class="modal-body modal-body-upload">
                     <div class="form-group col-12">
                         <label>Dokumen Sebelumnya</label>
-                        <input type="text" class="form-control" name="subject" readonly value="Subject">
+                        <input type="text" class="form-control" name="old" readonly value="{{$ds->file}}">
                     </div>
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">
@@ -203,19 +207,20 @@
     </div>
 </div>
 <!-- End Modal Update Data -->
-
+@endforeach
+@foreach($dokumen_selesai as $ds)
 <!-- Modal Delete Data-->
-<div class="modal small fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal small fade" id="hapus-{{$ds->id_dokumen_selesai}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/status')}}" method="post">
+            <form action="{{ url('/dokumen/delete-balasan/'.$ds->id_dokumen_selesai)}}" method="post">
                 <div class="modal-header bg-danger">
                     <h5 class="modal-title">Hapus Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 
                 </div>
                 <div class="modal-body">
-                    <p>Apakah anda yakin ingin menghapus dokumen ini?
+                    <p>Apakah anda yakin ingin menghapus dokumen "{{$ds->file}}" ?
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
@@ -226,6 +231,29 @@
     </div>
 </div>
 <!-- End Modal Delete Data -->
+@endforeach
+@foreach($dokumen_selesai as $ds)
+<!-- Modal Kirim Dokumen -->
+<div class="modal small fade" id="kirim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">Kirim Dokumen</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin ingin mengirim dokumen ke email {{$dokumen->email}} ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
+                <a href="{{url('dokumen/kirim/')}}{{$ds->dokumen_id_dokumen}}">
+                    <button type="button" class="btn btn-primary" >Ya</button>
+                </a>    
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
 
 @section('script')

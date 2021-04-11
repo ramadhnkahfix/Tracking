@@ -7,6 +7,7 @@ use App\Models\Dokuman;
 use App\Models\DetailDokuman;
 use App\Models\DokumenSelesai;
 use Carbon\Carbon;
+use Storage;
 
 class AdminController extends Controller
 {
@@ -43,6 +44,22 @@ class AdminController extends Controller
             'dokumen_selesai' => $dokumen_selesai,
             'data' => $data
         ]);
+    }
+
+    public function editDetailDokumen(Request $request)
+    {
+
+
+        return redirect()->back();
+    }
+
+    public function deleteDetailDokumen($id)
+    {
+        $data = DokumenSelesai::findOrFail($id);
+        Storage::disk('public')->delete("/file_balasan"."/".$data->file);
+        $data->delete();
+
+        return redirect()->back();
     }
 
     public function storeDokumen(Request $request)

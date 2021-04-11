@@ -44,7 +44,7 @@
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
-                                    <td>{{ $dok->tanggal }}</td>
+                                    <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
                                     <td align="center">@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
                                         @elseif($dok->status == 2)
@@ -107,6 +107,7 @@
                     <div class="form-group col-12">
                         <label>Status</label>
                         <select name="status" class="form-control">
+                            <option selected disabled>Pilih Status</option>
                             <option value="1">Diterima</option>
                             <option value="2">Diproses</option>
                             <option value="3">Selesai</option>
