@@ -7,6 +7,7 @@ use App\Models\Dokuman;
 use App\Models\DetailDokuman;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\NotifikasiKodeUnik;
 
 class UploadController extends Controller
 {
@@ -76,11 +77,13 @@ class UploadController extends Controller
             $i++;
         }
         DetailDokuman::insert($detail);
-        $user = User::all();
-        \Mail::raw('Kode Unik Untuk Tracking Dokumen' . $dokumen->tanggal, function($message) use($dokumen){
-            $message->to($dokumen->email, $dokumen->nama);
-            $message->subject('Kode Unik Tracking');
-        });
+        
+        // \Mail::raw('Kode Unik Untuk Tracking Dokumen' . $dokumen->tanggal, function($message) use($dokumen){
+        //     $message->to($dokumen->email, $dokumen->nama);
+        //     $message->subject('Kode Unik Tracking');
+        // });
+        // $user = User::all();
+        \Mail::to($dokumen->email)->send(new NotifikasiKodeUnik);
         return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
     }
 

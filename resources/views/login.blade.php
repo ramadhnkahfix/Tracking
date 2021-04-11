@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
       @if(session('status'))
-          <div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">
+          <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
               {{ session('status') }}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>

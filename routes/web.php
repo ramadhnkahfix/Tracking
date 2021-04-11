@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,18 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Auth::routes(['verify' =>  true]);
 Route::get('/', 'HomeController@index')->name('home');
 
 // Route::get('/tracking', function(){
 //     return view('layouts.home');
-// });
-
-// Route::get('kirimemail',function(){
-//     \Mail::raw('Halo Adik adik',function($message){
-//         $message->to('gudanggaram@gmail.com', 'Bea Cukai');
-//         $message->subject('Balasan Permohonan Cukai');
-//     });
 // });
 
 // Route Login
