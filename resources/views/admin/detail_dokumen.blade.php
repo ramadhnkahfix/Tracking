@@ -181,6 +181,7 @@
         <div class="modal-content">
             <form action="{{ url('/dokumen/edit-balasan')}}" method="post" enctype="multipart/form-data">
             @csrf
+                <input type="hidden" name="id" value="{{$ds->id_dokumen_selesai}}">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title">Update Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
@@ -213,7 +214,7 @@
 <div class="modal small fade" id="hapus-{{$ds->id_dokumen_selesai}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ url('/dokumen/delete-balasan/'.$ds->id_dokumen_selesai)}}" method="post">
+            <form action="{{ url('/dokumen/delete-balasan/'.$ds->id_dokumen_selesai)}}" method="get">
                 <div class="modal-header bg-danger">
                     <h5 class="modal-title">Hapus Dokumen</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>

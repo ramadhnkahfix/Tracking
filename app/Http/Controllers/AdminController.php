@@ -48,7 +48,15 @@ class AdminController extends Controller
 
     public function editDetailDokumen(Request $request)
     {
+        $data = DokumenSelesai::findOrFail($request->id);
+        Storage::disk('public')->delete("/file_balasan"."/".$data->file);
 
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+        $file->move('file_balasan/', $name);
+
+        $data->file = $name;
+        $data->save();
 
         return redirect()->back();
     }
