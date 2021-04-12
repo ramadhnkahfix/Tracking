@@ -44,7 +44,8 @@ class Dokuman extends Model
 		'email',
 		'subject',
 		'tanggal',
-		'status'
+		'status',
+		'kode'
 	];
 
 	public function detail_dokumen()

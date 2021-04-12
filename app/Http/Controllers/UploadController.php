@@ -49,7 +49,10 @@ class UploadController extends Controller
 
         // dd($request->all());
         
-        
+        // Generate Kode
+        $tgl = Carbon::now()->format("dmyHi");
+        $rand = rand(pow(10, 2));
+        $kode = "BC".$tgl.$rand;
 
         $date = Carbon::now()->format("d-m-Y");
 
@@ -58,7 +61,8 @@ class UploadController extends Controller
             'email' => $request->email,
             'subject' => $request->subject,
             'tanggal' =>$date,
-            'status' => 1
+            'status' => 1,
+            'kode' => $kode
         ]);
 
         $id = Dokuman::select('id_dokumen')->orderBy('id_dokumen', 'desc')->first();

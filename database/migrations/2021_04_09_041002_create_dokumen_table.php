@@ -20,6 +20,7 @@ class CreateDokumenTable extends Migration
             $table->string('subject', 100);
             $table->date('tanggal');
             $table->tinyInteger('status');
+            $table->string('kode', 15);
         });
     }
 
