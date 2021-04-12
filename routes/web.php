@@ -57,5 +57,6 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     //Download
     Route::get('/download/dokumen/{id}', 'AdminController@download');
 
-
+    //Kirim Email
+    Route::get('/notif-email','AdminController@emailDok');
 });

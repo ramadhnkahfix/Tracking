@@ -238,12 +238,14 @@
 <div class="modal small fade" id="kirim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+        <form action="/notif-email" method="post">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title">Kirim Dokumen</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
             </div>
             <div class="modal-body">
                 <p>Apakah anda yakin ingin mengirim dokumen ke email {{$dokumen->email}} ?</p>
+                <input type="file" class="form-control" name="file[]" readonly value="{{$ds->file}}" hiden>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
@@ -251,6 +253,7 @@
                     <button type="button" class="btn btn-primary" >Ya</button>
                 </a>    
             </div>
+        </form>
         </div>
     </div>
 </div>

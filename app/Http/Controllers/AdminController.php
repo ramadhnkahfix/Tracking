@@ -8,6 +8,7 @@ use App\Models\DetailDokuman;
 use App\Models\DokumenSelesai;
 use Carbon\Carbon;
 use Storage;
+use App\Mail\NotifikasiDokBalasan;
 
 class AdminController extends Controller
 {
@@ -33,7 +34,7 @@ class AdminController extends Controller
 
     public function detail($id)
     {
-        $dokumen = Dokuman::findOrFail($id)->first();
+        $dokumen = Dokuman::findOrFail($id);
         $detail_dokumen = DetailDokuman::with('dokuman')->where('dokumen_id_dokumen', $id)->get();
         $dokumen_selesai = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
         $data = $dokumen_selesai->first();
@@ -105,5 +106,12 @@ class AdminController extends Controller
         $file = public_path()."/document"."/".$data->file; 
 
         return response()->download($file, $data->file);
+    }
+
+    public function emailDok($id)
+    {
+        $dokumen = Dokuman::findOrFail($id)->get();
+        
+        \Mail::to($dokumen->email)->send(new NotifikasiDokSelesai);
     }
 }
