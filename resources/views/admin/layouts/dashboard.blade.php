@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dokumen as $dok)
+                            @foreach($data as $dok)
                             <tr>
                                 <td>{{ $dok->nama_instansi }}</td>
                                 <td>{{ $dok->subject }}</td>

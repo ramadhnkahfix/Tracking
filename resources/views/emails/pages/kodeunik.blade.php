@@ -1,18 +1,19 @@
 @component('mail::message')
 # Kode Unik
+## Yth.kepada User
 
 Ini adalah kode unik untuk mentracking document anda di Bea Cukai. Kode ini bersifat rahasia jangan beritahu siapapun.
 
 @component('mail::table')
-| Laravel       | Table         |   |
-| ------------- |:-------------:| --------:|
-| Col 2 is      | Centered      |       |
-| Col 3 is      | Right-Aligned |     |
+|Nomor Kode Unik|
+|:-------------:|
+|               |
+| Right-Aligned |
 @endcomponent
 
-@component('mail::button', ['url' => $details['url']])
+@component('mail::button', ['url' =>'', 'color' => 'primary'])
 Click Here
-@endcomponent
+@endcomponent  
 
 {{ config('app.name') }}
 @endcomponent

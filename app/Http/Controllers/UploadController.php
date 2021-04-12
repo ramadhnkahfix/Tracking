@@ -51,7 +51,7 @@ class UploadController extends Controller
         
         // Generate Kode
         $tgl = Carbon::now()->format("dmyHi");
-        $rand = rand(pow(10, 2));
+        $rand = rand(100, 999);
         $kode = "BC".$tgl.$rand;
 
         $date = Carbon::now()->format("d-m-Y");
@@ -88,7 +88,7 @@ class UploadController extends Controller
         // });
         // $user = User::all();
         \Mail::to($dokumen->email)->send(new NotifikasiKodeUnik);
-        return redirect('/upload')->with('status','Data Berhasil di Tambahkan');
+        return redirect('/upload')->with('status','Data Berhasil di Upload');
     }
 
     /**

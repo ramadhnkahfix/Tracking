@@ -112,8 +112,13 @@ class AdminController extends Controller
 
     public function emailDok($id)
     {
-        $dokumen = Dokuman::findOrFail($id)->get();
+        // $dokumen = Dokuman::findOrFail($id)->get();
         
-        \Mail::to($dokumen->email)->send(new NotifikasiDokSelesai);
+        $ds = Dokuman::findOrFail($id);
+        $dokumen = DokumenSelesai::with('dokuman')
+                ->where('dokumen_id_dokumen ', $id)->get();
+        \Mail::to($dokumen->dokuman->email)->send(new NotifikasiDokBalasan);
+        
+        return back();
     }
 }
