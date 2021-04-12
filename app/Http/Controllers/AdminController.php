@@ -14,7 +14,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.layouts.dashboard');
+        $data = Dokuman::all();
+
+        return view('admin.layouts.dashboard')->with(compact('data'));
     }
 
     public function dokumen()
