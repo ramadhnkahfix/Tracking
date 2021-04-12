@@ -14,8 +14,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $data = Dokuman::all();
-
+        $data = [];
+        $data[0] = Dokuman::all(); $data[1] = Dokuman::where('status', '=', 1)->count('id_dokumen'); $data[2] = Dokuman::where('status', '=', 2)->count('id_dokumen'); $data[3] = Dokuman::where('status', '=', 3)->count('id_dokumen');
         return view('admin.layouts.dashboard')->with(compact('data'));
     }
 
