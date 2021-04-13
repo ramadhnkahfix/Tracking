@@ -54,11 +54,15 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-4">
-                  <div class="g-recaptcha" data-sitekey="6LcuRowaAAAAAEQuIA575O1WQ3PfW5p5iE1aWNsX"></div>
-                  <br>
-                  <input type="submit" value="submit" class="btn btn-primary">
+                <div class="col-6">
+                  <span id="captcha-img">
+                    {!! captcha_img('flat') !!}
+                  </span>
+                  <button type="button" id="reload" class="btn btn-danger ml-2">&#x21bb;</button>
                 </div>
+              </div>
+              <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-info">Submit</button>
               </div>
             </form>
           </div>
@@ -69,5 +73,21 @@
     </div>
   </div>
 </div>
+
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  $('#reload').click(function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'GET',
+      url:'reload',
+      success:function(res){
+        $('#captcha-img').html(res.captcha);
+      }
+    });
+  });
+</script>
 
 @endsection

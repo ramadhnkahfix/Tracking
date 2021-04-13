@@ -45,6 +45,6 @@ class DokumenSelesai extends Model
 
 	public function dokuman()
 	{
-		return $this->belongsTo(Dokuman::class, 'dokumen_id_dokumen');
+		return $this->belongsTo(Dokuman::class,'dokumen_id_dokumen','id_dokumen');
 	}
 }

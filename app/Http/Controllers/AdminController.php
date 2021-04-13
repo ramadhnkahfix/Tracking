@@ -114,11 +114,11 @@ class AdminController extends Controller
     {
         // $dokumen = Dokuman::findOrFail($id)->get();
         
-        $ds = Dokuman::findOrFail($id);
-        $dokumen = DokumenSelesai::with('dokuman')
-                ->where('dokumen_id_dokumen ', $id)->get();
-        \Mail::to($dokumen->dokuman->email)->send(new NotifikasiDokBalasan);
+        $email = Dokuman::where('id_dokumen', '=', $id)->first();
+        $dokumen = DokumenSelesai::where('dokumen_id_dokumen','=',$id)->get();
+        \Mail::to($email->email)->send(new NotifikasiDokBalasan($dokumen));
         
-        return back();
+        dd('Email Berhasil dikirim');
+        // return back();
     }
 }

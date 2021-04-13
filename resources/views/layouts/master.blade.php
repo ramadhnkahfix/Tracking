@@ -44,7 +44,8 @@
 		</div>
 				
 	@include('layouts.includes.footer')
-
+	<!-- JQuery -->
+	<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
 	<!-- Fontawesome JS Files -->
 	<script type="text/javascript" src="{{asset('assets/fontawesome/js/all.js')}}"></script>
 	<!-- Bootstrap JS Files -->

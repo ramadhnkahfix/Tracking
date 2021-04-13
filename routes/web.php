@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::get('/upload','UploadController@index')->name('upload');
     Route::post('/upload','UploadController@store');
 
+
+    Route::get('/reload','HomeController@reload');
+
     Route::get('/change-password', 'HomeController@changePassword');
     Route::post('/change-password', 'HomeController@updatePassword');
     Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
@@ -57,7 +60,8 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     //Download
     Route::get('/download/dokumen/{id}', 'AdminController@download');
 
-    //Kirim Email
-    Route::post('/dokumen/notifemail/{id}','AdminController@emailDok');
+    //Kirim Email Dokumen Selesai
+    Route::get('/dokumen/notifemail/{id}','AdminController@emailDok');
+
 
 });

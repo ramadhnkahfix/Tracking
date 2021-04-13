@@ -238,7 +238,7 @@
 <div class="modal small fade" id="kirim" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-        <form action="{{url('/dokumen/notifemail/'.$dokumen->id_dokumen), $dokumen->id_dokumen}}" method="post">
+        <form action="{{url('/dokumen/notifemail/'.$dokumen->id_dokumen), $dokumen->id_dokumen}}" method="get">
         @csrf
             <div class="modal-header bg-primary">
                 <h5 class="modal-title">Kirim Dokumen</h5>

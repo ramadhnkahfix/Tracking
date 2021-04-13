@@ -96,4 +96,9 @@ class HomeController extends Controller
         $verify_result =  HASH::check($old_password, Auth::user()->password);
         return response()->json($verify_result);
     }
+
+    public function reload()
+    {
+        return response()->json(['captcha'=> captcha-img()]);
+    }
 }
