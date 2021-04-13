@@ -50,8 +50,13 @@
             <form action="" method="POST">
               <div class="form-group mb-4">
                 <div class="col-4">
-                  <input type="text" class="form-control form-control-lg" id="" placeholder="Isikan Kode Unik">
+                  <input type="text" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik">
                 </div>
+                @error('kode')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group">
                 <div class="col-6">
@@ -60,6 +65,14 @@
                   </span>
                   <button type="button" id="reload" class="btn btn-danger ml-2">&#x21bb;</button>
                 </div>
+              </div>
+              <div class="form-group col-md-4">
+                <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control @error('captcha') is-invalid @enderror">
+                @error('captcha')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group col-md-4">
                 <button type="submit" class="btn btn-info">Submit</button>
@@ -79,12 +92,12 @@
 @section('script')
 <script type="text/javascript">
   $('#reload').click(function(e){
-    e.preventDefault();
+    // e.preventDefault();
     $.ajax({
       type:'GET',
-      url:'reload',
-      success:function(res){
-        $('#captcha-img').html(res.captcha);
+      url:'{{ url('/reload') }}',
+      success:function(data){
+        $('#captcha-img').html(data);
       }
     });
   });

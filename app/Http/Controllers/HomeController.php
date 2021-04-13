@@ -99,6 +99,15 @@ class HomeController extends Controller
 
     public function reload()
     {
-        return response()->json(['captcha'=> captcha-img()]);
+        // return response()->json(['captcha'=> captcha-img()]);
+        return captcha_img();
+    }
+
+    public function getDokumen(Request $request)
+    {
+        $request->validate([
+            'kode' => 'required',
+            'captcha' => 'required|captcha',
+        ]);
     }
 }
