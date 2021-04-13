@@ -14,16 +14,29 @@
     <!-- Small boxes (Stat box) -->
         <div class="row justify-content-between">
             <div class="col-md-2 col-sm-6 col-12">
-                <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+                <a href="https://office.kemenkeu.go.id" target="_blank">
+                    <div class="info-box">
+                    <span class="info-box-icon bg-primary"><i class="fas fa-external-link-alt"></i></span>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Messages</span>
-                    <span class="info-box-number">1,410</span>
-                </div>
-                <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
+                    <div class="info-box-content">
+                        <span class="info-box-text" style="color: black">NADINE</span>
+                        <span class="info-box-number">e-kemenkeu</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                <a href="https://intranet.beacukai.go.id" target="_blank">
+                    <div class="info-box">
+                    <span class="info-box-icon bg-primary"><i class="fas fa-external-link-alt"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text" style="color: black">CEHRIS G3</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
             </div>
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="small-box bg-info">

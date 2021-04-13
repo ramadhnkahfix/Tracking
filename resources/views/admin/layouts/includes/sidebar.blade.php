@@ -78,12 +78,14 @@
                 </li>
                 </ul> -->
             </li>
+            @if(auth()->user()->role == 1)
             <li class="nav-item">
                 <a href="{{ url('/admin/user') }}" id="user" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>User</p>
                 </a>
             </li>
+            @endif
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

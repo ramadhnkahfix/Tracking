@@ -20,6 +20,7 @@ class CreateUserTable extends Migration
             $table->string('email_verified_at', 45)->nullable();
             $table->string('password', 300);
             $table->tinyInteger('status');
+            $table->tinyInteger('role');
             $table->rememberToken();
             $table->integer('id_jabatan')->index('fk_user_jabatan_idx');
         });
