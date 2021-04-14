@@ -109,5 +109,9 @@ class HomeController extends Controller
             'kode' => 'required',
             'captcha' => 'required|captcha',
         ]);
+
+        $data = Dokuman::select('status')->where('kode', '=', $request->id)->first();
+
+        return response()->json(['success' => true, 'data' => $data]);
     }
 }
