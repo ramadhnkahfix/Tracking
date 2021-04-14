@@ -94,7 +94,7 @@ class AdminController extends Controller
         }
         DokumenSelesai::insert($data);
 
-        return redirect()->back()->with('status','Data Berhasil di Tambahkan');
+        return redirect()->back()->with('status','File Berhasil di Upload');
     }
 
     public function profile()
@@ -116,6 +116,7 @@ class AdminController extends Controller
         
         $email = Dokuman::where('id_dokumen', '=', $id)->first();
         $dokumen = DokumenSelesai::where('dokumen_id_dokumen','=',$id)->get();
+        // dd($dokumen);
         \Mail::to($email->email)->send(new NotifikasiDokBalasan($dokumen));
         
         // dd('Email Berhasil dikirim');

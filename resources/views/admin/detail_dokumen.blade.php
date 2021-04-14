@@ -85,7 +85,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">Dokumen Selesai</h3>
                             <a href="#kirim" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-primary">KIRIM</button>

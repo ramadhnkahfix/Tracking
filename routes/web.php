@@ -14,7 +14,14 @@ use Illuminate\Support\Facades\Auth;
 */
 // Auth::routes(['verify' =>  true]);
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/reload','HomeController@reload');
+Route::post('/user/track', function(){
 
+    $kode = $_POST['kode'];
+    $data = App\Models\Dokuman::select('status')->where('kode', '=', $kode)->first();
+
+    return response()->json(['success' => true, 'data' => $data]);
+});
 // Route::get('/tracking', function(){
 //     return view('layouts.home');
 // });
@@ -31,7 +38,7 @@ Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::post('/upload','UploadController@store');
 
 
-    Route::get('/reload','HomeController@reload');
+    
 
     Route::get('/change-password', 'HomeController@changePassword');
     Route::post('/change-password', 'HomeController@updatePassword');

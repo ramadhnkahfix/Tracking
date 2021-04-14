@@ -4,6 +4,7 @@
 	<title>Bea Cukai Kediri</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<link rel="Shortcut Icon" type="image/ico" href="{{asset('assets/assets/img/logo_bea_cukai.png')}}">
 		<!-- CSS Fontawesome -->

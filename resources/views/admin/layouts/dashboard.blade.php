@@ -13,7 +13,7 @@
     <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
         <div class="row justify-content-between">
-            <div class="col-md-2 col-sm-6 col-12">
+            <div class="col-md-3 col-sm-6 col-12">
                 <a href="https://office.kemenkeu.go.id" target="_blank">
                     <div class="info-box">
                     <span class="info-box-icon bg-primary"><i class="fas fa-external-link-alt"></i></span>
