@@ -19,7 +19,7 @@ class CreateUserTable extends Migration
             $table->string('email', 100)->unique('email_UNIQUE');
             $table->string('email_verified_at', 45)->nullable();
             $table->string('password', 300);
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->nullable();
             $table->tinyInteger('role')->nullable();
             $table->rememberToken();
             $table->integer('id_jabatan')->index('fk_user_jabatan_idx');

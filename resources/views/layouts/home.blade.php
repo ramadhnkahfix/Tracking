@@ -103,11 +103,7 @@
           let captcha = $('#captcha').val();
           var token = $('meta[name="csrf-token"]').attr('content');
           var url = '/user/track';
-          // $.ajaxSetup({
-          //   headers: {
-          //     'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-          //   }
-          // });
+          
           $.ajax({
               type: 'POST',
               url: url,

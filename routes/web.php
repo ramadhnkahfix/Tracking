@@ -16,8 +16,13 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/reload','HomeController@reload');
 Route::post('/user/track', function(){
-
+    // $captcha = $_POST['captcha'];
     $kode = $_POST['kode'];
+
+    // $captcha->validate([
+    //     $captcha => 'required|captcha'
+    // ]);
+
     $data = App\Models\Dokuman::select('status')->where('kode', '=', $kode)->first();
 
     return response()->json(['success' => true, 'data' => $data]);

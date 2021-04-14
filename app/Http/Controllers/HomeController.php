@@ -28,7 +28,7 @@ class HomeController extends Controller
         // ]);
         
         if(Auth::attempt($request->only('email','password'))){
-            if(Auth::user()->id_jabatan == 1){
+            if(Auth::user()->id_jabatan == 1 && Auth::user()->status == 1){
                 return redirect()->route('admin');
             }
             elseif(Auth::user()->id_jabatan == 2){
@@ -82,7 +82,7 @@ class HomeController extends Controller
         $user->password = bcrypt($request->new_password);
         $user->save();
 
-        if(Auth::user()->id_jabatan == 1){
+        if(Auth::user()->id_jabatan == 1 && Auth::user()->status == 1){
             return redirect()->route('admin');
         }
         elseif(Auth::user()->id_jabatan == 2){
