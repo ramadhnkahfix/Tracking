@@ -118,7 +118,7 @@ class AdminController extends Controller
         $dokumen = DokumenSelesai::where('dokumen_id_dokumen','=',$id)->get();
         \Mail::to($email->email)->send(new NotifikasiDokBalasan($dokumen));
         
-        dd('Email Berhasil dikirim');
-        // return back();
+        // dd('Email Berhasil dikirim');
+        return back()->with('status','File berhasil di Kirim ke Email');
     }
 }

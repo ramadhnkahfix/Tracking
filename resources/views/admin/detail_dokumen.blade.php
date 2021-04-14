@@ -91,6 +91,14 @@
                                 <button type="button" class="btn btn-sm btn-primary">KIRIM</button>
                             </a>
                         </div>
+                        @if(session('status'))
+                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <table id="selesai" class="table table-bordered table-striped">
@@ -249,9 +257,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tidak</button> 
-                <a href="{{url('dokumen/kirim/')}}{{$ds->dokumen_id_dokumen}}">
-                    <button type="submit" class="btn btn-primary" >Ya</button>
-                </a>    
+                <button type="submit" class="btn btn-primary" >Ya</button>        
             </div>
         </form>
         </div>
