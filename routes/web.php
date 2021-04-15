@@ -16,20 +16,7 @@ use Illuminate\Http\Request;
 // Auth::routes(['verify' =>  true]);
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/reload','HomeController@reload');
-Route::post('/user/track', function(Request $request){
-    $request->validate([
-        'kode' => 'required',
-        'captcha' => 'required|captcha',
-    ],['captcha.captcha'=>'Invalid captcha code']);
-
-    $data = App\Models\Dokuman::select('status')->where('kode', '=', $request->kode)->first();
-    
-
-    return response()->json(['success' => true, 'data' => $data]);
-});
-// Route::get('/tracking', function(){
-//     return view('layouts.home');
-// });
+Route::post('/user/track', 'HomeController@getDok');
 
 // Route Login
 Route::get('/login', 'HomeController@login')->name('login');

@@ -47,7 +47,8 @@
       <div class="card-body py-3">
         <div class="row my-2">
           <div class="col">
-            <!-- <form action="" method="POST"> -->
+            <!-- <form action="/track" method="POST"> -->
+            
               <div class="form-group mb-4">
                 <div class="col-6">
                   <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik" required>
@@ -58,7 +59,7 @@
                   </span>
                 @enderror
               </div>
-              <div class="form-group">
+              <div class="form-group" id="img-captcha">
                 <div class="col-6">
                   <span id="captcha-img">
                     {!! captcha_img() !!}
@@ -69,15 +70,16 @@
               <div class="form-group mb-4">
                 <div class="col-6">
                 <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control" required>
-                  @error('captcha')
-                  <span class="form-group" style="visibility: hidden" role="alert">
-                      <strong style="color: red">{{ $message }}</strong>
+                  
+                  <span class="form-group" id="alert" style="visibility: hidden" role="alert">
+                      <input type="hidden" id="cek" value="0">
+                      <strong style="color: red">Captcha tidak sesuai.</strong>
                   </span>
-                  @enderror
+                  
                 </div>
               </div>
               <div class="form-group col-md-4">
-                <button type="button" id="submit" class="btn btn-info">Submit</button>
+                <button type="submit" id="submit" class="btn btn-info">Submit</button>
               </div>
             <!-- </form> -->
           </div>
@@ -97,8 +99,6 @@
 @section('script')
 <script type="text/javascript">
   $(document).ready(function(){
-      $('#user').addClass('active');
-
       $('#submit').on('click', function(){
           
           let kode = $('#kode').val();
@@ -120,6 +120,9 @@
                       let diproses = '<p>Dokumen yang anda kirimkan dalam proses pengerjaan.</p>';
                       let selesai = '<p>Dokumen yang anda kirimkan telah selesai dan telah kami kirim ke email anda. Mohon cek email anda.</p>';
 
+                      if(document.getElementById('cek').value == 1){
+                        document.getElementById('alert').style.visibility = "hidden";
+                      }
                       if(results.data.status == 1){
                         $('.pesan').append(diterima);
                       }
@@ -130,12 +133,26 @@
                         $('.pesan').append(selesai);
                       }
                       
+                      //remove captcha
+                      $('#img-captcha').remove();
+                      $('#reload').remove();
+                      $('#captcha').remove();
+                      $('#submit').remove();
                   }
                   else {
                       let gagal = '<p>Mohon periksa kembali kode unik yang anda inputkan dan input captcha dengan benar.</p>';
                       $('.pesan').append(gagal);
                   }
-              }
+              },
+              error: function(err){
+               if (err.status == 422) {
+                   var errors = JSON.parse(err.responseText);
+                   if (errors.captcha) {
+                       document.getElementById('alert').style.visibility = "visible";
+                       document.getElementById('cek').value = 1;
+                   }
+               }
+           }
           });
       });
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Dokuman;
 use Str;
+use App\Http\Controllers\Validator;
 
 class HomeController extends Controller
 {
@@ -101,5 +103,29 @@ class HomeController extends Controller
     {
         // return response()->json(['captcha'=> captcha-img()]);
         return captcha_img();
+    }
+
+    public function getDok(Request $request)
+    {
+        $this->validate($request, [ 
+            'kode' => 'required',
+            'captcha' => 'required|captcha',
+        ]);
+        // $validator = $request->validate([
+        //     'kode' => 'required',
+        //     'captcha' => 'required|captcha',
+        // ]);
+
+        // if($validator->fails()){
+        //     // $errors = $validator->errors();
+        //     // echo $errors;
+        //     return response()->json(['errors'=>$validator->errors()->all()]);
+        // }
+        $data = Dokuman::select('status')->where('kode', '=', $request->kode)->first();
+
+        return response()->json(['success' => true, 'data' => $data]);
+
+        // dd($request->all());
+        // return response()->json();
     }
 }
