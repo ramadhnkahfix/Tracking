@@ -47,10 +47,11 @@
       <div class="card-body py-3">
         <div class="row my-2">
           <div class="col">
-            <!-- <form action="" method="POST"> -->
+            <!-- <form action="/track" method="POST"> -->
+            
               <div class="form-group mb-4">
                 <div class="col-4">
-                  <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik" required>
+                  <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik">
                 </div>
                 @error('kode')
                   <span class="invalid-feedback" role="alert">
@@ -67,7 +68,7 @@
                 </div>
               </div>
               <div class="form-group col-md-4">
-                <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control @error('captcha') is-invalid @enderror" required>
+                <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control @error('captcha') is-invalid @enderror" >
                 @error('captcha')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -75,7 +76,7 @@
                 @enderror
               </div>
               <div class="form-group col-md-4">
-                <button type="button" id="submit" class="btn btn-info">Submit</button>
+                <button type="submit" id="submit" class="btn btn-info">Submit</button>
               </div>
             <!-- </form> -->
           </div>
@@ -102,7 +103,7 @@
           let kode = $('#kode').val();
           let captcha = $('#captcha').val();
           var token = $('meta[name="csrf-token"]').attr('content');
-          var url = '/user/track';
+          var url = '/track';
           
           $.ajax({
               type: 'POST',
@@ -133,7 +134,15 @@
                       let gagal = '<p>Mohon periksa kembali kode unik yang anda inputkan dan input captcha dengan benar.</p>';
                       $('.pesan').append(gagal);
                   }
-              }
+              },
+              error: function(err){
+               if (err.status == 422) {
+                   var errors = JSON.parse(err.responseText);
+                   if (errors.captcha) {
+                       alert('Captcha tidak sesuai'); // and so on
+                   }
+               }
+           }
           });
       });
 

@@ -27,6 +27,7 @@ Route::post('/user/track', function(){
 
     return response()->json(['success' => true, 'data' => $data]);
 });
+Route::post('/track','HomeController@getDok');
 // Route::get('/tracking', function(){
 //     return view('layouts.home');
 // });
