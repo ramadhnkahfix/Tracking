@@ -49,7 +49,7 @@
           <div class="col">
             <!-- <form action="" method="POST"> -->
               <div class="form-group mb-4">
-                <div class="col-4">
+                <div class="col-6">
                   <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik" required>
                 </div>
                 @error('kode')
@@ -66,13 +66,15 @@
                   <button type="button" id="reload" class="btn btn-danger ml-2">&#x21bb;</button>
                 </div>
               </div>
-              <div class="form-group col-md-4">
-                <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control @error('captcha') is-invalid @enderror" required>
-                @error('captcha')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
+              <div class="form-group mb-4">
+                <div class="col-6">
+                <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control" required>
+                  @error('captcha')
+                  <span class="form-group" style="visibility: hidden" role="alert">
+                      <strong style="color: red">{{ $message }}</strong>
                   </span>
-                @enderror
+                  @enderror
+                </div>
               </div>
               <div class="form-group col-md-4">
                 <button type="button" id="submit" class="btn btn-info">Submit</button>

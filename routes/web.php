@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +16,14 @@ use Illuminate\Support\Facades\Auth;
 // Auth::routes(['verify' =>  true]);
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/reload','HomeController@reload');
-Route::post('/user/track', function(){
-    // $captcha = $_POST['captcha'];
-    $kode = $_POST['kode'];
+Route::post('/user/track', function(Request $request){
+    $request->validate([
+        'kode' => 'required',
+        'captcha' => 'required|captcha',
+    ],['captcha.captcha'=>'Invalid captcha code']);
 
-    // $captcha->validate([
-    //     $captcha => 'required|captcha'
-    // ]);
-
-    $data = App\Models\Dokuman::select('status')->where('kode', '=', $kode)->first();
+    $data = App\Models\Dokuman::select('status')->where('kode', '=', $request->kode)->first();
+    
 
     return response()->json(['success' => true, 'data' => $data]);
 });
