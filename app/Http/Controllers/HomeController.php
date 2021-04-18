@@ -121,7 +121,7 @@ class HomeController extends Controller
         //     // echo $errors;
         //     return response()->json(['errors'=>$validator->errors()->all()]);
         // }
-        $data = Dokuman::select('status')->where('kode', '=', $request->kode)->first();
+        $data = Dokuman::select('status')->where('kode', '=', decrypt($request->kode))->first();
 
         return response()->json(['success' => true, 'data' => $data]);
 

@@ -84,7 +84,7 @@
             <!-- </form> -->
           </div>
         </div>
-        <div class="row my-2 col-12">
+        <div class="row mx-1 col-12">
           <div class="pesan"></div>
         </div>
       </div>
@@ -123,23 +123,36 @@
                       if(document.getElementById('cek').value == 1){
                         document.getElementById('alert').style.visibility = "hidden";
                       }
-                      if(results.data.status == 1){
+                      if(results.data == null) {
+                        let gagal = '<p>Mohon periksa kembali kode unik yang anda inputkan dan input captcha dengan benar.</p>';
+                        $('.pesan').append(gagal);
+                      }
+                      else if(results.data.status == 1){
                         $('.pesan').append(diterima);
+                        //remove captcha
+                        $('#img-captcha').remove();
+                        $('#reload').remove();
+                        $('#captcha').remove();
+                        $('#submit').remove();
                       }
                       else if(results.data.status == 2){
                         $('.pesan').append(diproses);
+                        //remove captcha
+                        $('#img-captcha').remove();
+                        $('#reload').remove();
+                        $('#captcha').remove();
+                        $('#submit').remove();
                       }
                       else if(results.data.status == 3){
                         $('.pesan').append(selesai);
+                        //remove captcha
+                        $('#img-captcha').remove();
+                        $('#reload').remove();
+                        $('#captcha').remove();
+                        $('#submit').remove();
                       }
-                      
-                      //remove captcha
-                      $('#img-captcha').remove();
-                      $('#reload').remove();
-                      $('#captcha').remove();
-                      $('#submit').remove();
                   }
-                  else {
+                  else if(results.data == null) {
                       let gagal = '<p>Mohon periksa kembali kode unik yang anda inputkan dan input captcha dengan benar.</p>';
                       $('.pesan').append(gagal);
                   }
