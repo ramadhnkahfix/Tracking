@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Crypt;
+use Illuminate\Support\Facades\Crypt;
 
 class NotifikasiKodeUnik extends Mailable
 {
@@ -34,7 +34,7 @@ class NotifikasiKodeUnik extends Mailable
         // $code = Crypt::decrypt($his->dokumen->kode);
         return $this->markdown('emails.pages.kodeunik')
                     ->with([
-                        'kode'=>$this->dokumen->kode,
+                        'kode'=>Crypt::decryptString($this->dokumen->kode),
                     ]);
     }
 }

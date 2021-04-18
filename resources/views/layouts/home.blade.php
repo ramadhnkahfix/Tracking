@@ -47,8 +47,8 @@
       <div class="card-body py-3">
         <div class="row my-2">
           <div class="col">
-            <!-- <form action="/track" method="POST"> -->
-            
+            <!-- <form action="/user/track" method="POST">
+            @csrf -->
               <div class="form-group mb-4">
                 <div class="col-6">
                   <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik" required>
