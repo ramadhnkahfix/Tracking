@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Dokuman;
 use Str;
 use App\Http\Controllers\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
@@ -63,7 +64,7 @@ class HomeController extends Controller
             'status' => 1,
             'remember_token' => Str::random(60)
         ]);
-        return redirect('/login')->with('status', 'Anda berhasil registrasi, Kami telah mengirim email untuk konfirmasi');
+        return redirect('/login')->with('status', 'Anda berhasil registrasi, silahkan Log In.');
     }
 
     public function logout()
@@ -111,21 +112,23 @@ class HomeController extends Controller
             'kode' => 'required',
             'captcha' => 'required|captcha',
         ]);
-        // $validator = $request->validate([
-        //     'kode' => 'required',
-        //     'captcha' => 'required|captcha',
-        // ]);
 
-        // if($validator->fails()){
-        //     // $errors = $validator->errors();
-        //     // echo $errors;
-        //     return response()->json(['errors'=>$validator->errors()->all()]);
-        // }
-        $data = Dokuman::select('status')->where('kode', '=', $request->kode)->first();
+        $check = Dokuman::all();
+        
+        for($i = 0; $i<count($check); $i++){
+            $decrypt = $this->check($check[$i]->kode);
+            
+            if($decrypt == $request->kode){
+                $id = $check[$i]->id_dokumen;
+            }
+        }
+        $data = Dokuman::select('status')->where('id_dokumen', '=', $id)->first();
 
         return response()->json(['success' => true, 'data' => $data]);
+    }
 
-        // dd($request->all());
-        // return response()->json();
+    public function check($x){
+        $hasil = Crypt::decryptString($x);
+        return $hasil;
     }
 }

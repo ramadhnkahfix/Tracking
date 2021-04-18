@@ -8,6 +8,7 @@ use App\Models\DetailDokuman;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\NotifikasiKodeUnik;
+use Illuminate\Support\Facades\Crypt;
 
 class UploadController extends Controller
 {
@@ -62,7 +63,7 @@ class UploadController extends Controller
             'subject' => $request->subject,
             'tanggal' =>$date,
             'status' => 1,
-            'kode' => $kode
+            'kode' => Crypt::encryptString($kode)
         ]);
 
         $id = Dokuman::select('id_dokumen')->orderBy('id_dokumen', 'desc')->first();
