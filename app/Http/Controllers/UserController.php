@@ -17,20 +17,21 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'jabatan_id' => 'required',
-            'email' => 'required|email|unique:user',
-            'password' =>  'required|min:8'
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'jabatan_id' => 'required',
+        //     'email' => 'required|email|unique:user',
+        //     'password' =>  'required|min:8'
+        // ]);
         
         // dd($request->all());
         User::create([
-            'name' => $request->name,
+            'nama' => $request->name,
             'id_jabatan' => $request->id_jabatan,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'remember_token' => Str::random(60)
+            'remember_token' => Str::random(60),
+            'status' => 1
         ]);
         return redirect ('/admin/user')->with('status','Data berhasil ditambahkan');
     }
