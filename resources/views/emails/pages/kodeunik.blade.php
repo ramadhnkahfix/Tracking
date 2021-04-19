@@ -6,7 +6,7 @@ Ini adalah kode unik untuk mentracking document anda di Bea Cukai. Kode ini bers
 @component('mail::table')
 |Nomor Kode Unik|
 |:-------------:|
-| {{ $kode }}   |
+| {{ ($kode) }}   |
 @endcomponent
 
 @component('mail::button', ['url' =>''])

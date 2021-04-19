@@ -31,6 +31,7 @@ class NotifikasiKodeUnik extends Mailable
      */
     public function build()
     {
+        // $code = Crypt::decrypt($his->dokumen->kode);
         return $this->markdown('emails.pages.kodeunik')
                     ->with([
                         'kode'=>Crypt::decryptString($this->dokumen->kode),

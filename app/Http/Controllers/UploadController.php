@@ -87,7 +87,8 @@ class UploadController extends Controller
         //     $message->to($dokumen->email, $dokumen->nama);
         //     $message->subject('Kode Unik Tracking');
         // });
-        // $user = User::all();
+        // $user = User::all(); 
+        
         \Mail::to($dokumen->email)->send(new NotifikasiKodeUnik($dokumen));
         return redirect('/upload')->with('status','File Berhasil di Upload, Cek Email Anda Untuk Mendapatkan Kode Tracking');
     }
