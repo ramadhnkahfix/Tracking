@@ -113,7 +113,8 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm 10">
-                        <input type="password" class="form-control" id="password" name="password" required>    
+                        <input type="password" class="form-control" id="password" name="password" required> 
+                        <p style="color: red">minimal 8 character</p>
                     </div>
                 </div>
                 <div class="form-group">
