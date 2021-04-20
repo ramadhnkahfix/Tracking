@@ -8,7 +8,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 /**
  * Class User
@@ -18,7 +17,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
  * @property string $email
  * @property string|null $email_verified_at
  * @property string $password
- * @property int $status
+ * @property int|null $status
+ * @property int|null $role
  * @property string|null $remember_token
  * @property int $id_jabatan
  * 
@@ -26,7 +26,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
  *
  * @package App\Models
  */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
 	protected $table = 'user';
 	protected $primaryKey = 'id_user';
@@ -34,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 	protected $casts = [
 		'status' => 'int',
+		'role' => 'int',
 		'id_jabatan' => 'int'
 	];
 
@@ -48,8 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
 		'email_verified_at',
 		'password',
 		'status',
-		'remember_token',
 		'role',
+		'remember_token',
 		'id_jabatan'
 	];
 

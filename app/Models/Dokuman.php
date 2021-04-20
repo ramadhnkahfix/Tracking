@@ -16,9 +16,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_dokumen
  * @property string $nama_instansi
  * @property string $email
- * @property string $subject
  * @property Carbon $tanggal
  * @property int $status
+ * @property int $kategori
+ * @property int $approve
+ * @property string|null $alasan
+ * @property string $kode
  * 
  * @property Collection|DetailDokuman[] $detail_dokumen
  * @property Collection|DokumenSelesai[] $dokumen_selesais
@@ -32,7 +35,9 @@ class Dokuman extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'status' => 'int'
+		'status' => 'int',
+		'kategori' => 'int',
+		'approve' => 'int'
 	];
 
 	protected $dates = [
@@ -42,9 +47,11 @@ class Dokuman extends Model
 	protected $fillable = [
 		'nama_instansi',
 		'email',
-		'subject',
 		'tanggal',
 		'status',
+		'kategori',
+		'approve',
+		'alasan',
 		'kode'
 	];
 

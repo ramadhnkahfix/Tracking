@@ -30,8 +30,8 @@ class UserController extends Controller
             'id_jabatan' => $request->id_jabatan,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'remember_token' => Str::random(60),
-            'status' => 1
+            'status' => 1,
+            'remember_token' => Str::random(60)
         ]);
         return redirect ('/admin/user')->with('status','Data berhasil ditambahkan');
     }
