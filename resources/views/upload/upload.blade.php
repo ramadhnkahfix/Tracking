@@ -65,14 +65,26 @@
                   <input type="email" name="email" style="width:100%" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="subject">Subject</label>
-                  <input type="text" name="subject" style="width:100%" class="form-control" required>
+                    <label>Tujuan Dokumen</label>
+                    <select style="width:100%" name="id_user" required>
+                    <option selected disabled>Pilih Seksi yang Dituju</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="subject">Kategori</label>
+                  <select style="width:100%" name="status">
+                      <option selected disabled>Pilih Status</option>
+                      <option value="1">Kepabeanan</option>
+                      <option value="2">Cukai</option>
+                      <option value="3">Umum</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <input type="hidden" value="1" id="no">
                   <label id="label-upload">Upload File</label><br>
-                  <input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>
-                  <small>format: .doc, .docx, .pdf</small>
+                  <input type="file" name="file[]" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
+                  <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
                 </div>
                 <div class="file"></div>
                 <!-- <div class="form-group control-group increment" >

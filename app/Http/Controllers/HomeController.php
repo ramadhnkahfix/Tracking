@@ -53,7 +53,14 @@ class HomeController extends Controller
             'email' => 'required|unique:user|email',
             'password' => 'required|min:8',
             'confirmation' => 'required|same:password'
-        ]);
+        ],['nama.required' => 'Field nama tidak boleh kosong',
+            'email.required' => 'Field email tidak boleh kosong',
+            'email.email' => 'Field harus berupa email',
+            'email.unique:user' => 'Email sudah terdaftar',
+            'password.required' => 'Field password tidak boleh kosong',
+            'password.min:8' => 'Password minimal 8 character',
+            'confirmation.required' => 'Field konfirmasi password tidak boleh kosong',
+            'confirmation.same:password' => 'Konfrimasi password tidak sesuai']);
 
         // dd($request->all());
         User::create([
