@@ -1,5 +1,6 @@
 @component('mail::message')
-# Kode Unik
+# Logo
+## Kode Unik
 
 Ini adalah kode unik untuk mentracking document anda di Bea Cukai. Kode ini bersifat rahasia jangan beritahu siapapun.
 
@@ -13,6 +14,6 @@ Ini adalah kode unik untuk mentracking document anda di Bea Cukai. Kode ini bers
 Start Tacking
 @endcomponent  
 
-Thanks,
+
 {{ config('app.name') }}
 @endcomponent
