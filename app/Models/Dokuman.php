@@ -37,7 +37,8 @@ class Dokuman extends Model
 	protected $casts = [
 		'status' => 'int',
 		'kategori' => 'int',
-		'approve' => 'int'
+		'approve' => 'int',
+		'user_role' => 'int'
 	];
 
 	protected $dates = [
@@ -52,7 +53,8 @@ class Dokuman extends Model
 		'kategori',
 		'approve',
 		'alasan',
-		'kode'
+		'kode',
+		'user_role'
 	];
 
 	public function detail_dokumen()
