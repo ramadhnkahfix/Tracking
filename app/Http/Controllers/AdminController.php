@@ -101,6 +101,20 @@ class AdminController extends Controller
         return view('admin.dokumen', compact('dokumen'));
     }
 
+    public function selesai()
+    {
+        $dokumen = Dokuman::where('status', '=', 3)->get();
+
+        return view('admin.riwayat.selesai', compact('dokumen'));
+    }
+
+    public function ditolak()
+    {
+        $dokumen = Dokuman::where('approve', '=', 3)->get();
+
+        return view('admin.riwayat.ditolak', compact('dokumen'));
+    }
+
     // Untuk menu selain super admin dan sekretaris
     public function riwayatApproved()
     {

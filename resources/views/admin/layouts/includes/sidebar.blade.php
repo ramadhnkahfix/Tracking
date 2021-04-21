@@ -84,9 +84,23 @@
                 <i class="nav-icon fas fa-history"></i>
                 <p>
                     History
-                    <!-- <i class="fas fa-angle-left right"></i> -->
+                    <i class="fas fa-angle-left right"></i>
                 </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/history/selesai') }}" class="nav-link">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>Finish</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/history/ditolak') }}" class="nav-link">
+                        <i class="fas fa-times-circle nav-icon"></i>
+                        <p>Rejected</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endif
             @if(auth()->user()->role == 1)

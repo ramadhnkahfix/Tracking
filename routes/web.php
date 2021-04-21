@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::post('/admin-user/status','UserController@status');
     Route::patch('/dokumen/{id}/status', 'AdminController@status')->name('update.status');
 
-
+    Route::get('/admin/history/selesai', 'AdminController@selesai');
+    Route::get('/admin/history/ditolak', 'AdminController@ditolak');
 
 
 
