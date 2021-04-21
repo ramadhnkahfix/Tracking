@@ -40,7 +40,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Diterima</h3>
-                            @if($dokumen->status != 3)
+                            @if($dokumen->status != 3 && $dokumen->approve == 1)
                             <a href="#upload" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-primary">Upload</button>
                             </a>
@@ -174,7 +174,18 @@
                     <br>
                     <div class="form-group col-12">
                         <label>Subject</label>
-                        <input type="text" class="form-control" name="subject" readonly value="{{$dokumen->subject}}">
+                        @php
+                            if($dokumen->kategori == 1){
+                                $subject = "Kepabeanan";
+                            }
+                            else if($dokumen->kategori == 2){
+                                $subject = "Cukai";
+                            }
+                            else if($dokumen->kategori == 3){
+                                $subject = "Umum";
+                            }
+                        @endphp
+                        <input type="text" class="form-control" readonly value="{{$subject}}">
                     </div>
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">
