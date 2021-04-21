@@ -1,12 +1,10 @@
 @component('mail::message')
-# Introduction
+# Dokumen Masuk
 
 The body of your message.
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+{{ config('app.name') }}<br>
+Jalan Diponegoro 64112 Mojoroto Jawa Timur
+Telp. 081335672009
 @endcomponent
