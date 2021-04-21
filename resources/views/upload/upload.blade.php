@@ -66,14 +66,21 @@
                 </div>
                 <div class="form-group">
                     <label>Tujuan Dokumen</label>
-                    <select style="width:100%" name="id_user" required>
+                    <select style="width:100%" name="user_role" required>
                     <option selected disabled>Pilih Seksi yang Dituju</option>
-
+                        <option value="2">Subbagian Umum</option>
+                        <option value="3">Seksi PKC I</option>
+                        <option value="4">Seksi PKC II</option>
+                        <option value="5">Seksi Perbendaharaan</option>
+                        <option value="6">Seksi Kepatuhan Internal</option>
+                        <option value="7">Seksi PLI</option>
+                        <option value="8">Seksi Intelijen dan Penindakan</option>
+                        <option value="9">Seksi Penyidikan Barang Hasil Penindakan</option>
                     </select>
                 </div>
                 <div class="form-group">
                   <label for="subject">Kategori Dokumen</label>
-                  <select style="width:100%" name="status">
+                  <select style="width:100%" name="kategori">
                       <option value="1">Kepabeanan</option>
                       <option value="2">Cukai</option>
                       <option value="3">Umum</option>

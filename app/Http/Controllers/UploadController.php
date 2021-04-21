@@ -8,6 +8,7 @@ use App\Models\DetailDokuman;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\NotifikasiKodeUnik;
+use App\Mail\NotifikasiDokMasuk;
 use Illuminate\Support\Facades\Crypt;
 
 class UploadController extends Controller
@@ -63,6 +64,9 @@ class UploadController extends Controller
             'subject' => $request->subject,
             'tanggal' =>$date,
             'status' => 1,
+            'kategori' => $request->kategori,
+            'approve' => 0,
+            'user_role' => $request->user_role,
             'kode' => Crypt::encryptString($kode)
         ]);
 
@@ -90,7 +94,14 @@ class UploadController extends Controller
         // $user = User::all(); 
         
         \Mail::to($dokumen->email)->send(new NotifikasiKodeUnik($dokumen));
+        $user = User::where('role', '=', $request->user_role)->get();
+            foreach($user as $u){
+                \Mail::to($u->email)->send(new NotifikasiDokMasuk($u));                
+            }
+
         return redirect('/upload')->with('status','File Berhasil di Upload, Cek Email Anda Untuk Mendapatkan Kode Tracking');
+        
+
     }
 
     /**
