@@ -40,9 +40,11 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Diterima</h3>
+                            @if($dokumen->status != 3)
                             <a href="#upload" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-primary">Upload</button>
                             </a>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
@@ -86,10 +88,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Dokumen Selesai</h3>
+                            <h3 class="card-title">Dokumen Balasan</h3>
+                            @if($dokumen->status != 3)
                             <a href="#kirim" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-primary">KIRIM</button>
                             </a>
+                            @endif
                         </div>
                         @if(session('status'))
                         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
@@ -107,7 +111,9 @@
                                     <th>Dokumen</th>
                                     <th>Tanggal</th>
                                     <th>User</th>
+                                    @if($dokumen->status != 3)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,6 +122,7 @@
                                     <td>{{$ds->file}}</td>
                                     <td>{{date('d F Y', strtotime($ds->tanggal))}}</td>
                                     <td>{{$ds->author}}</td>
+                                    @if($dokumen->status != 3)
                                     <td align="center" style="width: 20%">
                                         <a href="#update-{{$ds->id_dokumen_selesai}}" class="text-warning" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">UPDATE</button>
@@ -124,6 +131,7 @@
                                             <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -132,7 +140,9 @@
                                     <th>Dokumen</th>
                                     <th>Tanggal</th>
                                     <th>User</th>
+                                    @if($dokumen->status != 3)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>
