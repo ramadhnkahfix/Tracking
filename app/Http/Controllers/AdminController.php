@@ -71,10 +71,12 @@ class AdminController extends Controller
         return view('admin.layouts.dashboard')->with(compact('data'));
     }
 
-    // Untuk menu selain super admin dan sekretaris
     public function dokumen()
     {
-        if(Auth::user()->role == 2){
+        if(Auth::user()->role == 1 || Auth::user()->role == null){
+            $dokumen = Dokuman::where(['approve' => 1])->where('status', '!=', 3)->get();
+        }
+        else if(Auth::user()->role == 2){
             $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 0])->get();
         }
         else if(Auth::user()->role == 3){
@@ -97,6 +99,62 @@ class AdminController extends Controller
         }
         
         return view('admin.dokumen', compact('dokumen'));
+    }
+
+    // Untuk menu selain super admin dan sekretaris
+    public function riwayatApproved()
+    {
+        if(Auth::user()->role == 2){
+            $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 3){
+            $dokumen = Dokuman::where(['user_role' => 3, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 4){
+            $dokumen = Dokuman::where(['user_role' => 4, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 5){
+            $dokumen = Dokuman::where(['user_role' => 5, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 6){
+            $dokumen = Dokuman::where(['user_role' => 6, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 7){
+            $dokumen = Dokuman::where(['user_role' => 7, 'approve' => 1])->get();
+        }
+        else if(Auth::user()->role == 8){
+            $dokumen = Dokuman::where(['user_role' => 8, 'approve' => 1])->get();
+        }
+
+        return view('admin.riwayat.approved', compact('dokumen'));
+    }
+
+    // Untuk menu selain super admin dan sekretaris
+    public function riwayatRejected()
+    {
+        if(Auth::user()->role == 2){
+            $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 3){
+            $dokumen = Dokuman::where(['user_role' => 3, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 4){
+            $dokumen = Dokuman::where(['user_role' => 4, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 5){
+            $dokumen = Dokuman::where(['user_role' => 5, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 6){
+            $dokumen = Dokuman::where(['user_role' => 6, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 7){
+            $dokumen = Dokuman::where(['user_role' => 7, 'approve' => 2])->get();
+        }
+        else if(Auth::user()->role == 8){
+            $dokumen = Dokuman::where(['user_role' => 8, 'approve' => 2])->get();
+        }
+
+        return view('admin.riwayat.rejected', compact('dokumen'));
     }
 
     public function status(Request $request,$id)

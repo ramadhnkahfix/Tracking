@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
-@section('title','Document')
-@section('page-title', 'Document')
+@section('title','History')
+@section('page-title', 'History')
 @section('style')
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -8,7 +8,7 @@
 @endsection
 @section('page')
 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-<li class="breadcrumb-item active">Document</li>
+<li class="breadcrumb-item active">History</li>
 @endsection
 
 @section('content')
@@ -21,11 +21,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!-- <div class="card-header">
-                        <a href="#tambah" data-toggle="modal">
-                            <button class="btn btn-primary">Tambah Data</button>
-                        </a>
-                    </div> -->
+                    <div class="card-header">
+                         <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Dokumen Selesai</h3>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="thead-dark text-center">
@@ -34,41 +34,24 @@
                                     <th>Email</th>
                                     <th>Subject</th>
                                     <th>Tanggal</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($dokumen as $dok)
+                                @if($dok->status == 3)
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
                                     <td>{{ $dok->subject }}</td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
-                                    <td align="center">@if($dok->status == 1)
-                                            <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
-                                        @elseif($dok->status == 2)
-                                            <button class="btn btn-info btn-sm" type="button">Diproses</button>
-                                        @elseif($dok->status == 3)
-                                            <button class="btn btn-success btn-sm" type="button">Selesai</button>
-                                        @endif
-                                    </td>
                                     <td align="center" style="width: 20%">
-                                        @if(auth()->user()->role == null)
-                                        <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-success">STATUS</button>
-                                        </a>
-                                        @endif
-                                        @if(auth()->user()->role != 1 && auth()->user()->role != null)
-                                        <a href="{{ url('/admin/approve/'.$dok->id_dokumen) }}" class="text-primary mr-2" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-secondary">APPROVE</button>
-                                        </a>
-                                        @endif
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
                                     </td>
                                 </tr>
+                                @endif
                                 @endforeach
                             </tbody>
                             <tfoot>
@@ -77,7 +60,6 @@
                                     <th>Email</th>
                                     <th>Subject</th>
                                     <th>Tanggal</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -89,7 +71,59 @@
             </div>
             <!-- /.col -->
         </div>
-    <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                         <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Dokumen Ditolak</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead class="thead-dark text-center">
+                                <tr>
+                                    <th>Nama Instansi</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Tanggal</th>
+                                    <th>Alasan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($dokumen as $dok)
+                                @if($dok->status == 3)
+                                <tr>
+                                    <td>{{ $dok->nama_instansi }}</td>
+                                    <td>{{ $dok->email }}</td>
+                                    <td>{{ $dok->subject }}</td>
+                                    <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
+                                    <td align="center" style="width: 20%">
+                                        <a href="#alasan-{{$dok->id_dokumen}}" class="text-danger" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-warning">ALASAN</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endif
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                <th>Nama Instansi</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
     </div><!-- /.container-fluid -->
 </section>
 
