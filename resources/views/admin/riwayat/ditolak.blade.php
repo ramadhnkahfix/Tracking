@@ -24,7 +24,7 @@
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Ditolak</h3>
-                            <a href="{{ url('/admin/delete-all/ditolak') }}" class="text-danger" data-toggle="modal">
+                            <a href="{{ url('/admin/delete/ditolak') }}" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a>
                         </div>
@@ -45,14 +45,22 @@
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
-                                    <td>{{ $dok->subject }}</td>
+                                    <td>
+                                        @if( $dok->kategori == 1 )
+                                            <p>Kepabeanan</p>
+                                        @elseif( $dok->kategori == 2 )
+                                            <p>Cukai</p>
+                                        @elseif( $dok->kategori == 3 )
+                                            <p>Umum</p>
+                                        @endif
+                                    </td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
                                     <td align="center" style="width: 20%">
                                         <a href="#alasan-{{$dok->id_dokumen}}" class="text-danger" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">ALASAN</button>
                                         </a>
                                         <a href="{{ url('/admin/delete/ditolak/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-danger">Hapus</button>
+                                            <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
                                     </td>
                                 </tr>

@@ -24,7 +24,7 @@
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Selesai</h3>
-                            <a href="{{ url('/admin/delete-all/selesai') }}" class="text-danger" data-toggle="modal">
+                            <a href="{{ url('/admin/delete/approved') }}" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a>
                         </div>
@@ -37,6 +37,7 @@
                                     <th>Email</th>
                                     <th>Subject</th>
                                     <th>Tanggal</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -45,25 +46,44 @@
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
-                                    <td>{{ $dok->subject }}</td>
+                                    <td>@if( $dok->kategori == 1 )
+                                            <p>Kepabeanan</p>
+                                        @elseif( $dok->kategori == 2 )
+                                            <p>Cukai</p>
+                                        @elseif( $dok->kategori == 3 )
+                                            <p>Umum</p>
+                                        @endif
+                                    </td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
+                                    <td align="center">
+                                        @if($dok->status == 1)
+                                            <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
+                                        @elseif($dok->status == 2)
+                                            <button class="btn btn-info btn-sm" type="button">Diproses</button>
+                                        @elseif($dok->status == 3)
+                                            <button class="btn btn-success btn-sm" type="button">Selesai</button>
+                                        @endif
+                                    </td>
                                     <td align="center" style="width: 20%">
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
-                                        <a href="{{ url('/admin/delete/selesai/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-danger">Hapus</button>
+                                        @if($dok->status == 3)
+                                        <a href="{{ url('/admin/delete/approved/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>Nama Instansi</th>
+                                    <th>Nama Instansi</th>
                                     <th>Email</th>
                                     <th>Subject</th>
                                     <th>Tanggal</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>

@@ -83,6 +83,9 @@
                                         <!-- <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a> -->
+                                        <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-danger">REJECT</button>
+                                        </a>
                                         @endif
                                         
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">

@@ -120,25 +120,25 @@ class AdminController extends Controller
     public function riwayatApproved()
     {
         if(Auth::user()->role == 2){
-            $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 3){
-            $dokumen = Dokuman::where(['user_role' => 3, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 3, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 4){
-            $dokumen = Dokuman::where(['user_role' => 4, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 4, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 5){
-            $dokumen = Dokuman::where(['user_role' => 5, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 5, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 6){
-            $dokumen = Dokuman::where(['user_role' => 6, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 6, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 7){
-            $dokumen = Dokuman::where(['user_role' => 7, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 7, 'approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 8){
-            $dokumen = Dokuman::where(['user_role' => 8, 'approve' => 1])->get();
+            $dokumen = Dokuman::where(['user_role' => 8, 'approve' => 1])->where('status', '!=', 3)->get();
         }
 
         return view('admin.riwayat.approved', compact('dokumen'));
@@ -170,6 +170,173 @@ class AdminController extends Controller
         }
 
         return view('admin.riwayat.rejected', compact('dokumen'));
+    }
+
+    public function deleteApprovedById($id)
+    {
+        $data = DetailDokuman::where('dokumen_id_dokumen', '=', $id)->get();
+        $balasan = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
+
+        //Hapus file
+        foreach($data as $d){
+            Storage::disk('public')->delete("/document"."/".$d->file);
+        }
+        foreach($balasan as $b){
+            Storage::disk('public')->delete("/file_balasan"."/".$b->file);
+        }
+
+        //Hapus Database
+        $data->delete();
+        $balasan->delete();
+        Dokuman::where('id_dokumen', '=', $id)->delete();
+
+        return back();
+    }
+
+    public function deleteApprovedAll()
+    {
+        $data = Dokuman::where(['status' => 3, 'approve' => 1])->get();
+
+        //Hapus file
+        foreach($data as $d){
+            $detail = DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
+            $balasan = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
+
+            foreach($detail as $det){
+                Storage::disk('public')->delete("/document"."/".$det->file);
+            }
+            foreach($balasan as $b){
+                Storage::disk('public')->delete("/file_balasan"."/".$b->file);
+            }
+
+            $balasan->delete();
+            $detail->delete();
+        }
+
+        //Hapus Database
+        $data->delete();
+
+        return back();
+    }
+
+    public function deleteRejectedById($id)
+    {
+        $data = DetailDokuman::where('dokumen_id_dokumen', '=', $id)->get();
+        
+        //Hapus file
+        foreach($data as $d){
+            Storage::disk('public')->delete("/document"."/".$d->file);
+        }
+        
+        //Hapus Database
+        $data->delete();
+        Dokuman::where('id_dokumen', '=', $id)->delete();
+
+        return back();
+    }
+
+    public function deleteRejectedAll()
+    {
+        $id_dokumen = Dokuman::select('id_dokumen')->where('approve', '=', 2)->get();
+
+        foreach($id_dokumen as $id){
+            $file = DetailDokuman::where('dokumen_id_dokumen', '=', $id->id_dokumen)->get();
+
+            //Hapus file
+            foreach($file as $f){
+                Storage::disk('public')->delete("/document"."/".$f->file);
+            }
+        
+            //Hapus Database
+            $file->delete();
+        }
+        //Hapus Database
+        $id_dokumen->delete();
+
+        return back();
+    }
+
+    public function deleteDitolakById($id)
+    {
+        $data = DetailDokuman::where('dokumen_id_dokumen', '=', $id)->get();
+        
+        //Hapus file
+        foreach($data as $d){
+            Storage::disk('public')->delete("/document"."/".$d->file);
+        }
+        
+        //Hapus Database
+        $data->delete();
+        Dokuman::where('id_dokumen', '=', $id)->delete();
+
+        return back();
+    }
+
+    public function deleteDitolakAll()
+    {
+        $data = Dokuman::where(['approve' => 3])->get();
+        
+        //Hapus file
+        foreach($data as $d){
+            $detail = DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
+
+            foreach($detail as $det){
+                Storage::disk('public')->delete("/document"."/".$det->file);
+            }
+            $detail->delete();
+        }
+        
+        //Hapus Database
+        $data->delete();
+
+        return back();
+    }
+
+    public function deleteSelesaiById($id)
+    {
+        $data = DetailDokuman::where(['dokumen_id_dokumen' => $id])->get();
+        $selesai = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
+        
+        //Hapus file
+        foreach($data as $d){
+            Storage::disk('public')->delete("/document"."/".$d->file);
+        }
+        foreach($selesai as $s){
+            Storage::disk('public')->delete("/document"."/".$s->file);
+        }
+        
+        //Hapus Database
+        $data->delete();
+        $selesai->delete();
+        Dokuman::where('id_dokumen', '=', $id)->delete();
+
+        return back();
+    }
+
+    public function deleteSelesaiAll()
+    {
+        $data = Dokuman::where(['status' => 3, 'approve' => 1])->get();
+        
+        //Hapus file
+        foreach($data as $d){
+            $detail = DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
+            $selesai = DokumenSelesai::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
+            
+            foreach($detail as $det){
+                Storage::disk('public')->delete("/document"."/".$det->file);
+            }
+            foreach($selesai as $s){
+                Storage::disk('public')->delete("/document"."/".$s->file);
+            }
+
+            $detail->delete();
+            $selesai->delete();
+        }
+        
+        //Hapus Database
+        $data->delete();
+
+        return back();
     }
 
     public function reject(Request $request,$id)

@@ -25,26 +25,24 @@ Route::get('/signup', 'HomeController@signup');
 Route::get('logout','HomeController@logout');
 Route::post('/postsignup', 'HomeController@postsignup');
 
+// Auth User Biasa dan Admin
 Route::group(['middleware' => ['auth','checkRole:1,2']],function(){
     Route::get('/upload','UploadController@index')->name('upload');
     Route::post('/upload','UploadController@store');
-
-
-    
 
     Route::get('/change-password', 'HomeController@changePassword');
     Route::post('/change-password', 'HomeController@updatePassword');
     Route::post('/password/verify_old_pass', 'HomeController@verify_old_password');
     
 });
+
+// Auth Admin
 Route::group(['middleware' => ['auth','checkRole:1']],function(){ 
     Route::get('/admin/user','UserController@index');
     Route::post('/admin-user','UserController@store');
     Route::post('/admin-user/status','UserController@status');
     Route::patch('/dokumen/{id}/status', 'AdminController@status')->name('update.status');
 
-    Route::get('/admin/history/selesai', 'AdminController@selesai');
-    Route::get('/admin/history/ditolak', 'AdminController@ditolak');
     // Status
     Route::patch('/admin/{id}/reject', 'AdminController@reject')->name('reject.status');
     Route::get('/admin/approve/{id}','AdminController@approve');
@@ -58,16 +56,29 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::post('/dokumen/edit-balasan', 'AdminController@editDetailDokumen');
     Route::get('/dokumen/delete-balasan/{id}', 'AdminController@deleteDetailDokumen');
 
-    //Download
+    // Download
     Route::get('/download/dokumen/{id}', 'AdminController@download');
 
-    //Kirim Email Dokumen Selesai
+    // Kirim Email Dokumen Selesai
     Route::get('/dokumen/notifemail/{id}','AdminController@emailDok');
 
-    //Contact
+    // Contact
     Route::get('/contact', function(){ return view('admin.contact'); });
 
-    //History
+    // History
+    /* Admin seksi */
     Route::get('/admin/approved','AdminController@riwayatApproved');
     Route::get('/admin/rejected','AdminController@riwayatrejected');
+    Route::get('/admin/delete/rejected/{id}', 'AdminController@deleteRejectedById');
+    Route::get('/admin/delete/rejected', 'AdminController@deleteRejectedAll');
+    Route::get('/admin/delete/approved/{id}', 'AdminController@deleteApprovedById');
+    Route::get('/admin/delete/approved', 'AdminController@deleteApprovedAll');
+
+    /* Super Admin dan sekretaris */
+    Route::get('/admin/history/selesai', 'AdminController@selesai');
+    Route::get('/admin/history/ditolak', 'AdminController@ditolak');
+    Route::get('/admin/delete/ditolak/{id}', 'AdminController@deleteDitolakById');
+    Route::get('/admin/delete/ditolak', 'AdminController@deleteDitolakAll');
+    Route::get('/admin/delete/selesai/{id}', 'AdminController@deleteSelesaiById');
+    Route::get('/admin/delete/selesai', 'AdminController@deleteSelesaiAll');
 });
