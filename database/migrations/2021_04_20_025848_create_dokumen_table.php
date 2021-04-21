@@ -23,6 +23,7 @@ class CreateDokumenTable extends Migration
             $table->tinyInteger('approve');
             $table->string('alasan')->nullable();
             $table->string('kode');
+            $table->tinyInteger('user_role');
         });
     }
 
