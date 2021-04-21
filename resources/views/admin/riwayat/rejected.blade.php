@@ -23,8 +23,8 @@
                 <div class="card">
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Dokumen Selesai</h3>
-                            <a href="{{ url('/admin/delete-all/selesai') }}" class="text-danger" data-toggle="modal">
+                            <h3 class="card-title">Dokumen Rejected</h3>
+                            <a href="{{ url('/admin/delete-all/ditolak') }}" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a>
                         </div>
@@ -48,12 +48,16 @@
                                     <td>{{ $dok->subject }}</td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
                                     <td align="center" style="width: 20%">
-                                        <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
-                                            <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
+                                        <a href="#alasan-{{$dok->id_dokumen}}" class="text-danger" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-warning">ALASAN</button>
                                         </a>
-                                        <a href="{{ url('/admin/delete/selesai/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                        </a>
+                                        <form action="{{ url('/admin/delete/ditolak/'.$dok->id_dokumen )}}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -78,6 +82,23 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<!-- Modal Status Data-->
+@foreach($dokumen as $dok)
+<div class="modal small fade" id="alasan-{{$dok->id_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Alasan Ditolak</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+            </div>
+            <div class="modal-body modal-body-upload">
+                <p>{{$dok->alasan}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Modal Status Data -->
 @endsection
 
 @section('script')

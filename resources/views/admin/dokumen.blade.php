@@ -32,10 +32,15 @@
                                 <tr>
                                     <th>Nama Instansi</th>
                                     <th>Email</th>
-                                    <th>Subject</th>
+                                    <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
+                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
                                     <th>Aksi</th>
+                                    @endif
+                                    @if(auth()->user()->role != 1 && auth()->user()->role != null)
+                                    <th>Detail</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,8 +48,17 @@
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->email }}</td>
-                                    <td>{{ $dok->subject }}</td>
+                                    <td>
+                                        @if( $dok->kategori == 1 )
+                                            <p>Kepabeanan</p>
+                                        @elseif( $dok->kategori == 2 )
+                                            <p>Cukai</p>
+                                        @elseif( $dok->kategori == 3 )
+                                            <p>Umum</p>
+                                        @endif
+                                    </td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
+                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
                                     <td align="center">@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
                                         @elseif($dok->status == 2)
@@ -53,17 +67,24 @@
                                             <button class="btn btn-success btn-sm" type="button">Selesai</button>
                                         @endif
                                     </td>
+                                    @endif
+                                    @if(auth()->user()->role != 1 && auth()->user()->role != null)
+                                    <td align="center">
+                                        <a href="{{ url('/admin/approve/'.$dok->id_dokumen) }}" class="text-primary mr-2">
+                                            <button type="button" class="btn btn-sm btn-info" onclick="return confirm('Apakah anda yakin akan mengapprove dokumen?')">APPROVE</button>
+                                        </a>
+                                        <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-danger">REJECT</button>
+                                        </a>
+                                    </td>
+                                    @endif
                                     <td align="center" style="width: 20%">
                                         @if(auth()->user()->role == null)
-                                        <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
+                                        <!-- <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
-                                        </a>
+                                        </a> -->
                                         @endif
-                                        @if(auth()->user()->role != 1 && auth()->user()->role != null)
-                                        <a href="{{ url('/admin/approve/'.$dok->id_dokumen) }}" class="text-primary mr-2" data-toggle="modal">
-                                            <button type="button" class="btn btn-sm btn-secondary">APPROVE</button>
-                                        </a>
-                                        @endif
+                                        
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
@@ -75,10 +96,15 @@
                                 <tr>
                                 <th>Nama Instansi</th>
                                     <th>Email</th>
-                                    <th>Subject</th>
+                                    <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
+                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
                                     <th>Aksi</th>
+                                    @endif
+                                    @if(auth()->user()->role != 1 && auth()->user()->role != null)
+                                    <th>Detail</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>
@@ -94,6 +120,35 @@
 </section>
 
 <!-- Modal Status Data-->
+@foreach($dokumen as $dok)
+<div class="modal small fade" id="reject-{{$dok->id_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ route('reject.status', $dok->id_dokumen) }}" method="post">
+            {{csrf_field()}}
+            @method('patch')
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title">Dokumen Reject</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </div>
+                <div class="modal-body modal-body-upload">
+                    <div class="form-group col-12">
+                        <textarea name="alasan" id="" cols="30" rows="10" class="ckeditor form-control" placeholder="Isikan Alasan" required></textarea>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Modal Status Data -->
+
+<!-- Modal Dokumen Reject -->
 @foreach($dokumen as $dok)
 <div class="modal small fade" id="status-{{$dok->id_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -130,7 +185,7 @@
     </div>
 </div>
 @endforeach
-<!-- End Modal Status Data -->
+<!-- End Modal Dokumen Reject -->
 @endsection
 
 @section('script')

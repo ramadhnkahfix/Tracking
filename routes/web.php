@@ -45,8 +45,9 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
 
     Route::get('/admin/history/selesai', 'AdminController@selesai');
     Route::get('/admin/history/ditolak', 'AdminController@ditolak');
-
-
+    // Status
+    Route::patch('/admin/{id}/reject', 'AdminController@reject')->name('reject.status');
+    Route::get('/admin/approve/{id}','AdminController@approve');
 
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/dokumen', 'AdminController@dokumen');
@@ -63,5 +64,7 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     //Kirim Email Dokumen Selesai
     Route::get('/dokumen/notifemail/{id}','AdminController@emailDok');
 
-
+    //History
+    Route::get('/admin/approved','AdminController@riwayatApproved');
+    Route::get('/admin/rejected','AdminController@riwayatrejected');
 });

@@ -9,6 +9,7 @@ use App\Models\DokumenSelesai;
 use Carbon\Carbon;
 use Storage;
 use App\Mail\NotifikasiDokBalasan;
+use App\Mail\NotifikasiPengembalianDok;
 use Auth;
 use DB;
 
@@ -171,6 +172,26 @@ class AdminController extends Controller
         return view('admin.riwayat.rejected', compact('dokumen'));
     }
 
+    public function reject(Request $request,$id)
+    {
+        Dokuman::findOrFail($id)->update([
+            'approve' => 2,
+            'alasan' => $request->alasan
+        ]);
+        $dokumen = Dokuman::where('id_dokumen', '=', $id)->first();
+        $doc = DetailDokuman::where('id_detail_dokumen', '=', $id)->get();
+        \Mail::to($dokumen->email)->send(new NotifikasiPengembalianDok($dokumen, $doc));
+        return back();
+    }
+
+    public function approve($id)
+    {
+        Dokuman::findOrFail($id)->update([
+            'approve' => 1,
+            'status' => 2,
+        ]);
+    }
+
     public function status(Request $request,$id)
     {
         Dokuman::findOrFail($id)->update([
@@ -261,6 +282,8 @@ class AdminController extends Controller
         // $dokumen = Dokuman::findOrFail($id)->get();
         
         $email = Dokuman::where('id_dokumen', '=', $id)->first();
+        $email->status = 3;
+        $email->save();
         $dokumen = DokumenSelesai::where('dokumen_id_dokumen','=',$id)->get();
         // dd($dokumen);
         \Mail::to($email->email)->send(new NotifikasiDokBalasan($dokumen));
