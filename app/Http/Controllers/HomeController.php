@@ -129,7 +129,7 @@ class HomeController extends Controller
                 $id = $check[$i]->id_dokumen;
             }
         }
-        $data = Dokuman::select('status')->where('id_dokumen', '=', $id)->first();
+        $data = Dokuman::select('status', 'approve')->where('id_dokumen', '=', $id)->first();
 
         return response()->json(['success' => true, 'data' => $data]);
     }

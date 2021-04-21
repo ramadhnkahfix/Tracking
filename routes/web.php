@@ -63,5 +63,5 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     //Kirim Email Dokumen Selesai
     Route::get('/dokumen/notifemail/{id}','AdminController@emailDok');
 
-
+    
 });

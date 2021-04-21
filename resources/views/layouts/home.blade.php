@@ -119,6 +119,8 @@
                       let diterima = '<p>Dokumen yang anda kirimkan telah kami terima.</p>';
                       let diproses = '<p>Dokumen yang anda kirimkan dalam proses pengerjaan.</p>';
                       let selesai = '<p>Dokumen yang anda kirimkan telah selesai dan telah kami kirim ke email anda. Mohon cek email anda.</p>';
+                      let ditolak = '<p>Dokumen yang anda ajukan, kami tolak karena beberapa alasan. Silahkan cek email anda..</p>';
+                      let dikembalikan = '<p>Dokumen yang anda kirimkan telah kami kembalikan. Silahkan cek email anda untuk keterangan lebih lanjut.</p>';
 
                       if(document.getElementById('cek').value == 1){
                         document.getElementById('alert').style.visibility = "hidden";
@@ -145,6 +147,22 @@
                       }
                       else if(results.data.status == 3){
                         $('.pesan').append(selesai);
+                        //remove captcha
+                        $('#img-captcha').remove();
+                        $('#reload').remove();
+                        $('#captcha').remove();
+                        $('#submit').remove();
+                      }
+                      else if(results.data.status == 2 && results.data.approve == 3){
+                        $('.pesan').append(ditolak);
+                        //remove captcha
+                        $('#img-captcha').remove();
+                        $('#reload').remove();
+                        $('#captcha').remove();
+                        $('#submit').remove();
+                      }
+                      else if(results.data.status == 1 && results.data.approve == 2){
+                        $('.pesan').append(dikembalikan);
                         //remove captcha
                         $('#img-captcha').remove();
                         $('#reload').remove();
