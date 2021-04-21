@@ -78,12 +78,48 @@
                 </li>
                 </ul> -->
             </li>
+            @if(auth()->user()->role == 1 || auth()->user()->role == null)
+            <li class="nav-item">
+                <a href="{{ url('/admin/history') }}" id="history" class="nav-link">
+                <i class="nav-icon fas fa-history"></i>
+                <p>
+                    History
+                    <!-- <i class="fas fa-angle-left right"></i> -->
+                </p>
+                </a>
+            </li>
+            @endif
             @if(auth()->user()->role == 1)
             <li class="nav-item">
                 <a href="{{ url('/admin/user') }}" id="user" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>User</p>
                 </a>
+            </li>
+            @endif
+            @if(auth()->user()->role != 1 && auth()->user()->role != null)
+            <li class="nav-item">
+                <a href="#" id="history" class="nav-link">
+                <i class="nav-icon fas fa-history"></i>
+                <p>
+                    History
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/approved') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Approved</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/admin/rejected') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Rejected</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endif
         </ul>
