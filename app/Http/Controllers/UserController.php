@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $jabatan = Jabatan::all();
-        $user = User::all();
+        $user = User::where('id_jabatan', '=', '1')->get();
         return view('admin.user', compact('user','jabatan'));
     }
 
@@ -27,10 +27,11 @@ class UserController extends Controller
         // dd($request->all());
         User::create([
             'nama' => $request->name,
-            'id_jabatan' => $request->id_jabatan,
+            'id_jabatan' => 1,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'status' => 1,
+            'role' => $request->role,
             'remember_token' => Str::random(60)
         ]);
         return redirect ('/admin/user')->with('status','Data berhasil ditambahkan');

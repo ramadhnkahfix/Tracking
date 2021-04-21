@@ -35,6 +35,7 @@
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,29 @@
                                     <td>{{ $usr->nama }}</td>
                                     <td>{{ $usr->jabatan->nama }}</td>
                                     <td>{{ $usr->email }}</td>
+                                    <td align="center">
+                                        @if($usr->role == null)
+                                            <p>Sekretaris</p>
+                                        @elseif($usr->role == 1)
+                                            <p>Super Admin</p>
+                                        @elseif($usr->role == 2)
+                                            <p>Subbagian Umum</p>
+                                        @elseif($usr->role == 3)
+                                            <p>Seksi PKC I</p>
+                                        @elseif($usr->role == 4)
+                                            <p>Seksi PKC II</p>
+                                        @elseif($usr->role == 5)
+                                            <p>Seksi Perbendaharaan</p>
+                                        @elseif($usr->role == 6)
+                                            <p>Seksi Kepatuhan Internal</p>
+                                        @elseif($usr->role == 7)
+                                            <p>Seksi PLI</p>
+                                        @elseif($usr->role == 8)
+                                            <p>Seksi Intelijen dan Penindakan</p>
+                                        @elseif($usr->role == 9)
+                                            <p>Seksi Penyidikan Barang Hasil Penindakan</p>
+                                        @endif
+                                    </td>
                                     <td id="kd-{{$usr->id_user}}" align="center" style="width: 20%">
                                         @if( $usr->status == null || $usr->status == 0 )
                                             <button class="btn btn-secondary btn-sm status" type="button" id="status-{{$usr->id_user}}">Disable</button>
@@ -61,6 +85,7 @@
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Status</th>
                                 </tr>
                             </tfoot>
@@ -94,20 +119,25 @@
                     </div>  
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Jabatan</label>
-                    <div class="col-sm-10">
-                        <select name="id_jabatan" class="form-control" required>
-                        <option selected disabled>Pilih Jabatan</option>
-                        @foreach($jabatan as $jbt)
-                            <option value="{{$jbt->id_jabatan}}">{{$jbt->nama}}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Role</label>
+                    <div class="col-sm-10">
+                        <select name="role" class="form-control" required>
+                            <option value="2">Subbagian Umum</option>
+                            <option value="3">Seksi PKC I</option>
+                            <option value="4">Seksi PKC II</option>
+                            <option value="5">Seksi Perbendaharaan</option>
+                            <option value="6">Seksi Kepatuhan Internal</option>
+                            <option value="7">Seksi PLI</option>
+                            <option value="8">Seksi Intelijen dan Penindakan</option>
+                            <option value="9">Seksi Penyidikan Barang Hasil Penindakan</option>
+                            <option value="">Sekretaris</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">

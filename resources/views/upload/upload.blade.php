@@ -72,9 +72,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                  <label for="subject">Kategori</label>
+                  <label for="subject">Kategori Dokumen</label>
                   <select style="width:100%" name="status">
-                      <option selected disabled>Pilih Status</option>
                       <option value="1">Kepabeanan</option>
                       <option value="2">Cukai</option>
                       <option value="3">Umum</option>
