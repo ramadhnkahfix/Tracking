@@ -1,11 +1,11 @@
 @component('mail::message')
 
 ## Kode Unik Tracking
-Yth. {{ ($nama) }}    
+### Yth. {{ ($nama) }}    
 
 Kode unik ini untuk mentracking document anda di Bea Cukai.<br>
-Hati-hati penipuan<br>
-Kode ini bersifat rahasia dan jangan beritahu siapapun. 
+Kode ini bersifat rahasia dan jangan beritahu siapapun.<br>
+**_Hati-hati penipuan_**
 
 @component('mail::table')
 |Nomor Kode Unik|

@@ -1,7 +1,8 @@
 @component('mail::message')
-# Dokumen Masuk
+## Dokumen Masuk
+Yth. {{($nama)}}
 
-The body of your message.
+Terdapat dokumen masuk dari
 
 
 {{ config('app.name') }}<br>

@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Storage;
 use App\Mail\NotifikasiDokBalasan;
 use App\Mail\NotifikasiPengembalianDok;
+use App\Mail\NotifikasiDokPenolakan;
 use Auth;
 use DB;
 
@@ -341,7 +342,7 @@ class AdminController extends Controller
 
     public function reject(Request $request,$id)
     {
-        $data = Dokuman::findOrFail($id)->first();
+        $data = Dokuman::findOrFail($id);
 
         if($data->approve == 1){
             $data->approve = 3;
@@ -350,12 +351,18 @@ class AdminController extends Controller
         else if($data->approve == 0){
             $data->approve = 2;
             $data->alasan = $request->alasan;
-        }
-        
+
+        }  
         $data->save();
         $dokumen = Dokuman::where('id_dokumen', '=', $id)->first();
         $doc = DetailDokuman::where('id_detail_dokumen', '=', $id)->get();
-        \Mail::to($dokumen->email)->send(new NotifikasiPengembalianDok($dokumen, $doc));
+        if($data->approve == 2){
+            \Mail::to($dokumen->email)->send(new NotifikasiPengembalianDok($dokumen, $doc));
+        }
+        else if($data->approve == 3){
+            \Mail::to($dokumen->email)->send(new NotifikasiDokPenolakan($dokumen, $doc));
+        }
+
         return back();
     }
 
@@ -365,6 +372,8 @@ class AdminController extends Controller
             'approve' => 1,
             'status' => 2,
         ]);
+
+        return redirect('admin.riwayat.approve');
     }
 
     public function status(Request $request,$id)
