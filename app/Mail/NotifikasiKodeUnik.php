@@ -35,6 +35,7 @@ class NotifikasiKodeUnik extends Mailable
         return $this->markdown('emails.pages.kodeunik')
                     ->with([
                         'kode'=>Crypt::decryptString($this->dokumen->kode),
+                        'nama'=>$this->dokumen->nama_instansi,
                     ]);
     }
 }

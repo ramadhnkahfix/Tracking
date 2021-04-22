@@ -1,12 +1,10 @@
 @component('mail::message')
-# Introduction
+# Dokumen Balasan
 
 The body of your message.
 
-@component('mail::button', ['url' => ''])
 
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+{{ config('app.name') }}<br>
+Jl. Diponegoro No.23 Kota Kediri 64123<br>
+Telp. +6281133355511
 @endcomponent
