@@ -341,10 +341,18 @@ class AdminController extends Controller
 
     public function reject(Request $request,$id)
     {
-        Dokuman::findOrFail($id)->update([
-            'approve' => 2,
-            'alasan' => $request->alasan
-        ]);
+        $data = Dokuman::findOrFail($id)->first();
+
+        if($data->approve == 1){
+            $data->approve = 3;
+            $data->alasan = $request->alasan;
+        }
+        else if($data->approve == 0){
+            $data->approve = 2;
+            $data->alasan = $request->alasan;
+        }
+        
+        $data->save();
         $dokumen = Dokuman::where('id_dokumen', '=', $id)->first();
         $doc = DetailDokuman::where('id_detail_dokumen', '=', $id)->get();
         \Mail::to($dokumen->email)->send(new NotifikasiPengembalianDok($dokumen, $doc));
