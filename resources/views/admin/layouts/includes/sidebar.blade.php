@@ -91,7 +91,7 @@
                     <li class="nav-item">
                         <a href="{{ url('/admin/history/selesai') }}" class="nav-link">
                         <i class="fas fa-check-circle nav-icon"></i>
-                        <p>Finish</p>
+                        <p>Done</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -123,13 +123,19 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{ url('/admin/approved') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-check-circle  nav-icon"></i>
                         <p>Approved</p>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('/admin/history/selesai') }}" class="nav-link">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>Done</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('/admin/rejected') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-times-circle nav-icon"></i>
                         <p>Rejected</p>
                         </a>
                     </li>
