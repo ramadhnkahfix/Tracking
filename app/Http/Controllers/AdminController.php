@@ -76,7 +76,9 @@ class AdminController extends Controller
     public function dokumen()
     {
         if(Auth::user()->role == 1 || Auth::user()->role == null){
-            $dokumen = Dokuman::where(['approve' => 1])->where('status', '!=', 3)->get();
+            $dokumen = Dokuman::
+                        join('dokumen_selesai as ds', 'ds.dokumen_id_dokumen', '=', 'dokumen.id_dokumen')
+                        ->where(['approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 2){
             $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 0])->get();

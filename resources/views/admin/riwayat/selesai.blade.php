@@ -24,7 +24,7 @@
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Selesai</h3>
-                            <a href="{{ url('/admin/delete/selesai') }}" class="text-danger" data-toggle="modal">
+                            <a href="{{ url('/admin/delete/selesai') }}" class="text-danger">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a>
                         </div>
@@ -59,7 +59,7 @@
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
-                                        <a href="{{ url('/admin/delete/selesai/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
+                                        <a href="{{ url('/admin/delete/selesai/'.$dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
                                         </a>
                                     </td>

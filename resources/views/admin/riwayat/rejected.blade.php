@@ -24,7 +24,7 @@
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Rejected</h3>
-                            <a href="{{ url('/admin/delete-all/rejected') }}" class="text-danger" data-toggle="modal">
+                            <a href="{{ url('/admin/delete/rejected') }}" class="text-danger">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a>
                         </div>
@@ -58,13 +58,9 @@
                                         <a href="#alasan-{{$dok->id_dokumen}}" class="text-danger" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-warning">ALASAN</button>
                                         </a>
-                                        <form action="{{ url('/admin/delete/rejected/'.$dok->id_dokumen )}}" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">
-                                                Hapus
-                                            </button>
-                                        </form>
+                                        <a href="{{ url('/admin/delete/rejected/'.$dok->id_dokumen) }}" class="text-danger">
+                                            <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

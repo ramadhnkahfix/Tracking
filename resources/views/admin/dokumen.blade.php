@@ -79,7 +79,7 @@
                                     </td>
                                     @endif
                                     <td align="center" style="width: 20%">
-                                        @if(auth()->user()->role == null)
+                                        @if(auth()->user()->role == null && $dok->id_dokumen_selesai == null)
                                         <!-- <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a> -->
