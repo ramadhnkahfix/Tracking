@@ -71,8 +71,8 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::get('/admin/rejected','AdminController@riwayatrejected');
     Route::get('/admin/delete/rejected/{id}', 'AdminController@deleteRejectedById');
     Route::get('/admin/delete/rejected', 'AdminController@deleteRejectedAll');
-    Route::get('/admin/delete/approved/{id}', 'AdminController@deleteApprovedById');
-    Route::get('/admin/delete/approved', 'AdminController@deleteApprovedAll');
+    // Route::get('/admin/delete/approved/{id}', 'AdminController@deleteApprovedById');
+    // Route::get('/admin/delete/approved', 'AdminController@deleteApprovedAll');
 
     /* Super Admin dan sekretaris */
     Route::get('/admin/history/selesai', 'AdminController@selesai');

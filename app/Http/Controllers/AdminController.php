@@ -187,8 +187,8 @@ class AdminController extends Controller
         }
 
         //Hapus Database
-        $data->delete();
-        $balasan->delete();
+        DetailDokuman::where('dokumen_id_dokumen', '=', $id)->delete();
+        DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->delete();
         Dokuman::where('id_dokumen', '=', $id)->delete();
 
         return back();
@@ -201,7 +201,7 @@ class AdminController extends Controller
         //Hapus file
         foreach($data as $d){
             $detail = DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
-            $balasan = DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->get();
+            $balasan = DokumenSelesai::where('dokumen_id_dokumen', '=', $d->id_dokumen)->get();
 
             foreach($detail as $det){
                 Storage::disk('public')->delete("/document"."/".$det->file);
@@ -210,12 +210,12 @@ class AdminController extends Controller
                 Storage::disk('public')->delete("/file_balasan"."/".$b->file);
             }
 
-            $balasan->delete();
-            $detail->delete();
+            DokumenSelesai::where('dokumen_id_dokumen', '=', $d->id_dokumen)->delete();
+            DetailDokuman::where('dokumen_id_dokumen', '=', $id)->delete();
         }
 
         //Hapus Database
-        $data->delete();
+        Dokuman::where(['status' => 3, 'approve' => 1])->delete();
 
         return back();
     }
@@ -230,7 +230,7 @@ class AdminController extends Controller
         }
         
         //Hapus Database
-        $data->delete();
+        DetailDokuman::where('dokumen_id_dokumen', '=', $id)->delete();
         Dokuman::where('id_dokumen', '=', $id)->delete();
 
         return back();
@@ -249,10 +249,10 @@ class AdminController extends Controller
             }
         
             //Hapus Database
-            $file->delete();
+            DetailDokuman::where('dokumen_id_dokumen', '=', $id->id_dokumen)->delete();
         }
         //Hapus Database
-        $id_dokumen->delete();
+        Dokuman::select('id_dokumen')->where('approve', '=', 2)->delete();
 
         return back();
     }
@@ -267,7 +267,7 @@ class AdminController extends Controller
         }
         
         //Hapus Database
-        $data->delete();
+        DetailDokuman::where('dokumen_id_dokumen', '=', $id)->delete();
         Dokuman::where('id_dokumen', '=', $id)->delete();
 
         return back();
@@ -284,11 +284,11 @@ class AdminController extends Controller
             foreach($detail as $det){
                 Storage::disk('public')->delete("/document"."/".$det->file);
             }
-            $detail->delete();
+            DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->delete();
         }
         
         //Hapus Database
-        $data->delete();
+        Dokuman::where(['approve' => 3])->delete();
 
         return back();
     }
@@ -307,8 +307,8 @@ class AdminController extends Controller
         }
         
         //Hapus Database
-        $data->delete();
-        $selesai->delete();
+        DetailDokuman::where(['dokumen_id_dokumen' => $id])->delete();
+        DokumenSelesai::where('dokumen_id_dokumen', '=', $id)->delete();
         Dokuman::where('id_dokumen', '=', $id)->delete();
 
         return back();
@@ -330,12 +330,12 @@ class AdminController extends Controller
                 Storage::disk('public')->delete("/document"."/".$s->file);
             }
 
-            $detail->delete();
-            $selesai->delete();
+            DetailDokuman::where('dokumen_id_dokumen', '=', $d->id_dokumen)->delete();
+            DokumenSelesai::where('dokumen_id_dokumen', '=', $d->id_dokumen)->delete();
         }
         
         //Hapus Database
-        $data->delete();
+        Dokuman::where(['status' => 3, 'approve' => 1])->delete();
 
         return back();
     }

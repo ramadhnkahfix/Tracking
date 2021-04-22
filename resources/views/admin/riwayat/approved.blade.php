@@ -24,9 +24,9 @@
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
                             <h3 class="card-title">Dokumen Selesai</h3>
-                            <a href="{{ url('/admin/delete/approved') }}" class="text-danger" data-toggle="modal">
+                            <!-- <a href="{{ url('/admin/delete/approved') }}" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                     <div class="card-body">
@@ -69,9 +69,9 @@
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
                                         </a>
                                         @if($dok->status == 3)
-                                        <a href="{{ url('/admin/delete/approved/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
+                                        <!-- <a href="{{ url('/admin/delete/approved/'.$dok->id_dokumen) }}" class="text-danger" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">HAPUS</button>
-                                        </a>
+                                        </a> -->
                                         @endif
                                     </td>
                                 </tr>
