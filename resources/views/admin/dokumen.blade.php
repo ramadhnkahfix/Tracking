@@ -35,7 +35,7 @@
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
-                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == null)
                                     <th>Aksi</th>
                                     @endif
                                     @if(auth()->user()->role != 1 && auth()->user()->role != null)
@@ -83,9 +83,9 @@
                                         <!-- <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a> -->
-                                        <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
+                                        <!-- <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">REJECT</button>
-                                        </a>
+                                        </a> -->
                                         @endif
                                         
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
@@ -102,7 +102,7 @@
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
-                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == null)
                                     <th>Aksi</th>
                                     @endif
                                     @if(auth()->user()->role != 1 && auth()->user()->role != null)
