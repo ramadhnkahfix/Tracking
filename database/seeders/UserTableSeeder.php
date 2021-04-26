@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
     {
         
 
-        
+        \DB::table('user')->delete();
         
         \DB::table('user')->insert(array (
             0 => 
@@ -138,6 +138,66 @@ class UserTableSeeder extends Seeder
                 'role' => 9,
                 'remember_token' => NULL,
                 'id_jabatan' => 1,
+            ),
+            10 => 
+            array (
+                'id_user' => 11,
+                'nama' => 'User 1',
+                'email' => 'user@app.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$X3hokyNqxPpXsn.j5UAKx.mbGPiWkonzJGvGe4Ku.n9iNfyVvm4hm',
+                'status' => 1,
+                'role' => NULL,
+                'remember_token' => '31K0YYshOaTfyy0sKJWO3ta1FJm7GD6jJuhFXeE9Jvvj42Nk7Rn8g2wFUCu9',
+                'id_jabatan' => 2,
+            ),
+            11 => 
+            array (
+                'id_user' => 12,
+                'nama' => 'User 2',
+                'email' => 'user2@gmail.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$KIrH6wMzwL1fftjNHfo..uHFWzxaOBBo2rBUviKS2aiqkt5nIij7i',
+                'status' => 1,
+                'role' => NULL,
+                'remember_token' => 'xYaB8VPrbcTRoZ2P4U3FmLg0wmak8MzSWtrtVxVBPA4VBOCFwwsmWEUfffe3',
+                'id_jabatan' => 2,
+            ),
+            12 => 
+            array (
+                'id_user' => 13,
+                'nama' => 'User 3',
+                'email' => 'user3@gmail.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$2cYYh0PQSTitxC9N47BQsui48bhxVJFnfFSLNVt2E0BhTBuptmh8K',
+                'status' => 1,
+                'role' => NULL,
+                'remember_token' => '2YgskA4BFqn3MQtpZdy0u7NDVi68Mj35jyOOVCGbesS5d3zN4pWOOAavT2np',
+                'id_jabatan' => 2,
+            ),
+            13 => 
+            array (
+                'id_user' => 14,
+                'nama' => 'User 4',
+                'email' => 'user4@gmail.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$Iyrs9xFmMLqi3cT6d8d1DOYjFpMojOA1qjbEI76Eq1e6P5u006pRe',
+                'status' => 1,
+                'role' => NULL,
+                'remember_token' => 'KbkBJCYUz6e4RuLlzGvsHi0j6tCM57DclNluB5ILHD6ehEviIW46ACPCiDKi',
+                'id_jabatan' => 2,
+            ),
+            14 => 
+            array (
+                'id_user' => 15,
+                'nama' => 'User 5',
+                'email' => 'user5@gmail.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$szqtQRSR7jAtpcCY2iWY4O6uRYHz0kUjsCnfLqCMEhGSTKBR3sVUK',
+                'status' => 1,
+                'role' => NULL,
+                'remember_token' => 'pgPGJkFCuAtSzpCbdnEDwR416vm6RkLj3oaTGrEb53wuXHgfQf40gBriTPTe',
+                'id_jabatan' => 2,
             ),
         ));
         

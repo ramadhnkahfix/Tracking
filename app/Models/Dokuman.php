@@ -51,6 +51,7 @@ class Dokuman extends Model
 		'tanggal',
 		'status',
 		'kategori',
+		'subject',
 		'approve',
 		'alasan',
 		'kode',

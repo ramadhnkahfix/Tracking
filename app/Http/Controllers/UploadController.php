@@ -65,6 +65,7 @@ class UploadController extends Controller
             'tanggal' =>$date,
             'status' => 1,
             'kategori' => $request->kategori,
+            'subject' => $request->subject,
             'approve' => 0,
             'user_role' => $request->user_role,
             'kode' => Crypt::encryptString($kode)
@@ -96,7 +97,7 @@ class UploadController extends Controller
         \Mail::to($dokumen->email)->send(new NotifikasiKodeUnik($dokumen));
         $user = User::where('role', '=', $request->user_role)->get();
             foreach($user as $u){
-                \Mail::to($u->email)->send(new NotifikasiDokMasuk($u));                
+                \Mail::to($u->email)->send(new NotifikasiDokMasuk($u,$dokumen));                
             }
 
         return redirect('/upload')->with('status','File Berhasil di Upload, Cek Email Anda Untuk Mendapatkan Kode Tracking');

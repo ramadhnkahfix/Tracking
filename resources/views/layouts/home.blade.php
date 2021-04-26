@@ -129,7 +129,7 @@
                         let gagal = '<p>Mohon periksa kembali kode unik yang anda inputkan dan input captcha dengan benar.</p>';
                         $('.pesan').append(gagal);
                       }
-                      else if(results.data.status == 1){
+                      else if(results.data.status == 1 && results.data.approve == 0){
                         $('.pesan').append(diterima);
                         //remove captcha
                         $('#img-captcha').remove();
@@ -153,14 +153,14 @@
                         $('#captcha').remove();
                         $('#submit').remove();
                       }
-                      else if(results.data.status == 2 && results.data.approve == 3){
-                        $('.pesan').append(ditolak);
+                      // else if(results.data.status == 2 && results.data.approve == 3){
+                      //   $('.pesan').append(ditolak);
                         //remove captcha
-                        $('#img-captcha').remove();
-                        $('#reload').remove();
-                        $('#captcha').remove();
-                        $('#submit').remove();
-                      }
+                      //   $('#img-captcha').remove();
+                      //   $('#reload').remove();
+                      //   $('#captcha').remove();
+                      //   $('#submit').remove();
+                      // }
                       else if(results.data.status == 1 && results.data.approve == 2){
                         $('.pesan').append(dikembalikan);
                         //remove captcha

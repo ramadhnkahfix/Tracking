@@ -79,6 +79,10 @@
                     </select>
                 </div>
                 <div class="form-group">
+                  <label>Subject</label>
+                  <input type="text" name="subject" style="width:100%" class="form-control" required>
+                </div>
+                <div class="form-group">
                   <label for="subject">Kategori Dokumen</label>
                   <select style="width:100%" name="kategori">
                       <option value="1">Kepabeanan</option>
@@ -131,8 +135,8 @@
 
             let el = '<div class="form-group">'+
                         '<label>Upload File '+no+'</label><br>'+
-                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf" required><br>'+
-                        '<small>format: .doc, .docx, .pdf</small>'+
+                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>'+
+                        '<small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>'+
                         '</div>';
             $('.file').append(el);
             document.getElementById('no').value = no;

@@ -13,14 +13,16 @@ class NotifikasiDokMasuk extends Mailable
 {
     use Queueable, SerializesModels;
     public $u;
+    public $dokumen;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $u)
+    public function __construct(User $u, Dokuman $dokumen)
     {
         $this->u = $u;
+        $this->dokumen = $dokumen;
     }
 
     /**
@@ -33,6 +35,7 @@ class NotifikasiDokMasuk extends Mailable
         return $this->markdown('emails/dokmasuk')
                     ->with([
                         'nama'=>$this->u->nama,
+                        'instansi'=>$this->dokumen->nama_instansi,
                     ]);
     }
 }

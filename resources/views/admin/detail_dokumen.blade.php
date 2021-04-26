@@ -190,7 +190,8 @@
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">
                         <label id="label-upload">File Dokumen</label>
-                        <input type="file" name="file[]" class="form-control" required>
+                        <input type="file" name="file[]" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
+                        <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
                     </div>
                     <div class="file"></div>
                 </div>
@@ -224,7 +225,8 @@
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">
                         <label id="label-upload">Dokumen Baru</label>
-                        <input type="file" name="file" class="form-control" required>
+                        <input type="file" name="file" class="form-control" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
+                  <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
                     </div>
                 </div>
                 <div class="file"></div>
@@ -312,7 +314,8 @@
 
             let el = '<div class="form-group col-12">'+
                         '<label>File Dokumen '+no+'</label>'+
-                        '<input type="file" class="form-control" name="file[]" required>'+
+                        '<input type="file" name="file[]" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>'+
+                        '<small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>'+
                         '</div>';
             $('.file').append(el);
             document.getElementById('no').value = no;

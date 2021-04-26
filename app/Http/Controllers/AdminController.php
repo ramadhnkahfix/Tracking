@@ -19,55 +19,55 @@ class AdminController extends Controller
     public function index()
     {
         $data = [];
-        $year = Carbon::now()->format('y');
+        $year = Carbon::now()->format('Y');
 
         if(Auth::user()->role == 1 || Auth::user()->role == null){
             $data[0] = Dokuman::where(['approve' => 1])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 2, 'approve' => 1])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 2){
             $data[0] = Dokuman::where(['user_role' => 2])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 2])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 3){
             $data[0] = Dokuman::where(['user_role' => 3])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 3])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 4){
             $data[0] = Dokuman::where(['user_role' => 4])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 4])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 5){
             $data[0] = Dokuman::where(['user_role' => 5])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 5])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 6){
             $data[0] = Dokuman::where(['user_role' => 6])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 0, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 6])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 7){
             $data[0] = Dokuman::where(['user_role' => 7])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 7])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
         else if(Auth::user()->role == 8){
             $data[0] = Dokuman::where(['user_role' => 8])->get();
-            $data[1] = Dokuman::where(['status' => 1, 'approve' => 1, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen'); 
-            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)', $year))->count('id_dokumen');
+            $data[1] = Dokuman::where(['status' => 1, 'approve' => 0, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[2] = Dokuman::where(['status' => 2, 'approve' => 1, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen'); 
+            $data[3] = Dokuman::where(['status' => 3, 'approve' => 1, 'user_role' => 8])->where(DB::raw('YEAR(tanggal)'), $year)->count('id_dokumen');
         }
 
         return view('admin.layouts.dashboard')->with(compact('data'));
@@ -76,9 +76,7 @@ class AdminController extends Controller
     public function dokumen()
     {
         if(Auth::user()->role == 1 || Auth::user()->role == null){
-            $dokumen = Dokuman::
-                        join('dokumen_selesai as ds', 'ds.dokumen_id_dokumen', '=', 'dokumen.id_dokumen')
-                        ->where(['approve' => 1])->where('status', '!=', 3)->get();
+            $dokumen = Dokuman::where(['approve' => 1])->where('status', '!=', 3)->get();
         }
         else if(Auth::user()->role == 2){
             $dokumen = Dokuman::where(['user_role' => 2, 'approve' => 0])->get();
@@ -365,7 +363,7 @@ class AdminController extends Controller
             \Mail::to($dokumen->email)->send(new NotifikasiDokPenolakan($dokumen, $doc));
         }
 
-        return back();
+        return redirect('/admin/rejected');
     }
 
     public function approve($id)
@@ -375,7 +373,7 @@ class AdminController extends Controller
             'status' => 2,
         ]);
 
-        return redirect('admin.riwayat.approve');
+        return redirect('/admin/approved');
     }
 
     public function status(Request $request,$id)

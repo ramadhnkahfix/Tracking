@@ -31,7 +31,7 @@
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th>Nama Instansi</th>
-                                    <th>Email</th>
+                                    <th>Subject</th>
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
@@ -47,7 +47,7 @@
                                 @foreach($dokumen as $dok)
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
-                                    <td>{{ $dok->email }}</td>
+                                    <td>{{ $dok->subject }}</td>
                                     <td>
                                         @if( $dok->kategori == 1 )
                                             <p>Kepabeanan</p>
@@ -58,7 +58,7 @@
                                         @endif
                                     </td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
-                                    @if(auth()->user()->role == 1 && auth()->user()->role == null)
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == null)
                                     <td align="center">@if($dok->status == 1)
                                             <button class="btn btn-secondary btn-sm" type="button">Diterima</button>
                                         @elseif($dok->status == 2)
@@ -97,8 +97,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>Nama Instansi</th>
-                                    <th>Email</th>
+                                    <th>Nama Instansi</th>
+                                    <th>Subject</th>
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>

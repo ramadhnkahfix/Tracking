@@ -102,7 +102,10 @@
                                     <td>{{ $dok->nama_instansi }}</td>
                                     <td>{{ $dok->subject }}</td>
                                     <td>{{ date('d F Y', strtotime($dok->tanggal)) }}</td>
-                                    <td align="center">@if($dok->status == 1)
+                                    <td align="center">
+                                        @if($dok->status == 1 && $dok->aprove == 2)
+                                            Dikembalikan
+                                        @elseif($dok->status == 1 && $dok->aprove == 0)
                                             Diterima
                                         @elseif($dok->status == 2)
                                             Diproses

@@ -34,8 +34,8 @@
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th>Nama Instansi</th>
-                                    <th>Email</th>
                                     <th>Subject</th>
+                                    <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -45,7 +45,7 @@
                                 @foreach($dokumen as $dok)
                                 <tr>
                                     <td>{{ $dok->nama_instansi }}</td>
-                                    <td>{{ $dok->email }}</td>
+                                    <td>{{ $dok->subject }}</td>
                                     <td>@if( $dok->kategori == 1 )
                                             <p>Kepabeanan</p>
                                         @elseif( $dok->kategori == 2 )
@@ -80,8 +80,8 @@
                             <tfoot>
                                 <tr>
                                     <th>Nama Instansi</th>
-                                    <th>Email</th>
                                     <th>Subject</th>
+                                    <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
                                     <th>Aksi</th>

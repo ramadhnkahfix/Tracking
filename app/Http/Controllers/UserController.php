@@ -11,9 +11,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $jabatan = Jabatan::all();
         $user = User::where('id_jabatan', '=', '1')->get();
-        return view('admin.user', compact('user','jabatan'));
+        return view('admin.user', compact('user'));
     }
 
     public function store(Request $request){

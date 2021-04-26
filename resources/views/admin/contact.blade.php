@@ -8,7 +8,7 @@
 @endsection
 @section('page')
 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-<li class="breadcrumb-item active">Document</li>
+<li class="breadcrumb-item active">Contact</li>
 @endsection
 
 @section('content')

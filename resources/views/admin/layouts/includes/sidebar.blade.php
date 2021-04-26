@@ -94,12 +94,12 @@
                         <p>Done</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{ url('/admin/history/ditolak') }}" class="nav-link">
                         <i class="fas fa-times-circle nav-icon"></i>
                         <p>Rejected</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             @endif

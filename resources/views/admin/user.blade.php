@@ -33,7 +33,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Jabatan</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Status</th>
@@ -44,7 +43,6 @@
                                 <tr id="{{$usr->id_user}}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $usr->nama }}</td>
-                                    <td>{{ $usr->jabatan->nama }}</td>
                                     <td>{{ $usr->email }}</td>
                                     <td align="center">
                                         @if($usr->role == null)
@@ -83,7 +81,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Jabatan</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Status</th>
