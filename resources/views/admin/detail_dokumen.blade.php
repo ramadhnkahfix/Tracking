@@ -52,6 +52,7 @@
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th>Dokumen</th>
+                                    <th>Preview</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -59,10 +60,13 @@
                                 @foreach($detail_dokumen as $dd)
                                 <tr>
                                     <td>{{$dd->file}}</td>
+                                    <td align="center" style="width:10%">
+                                    <a href="#preview-{{$dd->id_detail_dokumen}}" class="text-danger" data-toggle="modal">
+                                        <button type="button" class="btn btn-sm btn-primary">PREVIEW</button>
+                                    </a>
+                                        <!-- <iframe src="{{url('/preview/'.$dd->id_detail_dokumen)}}" width="600" heigth="400">Preview</iframe> -->
+                                    </td>
                                     <td align="center" style="width: 20%">
-                                        <a href="{{url('/preview/dokumen/'.$dd->id_detail_dokumen)}}" class="text-danger">
-                                            <button type="button" class="btn btn-sm btn-success">PREVIEW</button>
-                                        </a>
                                         <a href="{{url('/download/dokumen/'.$dd->id_detail_dokumen)}}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-success">DOWNLOAD</button>
                                         </a>
@@ -73,6 +77,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Dokumen</th>
+                                    <th>Preview</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -193,7 +198,7 @@
                     <div class="form-group col-12">
                         <input type="hidden" value="1" id="no">
                         <label id="label-upload">File Dokumen</label>
-                        <input type="file" name="file[]" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
+                        <input type="file" name="file[]" class="form-control" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
                         <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
                     </div>
                     <div class="file"></div>
@@ -207,6 +212,29 @@
     </div>
 </div>
 <!-- End Modal Upload Data -->
+
+<!-- Modal Preview -->
+@foreach($detail_dokumen as $dd)
+<div class="modal fade show" id="preview-{{$dd->id_detail_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title">Preview {{$dd->file}}</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </div>
+                <div class="modal-body" style="height:600px">
+                    <embed src="{{url('/preview/'.$dd->id_detail_dokumen)}}" style="height:100%" width="100%" heigth="100%"></embed>
+                </div>
+
+                <!-- <div class="modal-footer modal-footer-upload">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
+                </div> -->
+        </div>
+    </div>
+</div>
+<!-- End Modal Preview -->
+@endforeach
 @foreach($dokumen_selesai as $ds)
 <!-- Modal Update Data-->
 <div class="modal small fade" id="update-{{$ds->id_dokumen_selesai}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -229,7 +257,7 @@
                         <input type="hidden" value="1" id="no">
                         <label id="label-upload">Dokumen Baru</label>
                         <input type="file" name="file" class="form-control" accept=".doc,.docx,.pdf,.jpg,.jpeg,.xls,.xlsx" required><br>
-                  <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
+                        <small>format: .doc, .docx, .pdf .jpg, .jpeg, .xls, .xlsx</small>
                     </div>
                 </div>
                 <div class="file"></div>

@@ -50,7 +50,7 @@
             <!-- <form action="/user/track" method="POST">
             @csrf -->
               <div class="form-group mb-4">
-                <div class="col-6">
+                <div class="col-md-6">
                   <input type="text" id="kode" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Isikan Kode Unik" required>
                 </div>
                 @error('kode')
@@ -64,11 +64,11 @@
                   <span id="captcha-img">
                     {!! captcha_img() !!}
                   </span>
-                  <button type="button" id="reload" class="btn btn-danger ml-2">&#x21bb;</button>
+                  <button type="button" id="reload" class="btn btn-danger ml-md-2">&#x21bb;</button>
                 </div>
               </div>
               <div class="form-group mb-4">
-                <div class="col-6">
+                <div class="col-md-6">
                 <input type="text" id="captcha" name="captcha" placeholder="Isikan Captcha" class="form-control" required>
                   
                   <span class="form-group" id="alert" style="visibility: hidden" role="alert">

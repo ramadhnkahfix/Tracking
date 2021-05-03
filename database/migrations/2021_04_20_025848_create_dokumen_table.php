@@ -19,6 +19,7 @@ class CreateDokumenTable extends Migration
             $table->string('email', 100);
             $table->date('tanggal');
             $table->tinyInteger('status');
+            $table->string('subject');
             $table->tinyInteger('kategori');
             $table->tinyInteger('approve');
             $table->string('alasan')->nullable();
