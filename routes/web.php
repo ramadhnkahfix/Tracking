@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
 
     // Status
     Route::patch('/admin/{id}/reject', 'AdminController@reject')->name('reject.status');
+    Route::patch('/admin/{id}/forward', 'AdminController@forward')->name('forward.status');
     Route::get('/admin/approve/{id}','AdminController@approve');
 
     Route::get('/admin', 'AdminController@index')->name('admin');
@@ -81,4 +82,6 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::get('/admin/delete/ditolak', 'AdminController@deleteDitolakAll');
     Route::get('/admin/delete/selesai/{id}', 'AdminController@deleteSelesaiById');
     Route::get('/admin/delete/selesai', 'AdminController@deleteSelesaiAll');
+
+    Route::get('/preview/{id}', 'AdminController@getPreview');
 });

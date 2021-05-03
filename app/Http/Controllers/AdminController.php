@@ -13,6 +13,7 @@ use App\Mail\NotifikasiPengembalianDok;
 use App\Mail\NotifikasiDokPenolakan;
 use Auth;
 use DB;
+use Response;
 
 class AdminController extends Controller
 {
@@ -376,6 +377,15 @@ class AdminController extends Controller
         return redirect('/admin/approved');
     }
 
+    public function forward($id,Request $request)
+    {
+        Dokuman::find($id)->update([
+            'user_role' => $request->role
+        ]);
+
+        return back()->with('status', 'Dokumen berhasil di Forward');
+    }
+
     public function status(Request $request,$id)
     {
         Dokuman::findOrFail($id)->update([
@@ -465,14 +475,65 @@ class AdminController extends Controller
     {
         // $dokumen = Dokuman::findOrFail($id)->get();
         
-        $email = Dokuman::where('id_dokumen', '=', $id)->first();
-        $email->status = 3;
-        $email->save();
+        $doc = Dokuman::where('id_dokumen', '=', $id)->first();
+        $doc->status = 3;
+        $doc->save();
+    
         $dokumen = DokumenSelesai::where('dokumen_id_dokumen','=',$id)->get();
         // dd($dokumen);
-        \Mail::to($email->email)->send(new NotifikasiDokBalasan($dokumen));
+        \Mail::to($doc->email)->send(new NotifikasiDokBalasan($dokumen, $doc));
         
         // dd('Email Berhasil dikirim');
         return back()->with('status','File berhasil di Kirim ke Email');
+    }
+
+    public function getPreview($id){
+        $file = DetailDokuman::where('id_detail_dokumen', '=', $id)->first();
+        $filename = $file->file;
+        $ext = explode('.',$file->file);
+
+        if($ext[1] == "pdf")
+        {
+            return Response::make(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+        else if($ext[1] == "docx")
+        {
+            return Response::make(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+        else if($ext[1] == "doc")
+        {
+            return Response::download(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'application/msword',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+        else if($ext[1] == "jpg")
+        {
+            return Response::make(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'image/jpeg',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+        else if($ext[1] == "xlsx")
+        {
+            return Response::make(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+        else if($ext[1] == "xls")
+        {
+            return Response::make(Storage::disk('public')->get('/'.'document/'.$filename),200, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]);
+        }
+           
     }
 }

@@ -21,11 +21,16 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!-- <div class="card-header">
-                        <a href="#tambah" data-toggle="modal">
-                            <button class="btn btn-primary">Tambah Data</button>
-                        </a>
-                    </div> -->
+                    <div class="card-header">
+                    @if(session('status'))
+                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                    </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="thead-dark text-center">
@@ -35,12 +40,7 @@
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == null)
                                     <th>Aksi</th>
-                                    @endif
-                                    @if(auth()->user()->role != 1 && auth()->user()->role != null)
-                                    <th>Detail</th>
-                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,7 +71,7 @@
                                     @if(auth()->user()->role != 1 && auth()->user()->role != null)
                                     <td align="center">
                                         <a href="{{ url('/admin/approve/'.$dok->id_dokumen) }}" class="text-primary mr-2">
-                                            <button type="button" class="btn btn-sm btn-info" onclick="return confirm('Apakah anda yakin akan mengapprove dokumen?')">APPROVE</button>
+                                            <button type="button" class="btn btn-sm btn-info" onclick="return confirm('Apakah anda yakin dokumen sudah terverifikasi dan akan mengapprove dokumen?')">APPROVE</button>
                                         </a>
                                         <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">REJECT</button>
@@ -79,17 +79,21 @@
                                     </td>
                                     @endif
                                     <td align="center" style="width: 20%">
-                                        @if(auth()->user()->role == null && $dok->id_dokumen_selesai == null)
+                                        @if(auth()->user()->role != null && auth()->user()->role != 1)
                                         <!-- <a href="#status-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-success">STATUS</button>
                                         </a> -->
                                         <!-- <a href="#reject-{{$dok->id_dokumen}}" class="text-primary mr-2" data-toggle="modal">
                                             <button type="button" class="btn btn-sm btn-danger">REJECT</button>
                                         </a> -->
+
                                         @endif
                                         
                                         <a href="{{ route('detail.dokumen', $dok->id_dokumen) }}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-primary">DETAIL</button>
+                                        </a>
+                                        <a href="#forward-{{$dok->id_dokumen}}" class="text-primary ml-2" data-toggle="modal">
+                                            <button type="button" class="btn btn-sm btn-warning">FORWARD</button>
                                         </a>
                                     </td>
                                 </tr>
@@ -102,12 +106,7 @@
                                     <th>Kategori</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == null)
                                     <th>Aksi</th>
-                                    @endif
-                                    @if(auth()->user()->role != 1 && auth()->user()->role != null)
-                                    <th>Detail</th>
-                                    @endif
                                 </tr>
                             </tfoot>
                         </table>
@@ -150,6 +149,43 @@
 </div>
 @endforeach
 <!-- End Modal Status Data -->
+
+<!-- Modal Forward Dokumen-->
+@foreach($dokumen as $dok)
+<div class="modal small fade" id="forward-{{$dok->id_dokumen}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ route('forward.status', $dok->id_dokumen) }}" method="post">
+            {{csrf_field()}}
+            @method('patch')
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Forward Dokumen</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </div>
+                <div class="modal-body modal-body-upload">
+                    <label>Seksi</label>
+                    <select name="role" class="form-control">
+                    <option selected disabled>Pilih Seksi</option>
+                        <option value="2">Subagian Umum</option>
+                        <option value="3">Seksi PKC I</option>
+                        <option value="4">Seksi PKC II</option>
+                        <option value="5">Seksi Perbendaharaan</option>
+                        <option value="6">Seksi Kepatuhan Internal</option>
+                        <option value="7">Seksi PLI</option>
+                        <option value="8">Seksi Intelijen dan Penindakan</option>
+                        <option value="9">Seksi Penyidikan Barang Hasil Penindakan</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal</button> 
+                    <button type="submit" class="btn btn-primary"  id="modalDelete">Simpan</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Modal Forward Dokumen -->
 
 <!-- Modal Dokumen Reject -->
 @foreach($dokumen as $dok)

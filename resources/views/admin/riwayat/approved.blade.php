@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                          <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Dokumen Selesai</h3>
+                            <h3 class="card-title">Dokumen</h3>
                             <!-- <a href="{{ url('/admin/delete/approved') }}" class="text-danger" data-toggle="modal">
                                 <button type="button" class="btn btn-sm btn-danger">Hapus Semua</button>
                             </a> -->
