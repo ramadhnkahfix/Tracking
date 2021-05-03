@@ -81,4 +81,6 @@ Route::group(['middleware' => ['auth','checkRole:1']],function(){
     Route::get('/admin/delete/ditolak', 'AdminController@deleteDitolakAll');
     Route::get('/admin/delete/selesai/{id}', 'AdminController@deleteSelesaiById');
     Route::get('/admin/delete/selesai', 'AdminController@deleteSelesaiAll');
+
+    Route::get('/preview/dokumen/{id}', 'AdminController@preview');
 });

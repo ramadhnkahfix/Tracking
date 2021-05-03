@@ -60,6 +60,9 @@
                                 <tr>
                                     <td>{{$dd->file}}</td>
                                     <td align="center" style="width: 20%">
+                                        <a href="{{url('/preview/dokumen/'.$dd->id_detail_dokumen)}}" class="text-danger">
+                                            <button type="button" class="btn btn-sm btn-success">PREVIEW</button>
+                                        </a>
                                         <a href="{{url('/download/dokumen/'.$dd->id_detail_dokumen)}}" class="text-danger">
                                             <button type="button" class="btn btn-sm btn-success">DOWNLOAD</button>
                                         </a>

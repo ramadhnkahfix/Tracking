@@ -55,6 +55,7 @@ class Dokuman extends Model
 		'approve',
 		'alasan',
 		'kode',
+		'subject',
 		'user_role'
 	];
 

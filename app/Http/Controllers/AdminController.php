@@ -475,4 +475,12 @@ class AdminController extends Controller
         // dd('Email Berhasil dikirim');
         return back()->with('status','File berhasil di Kirim ke Email');
     }
+
+    public function preview($id)
+    {
+        $file = DetailDokuman::where('id_detail_dokumen', '=', $id)->first();
+        $data = public_path()."/document"."/".$file->file;
+
+        return view('admin.preview')->with(compact('data'));
+    }
 }
